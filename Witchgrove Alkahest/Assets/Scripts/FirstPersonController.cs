@@ -69,6 +69,11 @@ public class FirstPersonController : MonoBehaviour
 
     void FixedUpdate()
     {
+        HandleMovement();
+    }
+
+    private void HandleMovement()
+    {
         bool isGrounded = controller.isGrounded;
 
         if (isGrounded && velocity.y < 0f)
@@ -79,11 +84,12 @@ public class FirstPersonController : MonoBehaviour
             input.Normalize();
         float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
         Vector3 move = transform.TransformDirection(input) * speed;
-
+        
         if (jumpRequested && isGrounded)
         {
             velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
             TriggerShake(jumpShakeDuration, jumpShakeAmplitude);
+            //SoundManager.Instance.PlaySound("Jump");  //JumpSound
         }
         jumpRequested = false;
 
@@ -92,7 +98,10 @@ public class FirstPersonController : MonoBehaviour
         controller.Move(finalMove * Time.fixedDeltaTime);
 
         if (!previousGrounded && isGrounded)
+        {
             TriggerShake(landShakeDuration, landShakeAmplitude);
+            //SoundManager.Instance.PlaySound("Landing");   //LandingSound
+        }
         previousGrounded = isGrounded;
     }
 
