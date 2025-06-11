@@ -225,6 +225,14 @@ MonoBehaviour:
   gravity: -15
   playerCamera: {fileID: 3283275812736484502}
   mouseSensitivity: 150
+  walkBobFrequency: 5
+  walkBobHorizontalAmplitude: 0.08
+  walkBobVerticalAmplitude: 0.08
+  walkBobSmooth: 5
+  sprintBobFrequency: 7
+  sprintBobHorizontalAmplitude: 0.15
+  sprintBobVerticalAmplitude: 0.15
+  sprintBobSmooth: 6
 --- !u!114 &1229813271580839356
 MonoBehaviour:
   m_ObjectHideFlags: 0
