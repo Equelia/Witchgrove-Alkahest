@@ -224,6 +224,7 @@ MonoBehaviour:
   jumpHeight: 1.5
   gravity: -15
   playerCamera: {fileID: 3283275812736484502}
+  inventoryPanel: {fileID: 0}
   mouseSensitivity: 150
   walkBobFrequency: 5
   walkBobHorizontalAmplitude: 0.08
@@ -233,6 +234,10 @@ MonoBehaviour:
   sprintBobHorizontalAmplitude: 0.15
   sprintBobVerticalAmplitude: 0.15
   sprintBobSmooth: 6
+  jumpShakeDuration: 0.2
+  jumpShakeAmplitude: 0.1
+  landShakeDuration: 0.3
+  landShakeAmplitude: 0.15
 --- !u!114 &1229813271580839356
 MonoBehaviour:
   m_ObjectHideFlags: 0
