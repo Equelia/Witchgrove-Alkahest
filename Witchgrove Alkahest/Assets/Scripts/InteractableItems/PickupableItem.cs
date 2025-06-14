@@ -6,8 +6,9 @@ using UnityEngine;
 /// </summary>
 
 [RequireComponent(typeof(Collider))]
-public class PickUpItem : MonoBehaviour
+public class PickupableItem : MonoBehaviour
 {
 	[Tooltip("Type of ingredient this object yields")]
-	public IngredientType type;
+	public ItemType type;
+	
 }

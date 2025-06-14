@@ -1,24 +1,28 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 /// <summary>
 /// Types of collectible ingredients.
 /// </summary>
-public enum IngredientType
+public enum ItemType
 {
     Herb,
     Mushroom,
     Crystal,
+    Сахар,
+    Соль,
+    Вода
 }
 
 /// <summary>
 /// Represents a single slot in the inventory.
 /// </summary>
 [Serializable]
-public class InventorySlot
+public class CellSlot
 {
-    public IngredientType Type;
+    public ItemType Type;
     public int Count;
 }
 
@@ -33,11 +37,12 @@ public class InventorySystem : MonoBehaviour
     [Tooltip("Maximum number of slots allowed")]
     [SerializeField] private int maxSlots = 4;
     [Tooltip("Maximum stack size per slot")]
-    [SerializeField] private int maxStack = 5;
+    public int maxStack = 5;
 
-    private List<InventorySlot> slots;
+    [HideInInspector] public List<CellSlot> inventorySlots;
+
+    public InventoryUI inventoryUI;
     
-    public event Action OnInventoryChanged;
 
     private void Awake()
     {
@@ -50,10 +55,10 @@ public class InventorySystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Initialize empty slots
-        slots = new List<InventorySlot>(maxSlots);
+        inventorySlots = new List<CellSlot>(maxSlots);
         for (int i = 0; i < maxSlots; i++)
         {
-            slots.Add(new InventorySlot { Type = default, Count = 0 });
+            inventorySlots.Add(new CellSlot { Type = default, Count = 0 });
         }
     }
 
@@ -61,33 +66,31 @@ public class InventorySystem : MonoBehaviour
     /// Try to add an item of the given type.
     /// Returns true if added successfully; false if inventory is full.
     /// </summary>
-    public bool AddItem(IngredientType type)
+    public bool AddItem(ItemType type)
     {
-        // 1) Try stacking onto existing slot
-        foreach (var slot in slots)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
+            var slot = inventorySlots[i];
+            
+            // 1) Try stacking onto existing slot
             if (slot.Count > 0 && slot.Type == type && slot.Count < maxStack)
             {
                 slot.Count++;
-                OnInventoryChanged?.Invoke();
+                inventoryUI.UpdateSlotUI(i);
                 Debug.Log($"[Inventory] Stacked one more {type}. Now: {slot.Count}");
                 return true;
             }
-        }
-
-        // 2) Try placing into empty slot
-        foreach (var slot in slots)
-        {
+            // 2) Get in the empty slot
             if (slot.Count == 0)
             {
                 slot.Type = type;
                 slot.Count = 1;
-                OnInventoryChanged?.Invoke();
+                inventoryUI.UpdateSlotUI(i);
                 Debug.Log($"[Inventory] Added new slot for {type}.");
                 return true;
             }
         }
-
+        
         // 3) Inventory full
         Debug.LogWarning($"[Inventory] Cannot add {type}: inventory full.");
         return false;
@@ -96,26 +99,33 @@ public class InventorySystem : MonoBehaviour
     /// <summary>
     /// Use (or remove) one item of the given type from inventory.
     /// </summary>
-    public void UseItem(IngredientType type)
+    public void UseItem(ItemType type)
     {
-        for (int i = 0; i < slots.Count; i++)
+        for (int i = 0; i < inventorySlots.Count; i++)
         {
-            var slot = slots[i];
+            var slot = inventorySlots[i];
             if (slot.Count > 0 && slot.Type == type)
             {
                 slot.Count--;
                 Debug.Log($"[Inventory] Used one {type}. Remaining: {slot.Count}");
                 // If slot is now empty, clear its type
                 if (slot.Count == 0)
-                    slots[i].Type = default;
+                    inventorySlots[i].Type = default;
 
-                OnInventoryChanged?.Invoke();
+                inventoryUI.UpdateSlotUI(i);
                 return;
             }
         }
 
         Debug.LogWarning($"[Inventory] No item of type {type} to use.");
     }
+    
+    public CellSlot GetInventorySlot(int index)
+    {
+        var slots = inventorySlots;
+        if (index >= 0 && index < slots.Count)
+            return slots[index];
 
-    public IReadOnlyList<InventorySlot> GetSlots() => slots;
+        return new CellSlot { Type = default, Count = 0 };
+    }
 }
