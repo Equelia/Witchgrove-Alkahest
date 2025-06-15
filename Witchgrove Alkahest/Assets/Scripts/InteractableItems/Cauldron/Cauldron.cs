@@ -11,6 +11,9 @@ public class Cauldron : InteractableItem
 	[HideInInspector] public int currentWaterAmount;
 	[HideInInspector] public int maxWaterAmount = 10;
 
+	private PotionData garbagePotion;
+	private BaseItemData waterIngredient;
+
 	public override void Interact()
 	{
 		base.Interact();
@@ -19,20 +22,23 @@ public class Cauldron : InteractableItem
 
 	private void Awake()
 	{
+		waterIngredient = ItemDatabase.Instance.GetItemById("вода");
+		garbagePotion = ItemDatabase.Instance.GetPotionById("смущенноезелье");
+		
 		currentWaterAmount = 2;
 		
 		// Initialize empty craft slots
 		craftCellSlots = new List<CellSlot>(8);
 		for (int i = 0; i < 8; i++)
 		{
-			craftCellSlots.Add(new CellSlot { Type = default, Count = 0 });
+			craftCellSlots.Add(new CellSlot { ItemData = default, Count = 0 });
 		}
 
 		// Initialize empty result slots
 		resultCellSlots = new List<CellSlot>(6);
 		for (int i = 0; i < 6; i++)
 		{
-			resultCellSlots.Add(new CellSlot { Type = default, Count = 0 });
+			resultCellSlots.Add(new CellSlot { ItemData = default, Count = 0 });
 		}
 	}
 	public void TryCraft()
@@ -71,7 +77,7 @@ public class Cauldron : InteractableItem
 		
 		if (!matched)
 		{
-			if (!HasSpaceForResult(ItemType.СмущенноеЗелье, 1))
+			if (!HasSpaceForResult(garbagePotion, 1))
 			{
 				Debug.LogWarning("[Cauldron] Нет места даже для смущённого зелья. Крафт отменён.");
 				return;
@@ -81,7 +87,7 @@ public class Cauldron : InteractableItem
 
 			ClearCraftSlots();
 
-			AddToResultSlot(ItemType.СмущенноеЗелье, 1);
+			AddToResultSlot(garbagePotion, 1);
 			currentWaterAmount--;
 		}
 	}
@@ -99,13 +105,13 @@ public class Cauldron : InteractableItem
 		return true;
 	}
 	
-	private bool HasSpaceForResult(ItemType type, int count)
+	private bool HasSpaceForResult(BaseItemData type, int count)
 	{
 		for (int i = 0; i < resultCellSlots.Count; i++)
 		{
 			var slot = resultCellSlots[i];
 
-			if (slot.Type == type && slot.Count < InventorySystem.Instance.maxStack)
+			if (slot.ItemData == type && slot.Count < InventorySystem.Instance.maxStack)
 			{
 				int space = InventorySystem.Instance.maxStack - slot.Count;
 				if (space >= count)
@@ -149,7 +155,7 @@ public class Cauldron : InteractableItem
 			var expected = recipe.ingredients[i];
 			var actual = nonEmptySlots[i];
 
-			if (actual.Type != expected.type || actual.Count < expected.count)
+			if (actual.ItemData != expected.type || actual.Count < expected.count)
 				return false;
 		}
 
@@ -159,17 +165,25 @@ public class Cauldron : InteractableItem
 
 	private void ConsumeIngredients(Recipe recipe)
 	{
+		List<CellSlot> nonEmptySlots = new List<CellSlot>();
+
+		foreach (var slot in craftCellSlots)
+		{
+			if (slot.Count > 0)
+				nonEmptySlots.Add(slot);
+		}
+
 		for (int i = 0; i < recipe.ingredients.Count; i++)
 		{
-			var slot = craftCellSlots[i];
 			var expected = recipe.ingredients[i];
+			var slot = nonEmptySlots[i];
 
-			if (slot.Type == expected.type)
+			if (slot.ItemData == expected.type)
 			{
 				slot.Count -= expected.count;
 				if (slot.Count <= 0)
 				{
-					slot.Type = default;
+					slot.ItemData = null;
 					slot.Count = 0;
 				}
 			}
@@ -180,18 +194,18 @@ public class Cauldron : InteractableItem
 	{
 		foreach (var slot in craftCellSlots)
 		{
-			slot.Type = default;
+			slot.ItemData = default;
 			slot.Count = 0;
 		}
 	}
 	
-	private void AddToResultSlot(ItemType type, int count)
+	private void AddToResultSlot(BaseItemData type, int count)
 	{
 		for(int i = 0; i < resultCellSlots.Count; i++)
 		{
 			var slot = resultCellSlots[i];
 			
-			if (slot.Type == type && slot.Count < InventorySystem.Instance.maxStack)
+			if (slot.ItemData == type && slot.Count < InventorySystem.Instance.maxStack)
 			{
 				int space = InventorySystem.Instance.maxStack - slot.Count;
 				int toAdd = Mathf.Min(space, count);
@@ -204,7 +218,7 @@ public class Cauldron : InteractableItem
 			
 			if (slot.Count == 0)
 			{
-				slot.Type = type;
+				slot.ItemData = type;
 				slot.Count = Mathf.Min(count, InventorySystem.Instance.maxStack);
 				return;
 			}
@@ -219,7 +233,7 @@ public class Cauldron : InteractableItem
 	{
 		if (currentWaterAmount < maxWaterAmount)
 		{
-			if (InventorySystem.Instance.TryConsumeItem(ItemType.Вода, 1))
+			if (InventorySystem.Instance.TryConsumeItem(waterIngredient, 1))
 			{
 				currentWaterAmount++;
 				return true;

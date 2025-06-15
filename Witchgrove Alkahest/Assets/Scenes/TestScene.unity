@@ -240,7 +240,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  ingredientData: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
   consumable: 1
 --- !u!1 &301302816
 GameObject:
@@ -289,7 +289,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  ingredientData: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
   consumable: 1
 --- !u!65 &301302819
 BoxCollider:
@@ -412,7 +412,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  ingredientData: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
   consumable: 1
 --- !u!65 &306594254
 BoxCollider:
@@ -959,7 +959,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  ingredientData: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
   consumable: 1
 --- !u!65 &595570389
 BoxCollider:
@@ -1082,7 +1082,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 3
+  ingredientData: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
   consumable: 0
 --- !u!65 &609624904
 BoxCollider:
@@ -1190,7 +1190,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  ingredientData: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
   consumable: 1
 --- !u!65 &709898946
 BoxCollider:
@@ -1313,7 +1313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  ingredientData: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
   consumable: 1
 --- !u!65 &754715026
 BoxCollider:
@@ -1487,7 +1487,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  ingredientData: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
   consumable: 1
 --- !u!65 &813565109
 BoxCollider:
@@ -1694,7 +1694,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  ingredientData: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
   consumable: 1
 --- !u!65 &911327100
 BoxCollider:
@@ -1875,7 +1875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  ingredientData: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
   consumable: 1
 --- !u!65 &1245712446
 BoxCollider:
@@ -2102,7 +2102,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  ingredientData: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
   consumable: 1
 --- !u!65 &1513122121
 BoxCollider:
@@ -2276,7 +2276,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  ingredientData: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
   consumable: 1
 --- !u!65 &1572099017
 BoxCollider:
@@ -2384,7 +2384,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7640f715224d229649ee41e77ebcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  recipeDatabase: {fileID: 11400000, guid: 18435eba0ee380c4d96e09771b4c9a13, type: 2}
+  recipeDatabase: {fileID: 11400000, guid: de2626fb752a1b54da5e2a88827df517, type: 2}
   craftCellSlots: []
   resultCellSlots: []
   currentWaterAmount: 0
@@ -2525,7 +2525,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  ingredientData: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
   consumable: 1
 --- !u!65 &1665809557
 BoxCollider:
@@ -2684,7 +2684,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  ingredientData: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
   consumable: 1
 --- !u!65 &1848190292
 BoxCollider:
@@ -2812,7 +2812,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 2
+  ingredientData: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
   consumable: 1
 --- !u!65 &2088780368
 BoxCollider:
@@ -2920,7 +2920,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 1
+  ingredientData: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
   consumable: 1
 --- !u!65 &2143840388
 BoxCollider:

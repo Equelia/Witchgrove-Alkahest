@@ -4,25 +4,12 @@ using UnityEngine;
 using UnityEngine.Serialization;
 
 /// <summary>
-/// Types of collectible ingredients.
-/// </summary>
-public enum ItemType
-{
-    Herb,
-    Mushroom,
-    Crystal,
-    Вода,
-    СмущенноеЗелье,
-    ЗельеЗдоровья
-}
-
-/// <summary>
 /// Represents a single slot in the inventory.
 /// </summary>
 [Serializable]
 public class CellSlot
 {
-    public ItemType Type;
+    public BaseItemData ItemData;
     public int Count;
 }
 
@@ -57,7 +44,7 @@ public class InventorySystem : MonoBehaviour
         inventorySlots = new List<CellSlot>(maxSlots);
         for (int i = 0; i < maxSlots; i++)
         {
-            inventorySlots.Add(new CellSlot { Type = default, Count = 0 });
+            inventorySlots.Add(new CellSlot { ItemData = default, Count = 0 });
         }
     }
 
@@ -65,47 +52,47 @@ public class InventorySystem : MonoBehaviour
     /// Try to add an item of the given type.
     /// Returns true if added successfully; false if inventory is full.
     /// </summary>
-    public bool AddItem(ItemType type)
+    public bool AddItem(BaseItemData item)
     {
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             var slot = inventorySlots[i];
             
             // 1) Try stacking onto existing slot
-            if (slot.Count > 0 && slot.Type == type && slot.Count < maxStack)
+            if (slot.Count > 0 && slot.ItemData == item && slot.Count < maxStack)
             {
                 slot.Count++;
                 inventoryUI.UpdateSlotUI(i);
-                Debug.Log($"[Inventory] Stacked one more {type}. Now: {slot.Count}");
+                Debug.Log($"[Inventory] Stacked one more {item}. Now: {slot.Count}");
                 return true;
             }
             // 2) Get in the empty slot
             if (slot.Count == 0)
             {
-                slot.Type = type;
+                slot.ItemData = item;
                 slot.Count = 1;
                 inventoryUI.UpdateSlotUI(i);
-                Debug.Log($"[Inventory] Added new slot for {type}.");
+                Debug.Log($"[Inventory] Added new slot for {item}.");
                 return true;
             }
         }
         
         // 3) Inventory full
-        Debug.LogWarning($"[Inventory] Cannot add {type}: inventory full.");
+        Debug.LogWarning($"[Inventory] Cannot add {item}: inventory full.");
         return false;
     }
     
-    public bool TryConsumeItem(ItemType type, int amount)
+    public bool TryConsumeItem(BaseItemData item, int amount)
     {
         for (int i = 0; i < inventorySlots.Count; i++)
         {
             var slot = inventorySlots[i];
             
-            if (slot.Type == type && slot.Count >= amount)
+            if (slot.ItemData == item && slot.Count >= amount)
             {
                 slot.Count -= amount;
                 if (slot.Count == 0)
-                    slot.Type = default;
+                    slot.ItemData = default;
 
                 inventoryUI.UpdateSlotUI(i);
                 return true;

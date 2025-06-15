@@ -7,14 +7,14 @@ public class Recipe
 {
 	[Tooltip("Assign ingredient in right order")]
 	public List<IngredientRequirement> ingredients;
-	public ItemType result;
+	public BaseItemData result;
 	public int resultCount;
 }
 
 [Serializable]
 public class IngredientRequirement
 {
-	public ItemType type;
+	public BaseItemData type;
 	public int count;
 }
 

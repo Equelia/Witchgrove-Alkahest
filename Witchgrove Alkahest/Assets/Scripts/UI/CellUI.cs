@@ -16,7 +16,7 @@ public class CellUI : MonoBehaviour,
 	public int SlotIndex { get; private set; }
 
 	private List<CellSlot> slotList;
-	private ItemType currentType;
+	private BaseItemData itemData;
 	private bool hasItem;
 
 	public void Setup(CellSlot slot, List<CellSlot> sourceList, int index)
@@ -25,7 +25,7 @@ public class CellUI : MonoBehaviour,
 		slotList = sourceList;
 		SlotIndex = index;
 		hasItem = slot.Count > 0;
-		currentType = slot.Type;
+		itemData = slot.ItemData;
 
 		countText.text = slot.Count > 0 ? slot.Count.ToString() : "";
 		countText.enabled = slot.Count > 0;
@@ -41,8 +41,8 @@ public class CellUI : MonoBehaviour,
 	public void Clear()
 	{
 		hasItem = false;
-		currentType = default;
-		SlotData = new CellSlot { Type = default, Count = 0 };
+		itemData = default;
+		SlotData = new CellSlot { ItemData = default, Count = 0 };
 		icon.enabled = false;
 		countText.enabled = false;
 		Tooltip.Instance.Hide();
@@ -56,12 +56,11 @@ public class CellUI : MonoBehaviour,
 		{
 			SlotData = updatedSlot;
 			hasItem = true;
-			currentType = updatedSlot.Type;
+			itemData = updatedSlot.ItemData;
 			countText.text = updatedSlot.Count.ToString();
 			countText.enabled = true;
 
-			InventorySystem.Instance.inventoryUI.iconDict.TryGetValue(updatedSlot.Type, out Sprite sprite);
-			SetSprite(sprite);
+			SetSprite(itemData.icon);
 		}
 		else
 		{
@@ -74,7 +73,7 @@ public class CellUI : MonoBehaviour,
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (hasItem && !DragManager.Instance.dragged)
-			Tooltip.Instance.Show(currentType.ToString(), eventData.position);
+			Tooltip.Instance.Show(itemData.ToString(), eventData.position);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
@@ -107,7 +106,7 @@ public class CellUI : MonoBehaviour,
 		var targetSlot = slotList[SlotIndex];
 		var sourceSlot = dragged.sourceSlot.slotList[dragged.sourceIndex];
 
-		if (targetSlot.Type == sourceSlot.Type && targetSlot.Count < InventorySystem.Instance.maxStack)
+		if (targetSlot.ItemData == sourceSlot.ItemData && targetSlot.Count < InventorySystem.Instance.maxStack)
 		{
 			int spaceLeft = InventorySystem.Instance.maxStack - targetSlot.Count;
 			int transferAmount = Mathf.Min(spaceLeft, sourceSlot.Count);
@@ -116,20 +115,20 @@ public class CellUI : MonoBehaviour,
 			sourceSlot.Count -= transferAmount;
 
 			if (sourceSlot.Count == 0)
-				sourceSlot.Type = default;
+				sourceSlot.ItemData = default;
 		}
 		else
 		{
 			var temp = new CellSlot
 			{
-				Type = targetSlot.Type,
+				ItemData = targetSlot.ItemData,
 				Count = targetSlot.Count
 			};
 
-			targetSlot.Type = sourceSlot.Type;
+			targetSlot.ItemData = sourceSlot.ItemData;
 			targetSlot.Count = sourceSlot.Count;
 
-			sourceSlot.Type = temp.Type;
+			sourceSlot.ItemData = temp.ItemData;
 			sourceSlot.Count = temp.Count;
 		}
 

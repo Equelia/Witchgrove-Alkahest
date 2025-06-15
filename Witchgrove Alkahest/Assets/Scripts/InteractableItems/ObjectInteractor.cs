@@ -62,7 +62,7 @@ public class ObjectInteractor : MonoBehaviour
             if (hit.collider.TryGetComponent<PickupableItem>(out var pickupable_item))
             {
                 pickupableItem = pickupable_item;
-                objectNameText.text = pickupable_item.type.ToString();
+                objectNameText.text = pickupable_item.ingredientData.ToString();
                 if (!objectNameTextHolder.activeSelf)
                     objectNameTextHolder.SetActive(true);
 
@@ -100,7 +100,7 @@ public class ObjectInteractor : MonoBehaviour
     /// </summary>
     private void PickUpHoveredItem()
     {
-        bool added = InventorySystem.Instance.AddItem(pickupableItem.type);
+        bool added = InventorySystem.Instance.AddItem(pickupableItem.ingredientData);
 
         if (!added)
         {
