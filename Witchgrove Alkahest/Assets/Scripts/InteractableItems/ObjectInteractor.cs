@@ -42,9 +42,7 @@ public class ObjectInteractor : MonoBehaviour
         //Interact with pickupable item
         if (pickupableItem != null && Input.GetKeyDown(KeyCode.E))
             PickUpHoveredItem();
-        
-        //Interact with interactable item
-        if (interactableItem != null && Input.GetKeyDown(KeyCode.E))
+        else if (interactableItem != null && Input.GetKeyDown(KeyCode.E))         //Interact with interactable item
         {
             interactableItem.Interact();            
             objectNameTextHolder.SetActive(false);
@@ -67,6 +65,8 @@ public class ObjectInteractor : MonoBehaviour
                 objectNameText.text = pickupable_item.type.ToString();
                 if (!objectNameTextHolder.activeSelf)
                     objectNameTextHolder.SetActive(true);
+
+                interactableItem = null;
                 return;
             }
             // Then try to get a InteractableItem component
@@ -76,6 +76,8 @@ public class ObjectInteractor : MonoBehaviour
                 objectNameText.text = interactable_item.gameObject.name;
                 if (!objectNameTextHolder.activeSelf)
                     objectNameTextHolder.SetActive(true);
+                
+                pickupableItem = null;
                 return;
             }
         }
@@ -88,6 +90,7 @@ public class ObjectInteractor : MonoBehaviour
     private void ClearHover()
     {
         pickupableItem = null;
+        interactableItem = null;
         objectNameTextHolder.SetActive(false);
     }
 
@@ -105,8 +108,11 @@ public class ObjectInteractor : MonoBehaviour
             return;
         }
 
-        pickupableItem.gameObject.SetActive(false);
-        pickupableItem = null;
-        objectNameTextHolder.SetActive(false);
+        if (pickupableItem.consumable)
+        {
+            pickupableItem.gameObject.SetActive(false);
+            pickupableItem = null;
+            objectNameTextHolder.SetActive(false);
+        }
     }
 }

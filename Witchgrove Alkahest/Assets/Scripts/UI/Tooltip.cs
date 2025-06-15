@@ -1,5 +1,6 @@
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// Simple singleton tooltip for showing item names on hover.
@@ -26,10 +27,14 @@ public class Tooltip : MonoBehaviour
 	public void Show(string text, Vector2 screenPosition)
 	{
 		gameObject.SetActive(true);
-		tooltipText.text = text;
+		
+		string formatted = System.Text.RegularExpressions.Regex.Replace(
+			text, @"(?<!^)([А-Я])", " $1"
+		);
+		tooltipText.text = formatted;
 
 		// Resize background to fit text plus padding
-		Vector2 size = new Vector2(tooltipText.preferredWidth, tooltipText.preferredHeight);
+		Vector2 size = tooltipText.GetPreferredValues(formatted);
 		background.sizeDelta = size + new Vector2(12, 12);
 
 		// Position at cursor

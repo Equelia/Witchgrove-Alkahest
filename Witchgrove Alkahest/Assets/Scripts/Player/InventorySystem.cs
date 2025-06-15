@@ -11,9 +11,9 @@ public enum ItemType
     Herb,
     Mushroom,
     Crystal,
-    Сахар,
-    Соль,
-    Вода
+    Вода,
+    СмущенноеЗелье,
+    ЗельеЗдоровья
 }
 
 /// <summary>
@@ -92,6 +92,25 @@ public class InventorySystem : MonoBehaviour
         
         // 3) Inventory full
         Debug.LogWarning($"[Inventory] Cannot add {type}: inventory full.");
+        return false;
+    }
+    
+    public bool TryConsumeItem(ItemType type, int amount)
+    {
+        for (int i = 0; i < inventorySlots.Count; i++)
+        {
+            var slot = inventorySlots[i];
+            
+            if (slot.Type == type && slot.Count >= amount)
+            {
+                slot.Count -= amount;
+                if (slot.Count == 0)
+                    slot.Type = default;
+
+                inventoryUI.UpdateSlotUI(i);
+                return true;
+            }
+        }
         return false;
     }
 }
