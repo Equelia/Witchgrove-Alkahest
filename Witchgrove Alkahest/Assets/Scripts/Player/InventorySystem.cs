@@ -1,7 +1,15 @@
 using System;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Serialization;
+/// <summary>
+/// Interface for every Inventory
+/// </summary>
+public interface IExternalInventoryReceiver
+{
+    bool CanReceiveItem(BaseItemData item);
+    bool ReceiveItem(BaseItemData item, int amount);
+}
+
 
 /// <summary>
 /// Represents a single slot in the inventory.
@@ -29,6 +37,8 @@ public class InventorySystem : MonoBehaviour
     [HideInInspector] public List<CellSlot> inventorySlots;
     
     public InventoryUI inventoryUI;
+    public IExternalInventoryReceiver CurrentExternalReceiver;
+
     
     private void Awake()
     {

@@ -5,7 +5,7 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class CellUI : MonoBehaviour,
-	IPointerEnterHandler, IPointerExitHandler,
+	IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
 	IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
 	[Header("CellUI Settings")] 
@@ -67,6 +67,28 @@ public class CellUI : MonoBehaviour,
 			Clear();
 		}
 	}
+	
+	private void TryGiveOneItemToExternal()
+	{
+		if (SlotData == null || SlotData.ItemData == null || SlotData.Count <= 0) return;
+
+		var externalReceiver = InventorySystem.Instance.CurrentExternalReceiver;
+		if (externalReceiver == null) return;
+
+		if (!externalReceiver.CanReceiveItem(SlotData.ItemData)) return;
+
+		if (externalReceiver.ReceiveItem(SlotData.ItemData, 1))
+		{
+			SlotData.Count -= 1;
+			if (SlotData.Count == 0)
+			{
+				SlotData.ItemData = null;
+			}
+			UpdateCellUI();
+			InventorySystem.Instance.inventoryUI.UpdateSlotUI(SlotIndex);
+		}
+	}
+
 
 	#region IPoint/IDrag implementation
 
@@ -80,6 +102,14 @@ public class CellUI : MonoBehaviour,
 	{
 		if (hasItem)
 			Tooltip.Instance.Hide();
+	}
+	
+	public void OnPointerClick(PointerEventData eventData)
+	{
+		if (eventData.button == PointerEventData.InputButton.Right)
+		{
+			TryGiveOneItemToExternal();
+		}	
 	}
 
 	public void OnBeginDrag(PointerEventData eventData)
@@ -137,4 +167,5 @@ public class CellUI : MonoBehaviour,
 	}
 
 	#endregion
+	
 }

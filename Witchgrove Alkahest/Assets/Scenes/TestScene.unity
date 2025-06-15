@@ -1781,6 +1781,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4688fdb7df04437aeb418b961361dc5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1186484297 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2389162861727479700, guid: dbfdf48efad8471429539445801e0cbd, type: 3}
+  m_PrefabInstance: {fileID: 1415806735335755996}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66feaa2c14dd9cd44acdb5cf5d8293a8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1210776649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2389,6 +2400,7 @@ MonoBehaviour:
   resultCellSlots: []
   currentWaterAmount: 0
   maxWaterAmount: 10
+  cauldronUI: {fileID: 1186484297}
 --- !u!65 &1617124250
 BoxCollider:
   m_ObjectHideFlags: 0

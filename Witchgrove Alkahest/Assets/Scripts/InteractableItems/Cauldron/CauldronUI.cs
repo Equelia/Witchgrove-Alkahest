@@ -49,7 +49,7 @@ public class CauldronUI : MonoBehaviour
 	private void Craft()
 	{
 		cauldronController.TryCraft();
-		RefreshCraftUI();
+		RefreshCellsUI();
 	}
 
 	private void AddWater()
@@ -58,7 +58,7 @@ public class CauldronUI : MonoBehaviour
 			UpdateWaterUI();
 	}
 	
-	private void RefreshCraftUI()
+	public void RefreshCellsUI()
 	{
 		foreach (var cell in craftCells) cell.UpdateCellUI();
 		foreach (var cell in resultCells) cell.UpdateCellUI();

@@ -44,8 +44,13 @@ public class ObjectInteractor : MonoBehaviour
             PickUpHoveredItem();
         else if (interactableItem != null && Input.GetKeyDown(KeyCode.E))         //Interact with interactable item
         {
-            interactableItem.Interact();            
+            interactableItem.Interact();        
             objectNameTextHolder.SetActive(false);
+            
+            if (interactableItem is IExternalInventoryReceiver receiver)
+                InventorySystem.Instance.CurrentExternalReceiver = receiver;
+            else
+                InventorySystem.Instance.CurrentExternalReceiver = null;
         }
     }
     

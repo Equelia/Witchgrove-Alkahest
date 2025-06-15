@@ -49,6 +49,7 @@ public class InventoryUI : MonoBehaviour
     {
         panel.SetActive(false);
         cauldronPanel.SetActive(false);
+        InventorySystem.Instance.CurrentExternalReceiver = null;
         Tooltip.Instance.Hide();
     }
 

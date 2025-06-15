@@ -1,7 +1,8 @@
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
-public class Cauldron : InteractableItem
+public class Cauldron : InteractableItem, IExternalInventoryReceiver
 {
 	[SerializeField] private RecipeDatabase recipeDatabase;
 
@@ -10,6 +11,8 @@ public class Cauldron : InteractableItem
 	
 	[HideInInspector] public int currentWaterAmount;
 	[HideInInspector] public int maxWaterAmount = 10;
+	
+	[SerializeField] private CauldronUI cauldronUI;
 
 	private PotionData garbagePotion;
 	private BaseItemData waterIngredient;
@@ -249,5 +252,39 @@ public class Cauldron : InteractableItem
 			Debug.Log("Котёл уже заполнен водой.");
 			return false;
 		}
+	}
+
+	public bool CanReceiveItem(BaseItemData item)
+	{
+		return craftCellSlots.Any(slot => slot.ItemData == null || slot.ItemData == item && slot.Count < InventorySystem.Instance.maxStack);
+	}
+
+
+	public bool ReceiveItem(BaseItemData item, int amount)
+	{
+		for (int i = 0; i < craftCellSlots.Count; i++)
+		{
+			var slot = craftCellSlots[i];
+
+			if (slot.ItemData == item && slot.Count < InventorySystem.Instance.maxStack)
+			{
+				int addable = Mathf.Min(amount, InventorySystem.Instance.maxStack - slot.Count);
+				slot.Count += addable;
+				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
+				cauldronUI.RefreshCellsUI();
+				return true;
+			}
+
+			if (slot.ItemData == null)
+			{
+				slot.ItemData = item;
+				slot.Count = 1;
+				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
+				cauldronUI.RefreshCellsUI();
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
