@@ -33,7 +33,7 @@ public class InventoryUI : MonoBehaviour
     public bool IsOpen => panel.activeSelf;
 
     // Internal lookup for fast icon retrieval
-    [HideInInspector] public Dictionary<ItemType, Sprite> iconDict;
+    public Dictionary<ItemType, Sprite> iconDict;
 
     private void Awake()
     {
@@ -86,9 +86,6 @@ public class InventoryUI : MonoBehaviour
     public void UpdateSlotUI(int index)
     {
         if (index >= 0 && index < cells.Length)
-        {
-            Debug.Log("UpdateSlotUI called in" + index);
-            cells[index].UpdateUI();
-        }
+            cells[index].UpdateCellUI();
     }
 }

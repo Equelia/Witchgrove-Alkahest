@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// Singleton for handle dragging object
+/// </summary>
 public class DragManager : MonoBehaviour
 {
 	public static DragManager Instance;
@@ -14,7 +17,13 @@ public class DragManager : MonoBehaviour
 
 	private void Awake()
 	{
+		if (Instance != null && Instance != this)
+		{
+			Destroy(gameObject);
+			return;
+		}
 		Instance = this;
+		DontDestroyOnLoad(gameObject);
 		draggedIconObject.SetActive(false);
 	}
 
@@ -26,8 +35,6 @@ public class DragManager : MonoBehaviour
 		
 		draggedItem = new DragItemData
 		{
-			type = cell.SlotData.Type,
-			count = cell.SlotData.Count,
 			sourceSlot = cell,
 			sourceIndex = cell.SlotIndex
 		};

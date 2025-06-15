@@ -8,17 +8,16 @@ public class CellUI : MonoBehaviour,
 	IPointerEnterHandler, IPointerExitHandler,
 	IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
 {
+	[Header("CellUI Settings")] 
 	[SerializeField] private Image icon;
 	[SerializeField] private TMP_Text countText;
-
-	public CellSlot SlotData { get; private set; } = new CellSlot();
-	public int SlotIndex { get; private set; }
 	
-	private List<CellSlot> slotList;
+	public CellSlot SlotData { get; private set; } = new();
+	public int SlotIndex { get; private set; }
 
+	private List<CellSlot> slotList;
 	private ItemType currentType;
 	private bool hasItem;
-	
 
 	public void Setup(CellSlot slot, List<CellSlot> sourceList, int index)
 	{
@@ -48,8 +47,8 @@ public class CellUI : MonoBehaviour,
 		countText.enabled = false;
 		Tooltip.Instance.Hide();
 	}
-	
-	public void UpdateUI()
+
+	public void UpdateCellUI()
 	{
 		var updatedSlot = slotList[SlotIndex];
 
@@ -69,7 +68,9 @@ public class CellUI : MonoBehaviour,
 			Clear();
 		}
 	}
-	
+
+	#region IPoint/IDrag implementation
+
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (hasItem && !DragManager.Instance.dragged)
@@ -106,7 +107,6 @@ public class CellUI : MonoBehaviour,
 		var targetSlot = slotList[SlotIndex];
 		var sourceSlot = dragged.sourceSlot.slotList[dragged.sourceIndex];
 
-		// Совмещение стеков, если типы совпадают
 		if (targetSlot.Type == sourceSlot.Type && targetSlot.Count < InventorySystem.Instance.maxStack)
 		{
 			int spaceLeft = InventorySystem.Instance.maxStack - targetSlot.Count;
@@ -115,13 +115,11 @@ public class CellUI : MonoBehaviour,
 			targetSlot.Count += transferAmount;
 			sourceSlot.Count -= transferAmount;
 
-			// Если источник опустел — очищаем его тип
 			if (sourceSlot.Count == 0)
 				sourceSlot.Type = default;
 		}
 		else
 		{
-			// Иначе просто свап
 			var temp = new CellSlot
 			{
 				Type = targetSlot.Type,
@@ -135,7 +133,9 @@ public class CellUI : MonoBehaviour,
 			sourceSlot.Count = temp.Count;
 		}
 
-		dragged.sourceSlot.UpdateUI();
-		UpdateUI();
+		dragged.sourceSlot.UpdateCellUI();
+		UpdateCellUI();
 	}
+
+	#endregion
 }

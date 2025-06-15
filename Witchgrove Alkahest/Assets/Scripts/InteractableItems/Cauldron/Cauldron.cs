@@ -14,7 +14,7 @@ public class Cauldron : InteractableItem
 		InventorySystem.Instance.inventoryUI.OpenCauldron();
 	}
 	
-	private void Start()
+	private void Awake()
 	{
 		// Initialize empty craft slots
 		craftCellSlots = new List<CellSlot>(8);
@@ -22,8 +22,6 @@ public class Cauldron : InteractableItem
 		{
 			craftCellSlots.Add(new CellSlot { Type = default, Count = 0 });
 		}
-		
-		
 		
 		// Initialize empty result slots
 		resultCellSlots = new List<CellSlot>(6);

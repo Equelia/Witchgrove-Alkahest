@@ -2,6 +2,7 @@ using UnityEngine;
 
 /// <summary>
 /// Requires the object to have a trigger collider.
+/// Base class of interactable items
 /// </summary>
 
 [RequireComponent(typeof(Collider))]

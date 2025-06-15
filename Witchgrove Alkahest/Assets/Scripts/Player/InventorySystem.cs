@@ -38,12 +38,11 @@ public class InventorySystem : MonoBehaviour
     [SerializeField] private int maxSlots = 4;
     [Tooltip("Maximum stack size per slot")]
     public int maxStack = 5;
-
+    
     [HideInInspector] public List<CellSlot> inventorySlots;
-
+    
     public InventoryUI inventoryUI;
     
-
     private void Awake()
     {
         if (Instance != null && Instance != this)
@@ -94,38 +93,5 @@ public class InventorySystem : MonoBehaviour
         // 3) Inventory full
         Debug.LogWarning($"[Inventory] Cannot add {type}: inventory full.");
         return false;
-    }
-
-    /// <summary>
-    /// Use (or remove) one item of the given type from inventory.
-    /// </summary>
-    public void UseItem(ItemType type)
-    {
-        for (int i = 0; i < inventorySlots.Count; i++)
-        {
-            var slot = inventorySlots[i];
-            if (slot.Count > 0 && slot.Type == type)
-            {
-                slot.Count--;
-                Debug.Log($"[Inventory] Used one {type}. Remaining: {slot.Count}");
-                // If slot is now empty, clear its type
-                if (slot.Count == 0)
-                    inventorySlots[i].Type = default;
-
-                inventoryUI.UpdateSlotUI(i);
-                return;
-            }
-        }
-
-        Debug.LogWarning($"[Inventory] No item of type {type} to use.");
-    }
-    
-    public CellSlot GetInventorySlot(int index)
-    {
-        var slots = inventorySlots;
-        if (index >= 0 && index < slots.Count)
-            return slots[index];
-
-        return new CellSlot { Type = default, Count = 0 };
     }
 }

@@ -13,8 +13,6 @@ public class CauldronUI : MonoBehaviour
 	[Tooltip("Assign Cauldron component")]
 	[SerializeField] private Cauldron cauldronController;
 	
-	private InventoryUI inventoryUI => InventorySystem.Instance.inventoryUI;
-
 	private void Start()
 	{
 		for (int i = 0; i < craftCells.Length; i++)

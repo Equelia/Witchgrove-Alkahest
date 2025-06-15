@@ -35,10 +35,7 @@ public class Tooltip : MonoBehaviour
 		// Position at cursor
 		(transform as RectTransform).position = screenPosition;
 	}
-
-	/// <summary>
-	/// Hide the tooltip.
-	/// </summary>
+	
 	public void Hide()
 	{
 		gameObject.SetActive(false);

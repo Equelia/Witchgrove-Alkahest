@@ -3,15 +3,15 @@ using UnityEngine;
 using UnityEngine.UI;
 
 /// <summary>
-/// Raycasts from screen center to detect pickupable items,
-/// shows their name in the UI, and on “E” adds them to inventory.
+/// Raycasts from screen center to detect interactable items,
+/// shows their name in the UI, and on “E” interacts with them.
 /// </summary>
 public class ObjectInteractor : MonoBehaviour
 {
     [Header("Interaction Settings")]
     [Tooltip("Max distance at which we can interact")]
     [SerializeField] private float interactDistance = 3f;
-    [Tooltip("Layer mask for pickupable objects")]
+    [Tooltip("Layer mask for interactable objects")]
     [SerializeField] private LayerMask interactLayer;
 
     [Header("UI")]
@@ -39,9 +39,11 @@ public class ObjectInteractor : MonoBehaviour
         
         HandleHover();
 
+        //Interact with pickupable item
         if (pickupableItem != null && Input.GetKeyDown(KeyCode.E))
             PickUpHoveredItem();
-
+        
+        //Interact with interactable item
         if (interactableItem != null && Input.GetKeyDown(KeyCode.E))
         {
             interactableItem.Interact();            
@@ -49,12 +51,16 @@ public class ObjectInteractor : MonoBehaviour
         }
     }
     
+    
+    /// <summary>
+    /// Check what's player hovering over to execute possible interactions 
+    /// </summary>
     private void HandleHover()
     {
         Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactLayer))
         {
-            // Try to get a PickUpItem component
+            // Try to get a PickupableItem component
             if (hit.collider.TryGetComponent<PickupableItem>(out var pickupable_item))
             {
                 pickupableItem = pickupable_item;
@@ -63,6 +69,7 @@ public class ObjectInteractor : MonoBehaviour
                     objectNameTextHolder.SetActive(true);
                 return;
             }
+            // Then try to get a InteractableItem component
             if (hit.collider.TryGetComponent<InteractableItem>(out var interactable_item))
             {
                 interactableItem = interactable_item;
