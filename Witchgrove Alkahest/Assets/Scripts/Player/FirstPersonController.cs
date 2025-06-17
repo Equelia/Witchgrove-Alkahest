@@ -1,214 +1,221 @@
-using System;
+using Unity.Cinemachine;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
 public class FirstPersonController : MonoBehaviour
 {
-	[Header("Movement Settings")] [SerializeField]
-	private float walkSpeed = 5f;
+    [Header("Movement Settings")]
+    [SerializeField] private float walkSpeed = 5f;
+    [SerializeField] private float sprintSpeed = 8f;
+    [SerializeField] private float minAirSpeed = 2f;                  // minimal horizontal speed in air
+    [SerializeField] private float airControlAcceleration = 3f;       // NEW: how fast to adjust direction in air
 
-	[SerializeField] private float sprintSpeed = 8f;
+    [Header("Jump & Gravity Settings")]
+    [SerializeField] private float jumpHeight = 1.5f;
+    [SerializeField] private float gravity = -9.81f;
 
-	[Header("Jump & Gravity Settings")] [SerializeField]
-	private float jumpHeight = 1.5f;
+    [Header("References")]
+    [SerializeField] private Transform headTransform;
+    [SerializeField] private CinemachineVirtualCamera vCam;
+    [SerializeField] private GameObject inventoryPanel;
 
-	[SerializeField] private float gravity = -9.81f;
+    [Header("Head Bob Settings")]
+    [SerializeField] private float walkBobFrequency = 1.5f;
+    [SerializeField] private float walkBobHorizontalAmplitude = 0.05f;
+    [SerializeField] private float walkBobVerticalAmplitude = 0.05f;
+    [SerializeField] private float walkBobSmooth = 5f;
 
-	[Header("Mouse Look Settings")] [SerializeField]
-	private Transform playerCamera;
+    [SerializeField] private float sprintBobFrequency = 3f;
+    [SerializeField] private float sprintBobHorizontalAmplitude = 0.1f;
+    [SerializeField] private float sprintBobVerticalAmplitude = 0.1f;
+    [SerializeField] private float sprintBobSmooth = 2f;
 
-	[SerializeField] private GameObject inventoryPanel;
-	[SerializeField] private float mouseSensitivity = 100f;
+    [Header("Jump/Land Shake Settings")]
+    [SerializeField] private float jumpShakeDuration = 0.2f;
+    [SerializeField] private float jumpShakeAmplitude = 0.1f;
+    [SerializeField] private float landShakeDuration = 0.3f;
+    [SerializeField] private float landShakeAmplitude = 0.15f;
 
-	[Header("Walk Head Bob Settings")] [Tooltip("Bob frequency when walking"), SerializeField]
-	private float walkBobFrequency = 1.5f;
+    private CharacterController controller;
+    private Vector3 velocity;            // vertical velocity
+    private Vector3 horizontalVelocity;  // horizontal movement stored between frames
+    private bool previousGrounded;
+    private bool jumpRequested;
 
-	[Tooltip("Horizontal bob amplitude when walking"), SerializeField]
-	private float walkBobHorizontalAmplitude = 0.05f;
+    private Vector3 headStartLocalPos;
+    private float bobTimer;
+    private float shakeTimer;
+    private float shakeDuration;
+    private float shakeAmplitude;
 
-	[Tooltip("Vertical bob amplitude when walking"), SerializeField]
-	private float walkBobVerticalAmplitude = 0.05f;
+    void Start()
+    {
+        controller = GetComponent<CharacterController>();
+        headStartLocalPos = headTransform.localPosition;
+        previousGrounded = controller.isGrounded;
+        horizontalVelocity = Vector3.zero;  // initialize horizontal velocity
+        Cursor.lockState = CursorLockMode.Locked;
+        Cursor.visible = false;
+    }
 
-	[Tooltip("Bob smooth when walking"), SerializeField]
-	private float walkBobSmooth = 5f;
+    void Update()
+    {
+        bool invOpen = inventoryPanel.activeSelf;
 
-	[Header("Sprint Head Bob Settings")] [Tooltip("Bob frequency when sprinting"), SerializeField]
-	private float sprintBobFrequency = 3f;
+        if (vCam != null)
+            vCam.enabled = !invOpen;
 
-	[Tooltip("Horizontal bob amplitude when sprinting"), SerializeField]
-	private float sprintBobHorizontalAmplitude = 0.1f;
+        if (invOpen)
+        {
+            if (Cursor.lockState != CursorLockMode.None)
+            {
+                Cursor.lockState = CursorLockMode.None;
+                Cursor.visible = true;
+            }
+            return;
+        }
+        if (Cursor.lockState != CursorLockMode.Locked)
+        {
+            Cursor.lockState = CursorLockMode.Locked;
+            Cursor.visible = false;
+        }
 
-	[Tooltip("Vertical bob amplitude when sprinting"), SerializeField]
-	private float sprintBobVerticalAmplitude = 0.1f;
+        HandleHeadBob();
 
-	[Tooltip("Bob smooth when sprinting"), SerializeField]
-	private float sprintBobSmooth = 2f;
+        if (Input.GetButtonDown("Jump"))
+            jumpRequested = true;
 
-	[Header("Jump/Land Shake Settings")] [Tooltip("Duration of shake when jumping"), SerializeField]
-	private float jumpShakeDuration = 0.2f;
+        if (shakeTimer > 0f)
+            shakeTimer -= Time.deltaTime;
 
-	[Tooltip("Amplitude of shake when jumping"), SerializeField]
-	private float jumpShakeAmplitude = 0.1f;
+        HandleMovement();
+        HandlePlayerRotation();
+    }
 
-	[Tooltip("Duration of shake when landing"), SerializeField]
-	private float landShakeDuration = 0.3f;
+    private void HandleMovement()
+    {
+        bool isGrounded = controller.isGrounded;
+        if (isGrounded && velocity.y < 0f)
+            velocity.y = -2f;
 
-	[Tooltip("Amplitude of shake when landing"), SerializeField]
-	private float landShakeAmplitude = 0.15f;
+        // use raw input for instant respond/release
+        Vector3 rawInput = new Vector3(
+            Input.GetAxisRaw("Horizontal"),
+            0f,
+            Input.GetAxisRaw("Vertical")
+        );
+        Vector3 inputDir = rawInput.sqrMagnitude > 0f ? rawInput.normalized : Vector3.zero;
 
-	private CharacterController controller;
-	private Vector3 velocity;
-	private float xRotation;
+        // calculate camera-based axes
+        Transform cam = Camera.main.transform;
+        Vector3 forward = cam.forward; forward.y = 0f; forward.Normalize();
+        Vector3 right   = cam.right;   right.y   = 0f; right.Normalize();
 
-	private Vector3 cameraStartLocalPos;
-	private float bobTimer;
+        if (isGrounded)
+        {
+            // update horizontal velocity on ground
+            float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
+            horizontalVelocity = (forward * inputDir.z + right * inputDir.x) * speed;
+        }
+        else
+        {
+            // IN AIR: apply directional control
+            if (inputDir != Vector3.zero)
+            {
+                float targetSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
+                Vector3 targetVel = (forward * inputDir.z + right * inputDir.x) * targetSpeed;
+                horizontalVelocity = Vector3.MoveTowards(
+                    horizontalVelocity,
+                    targetVel,
+                    airControlAcceleration * Time.deltaTime
+                );
+            }
+            // enforce minimal air speed if below threshold
+            if (horizontalVelocity.magnitude < minAirSpeed)
+            {
+                horizontalVelocity = horizontalVelocity.normalized * minAirSpeed;
+            }
+        }
 
-	private float shakeTimer;
-	private float shakeDuration;
-	private float shakeAmplitude;
-	private bool previousGrounded;
-	private bool jumpRequested;
+        if (jumpRequested && isGrounded)
+        {
+            velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+            TriggerShake(jumpShakeDuration, jumpShakeAmplitude);
+        }
+        jumpRequested = false;
 
-	void Start()
-	{
-		controller = GetComponent<CharacterController>();
-		cameraStartLocalPos = playerCamera.localPosition;
-		previousGrounded = controller.isGrounded;
-		Cursor.lockState = CursorLockMode.Locked;
-		Cursor.visible = false;
-	}
+        // apply gravity
+        velocity.y += gravity * Time.deltaTime;
 
-	void Update()
-	{
-		if (inventoryPanel.activeSelf)
-		{
-			if (Cursor.lockState != CursorLockMode.None)
-			{
-				Cursor.lockState = CursorLockMode.None;
-				Cursor.visible = true;
-			}
+        // move character
+        Vector3 finalMove = horizontalVelocity + Vector3.up * velocity.y;
+        controller.Move(finalMove * Time.deltaTime);
 
-			return;
-		}
+        if (!previousGrounded && isGrounded)
+            TriggerShake(landShakeDuration, landShakeAmplitude);
 
-		if (Cursor.lockState != CursorLockMode.Locked)
-		{
-			Cursor.lockState = CursorLockMode.Locked;
-			Cursor.visible = false;
-		}
+        previousGrounded = isGrounded;
+    }
 
-		HandleMouseLook();
-		HandleHeadBob();
+    private void HandlePlayerRotation()
+    {
+        Vector3 dir = Camera.main.transform.forward;
+        dir.y = 0f;
+        if (dir.sqrMagnitude > 0.01f)
+            transform.rotation = Quaternion.Slerp(
+                transform.rotation,
+                Quaternion.LookRotation(dir),
+                10f * Time.deltaTime
+            );
+    }
 
-		if (Input.GetButtonDown("Jump"))
-			jumpRequested = true;
+    private void HandleHeadBob()
+    {
+        Vector2 movementInput = new Vector2(
+            Input.GetAxisRaw("Horizontal"),
+            Input.GetAxisRaw("Vertical")
+        );
+        float magnitude = movementInput.magnitude;
+        bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
-		if (shakeTimer > 0f)
-			shakeTimer -= Time.deltaTime;
-	}
+        float frequency = isSprinting ? sprintBobFrequency : walkBobFrequency;
+        float hAmp = isSprinting ? sprintBobHorizontalAmplitude : walkBobHorizontalAmplitude;
+        float vAmp = isSprinting ? sprintBobVerticalAmplitude : walkBobVerticalAmplitude;
+        float smooth = isSprinting ? sprintBobSmooth : walkBobSmooth;
 
-	void FixedUpdate()
-	{
-		if (inventoryPanel != null && inventoryPanel.activeSelf)
-			return;
-		
-		HandleMovement();
-	}
+        Vector3 targetPos = headStartLocalPos;
 
-	#region Movement
+        if (controller.isGrounded && magnitude > 0f)
+        {
+            bobTimer += Time.deltaTime * frequency * magnitude;
+            float xOffset = Mathf.Cos(bobTimer) * hAmp * magnitude;
+            float yOffset = Mathf.Sin(bobTimer * 2f) * vAmp * magnitude;
+            targetPos += new Vector3(xOffset, yOffset, 0f);
+        }
+        else bobTimer = 0f;
 
-	private void HandleMovement()
-	{
-		bool isGrounded = controller.isGrounded;
+        if (shakeTimer > 0f)
+        {
+            float elapsed = shakeDuration - shakeTimer;
+            float progress = Mathf.Clamp01(elapsed / shakeDuration);
+            float damper = 1f - progress;
+            float shakeFreq = Mathf.PI * 4f;
+            float xShake = Mathf.Sin(elapsed * shakeFreq) * shakeAmplitude * damper;
+            float yShake = Mathf.Sin(elapsed * shakeFreq * 1.5f) * shakeAmplitude * damper;
+            targetPos += new Vector3(xShake, yShake, 0f);
+        }
 
-		if (isGrounded && velocity.y < 0f)
-			velocity.y = -2f;
+        headTransform.localPosition = Vector3.Lerp(
+            headTransform.localPosition,
+            targetPos,
+            Time.deltaTime * smooth
+        );
+    }
 
-		Vector3 input = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
-		if (input.sqrMagnitude > 1f)
-			input.Normalize();
-		float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
-		Vector3 move = transform.TransformDirection(input) * speed;
-
-		if (jumpRequested && isGrounded)
-		{
-			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
-			TriggerShake(jumpShakeDuration, jumpShakeAmplitude);
-			//SoundManager.Instance.PlaySound("Jump");  //JumpSound
-		}
-
-		jumpRequested = false;
-
-		velocity.y += gravity * Time.fixedDeltaTime;
-		Vector3 finalMove = move + Vector3.up * velocity.y;
-		controller.Move(finalMove * Time.fixedDeltaTime);
-
-		if (!previousGrounded && isGrounded)
-		{
-			TriggerShake(landShakeDuration, landShakeAmplitude);
-			//SoundManager.Instance.PlaySound("Landing");   //LandingSound
-		}
-
-		previousGrounded = isGrounded;
-	}
-
-	private void HandleMouseLook()
-	{
-		float mouseX = Input.GetAxis("Mouse X") * mouseSensitivity * Time.deltaTime;
-		float mouseY = Input.GetAxis("Mouse Y") * mouseSensitivity * Time.deltaTime;
-
-		xRotation -= mouseY;
-		xRotation = Mathf.Clamp(xRotation, -90f, 90f);
-		playerCamera.localRotation = Quaternion.Euler(xRotation, 0f, 0f);
-
-		transform.Rotate(Vector3.up * mouseX);
-	}
-
-	private void HandleHeadBob()
-	{
-		Vector2 movementInput = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"));
-		float magnitude = movementInput.magnitude;
-		bool isSprinting = Input.GetKey(KeyCode.LeftShift);
-
-		float frequency = isSprinting ? sprintBobFrequency : walkBobFrequency;
-		float hAmp = isSprinting ? sprintBobHorizontalAmplitude : walkBobHorizontalAmplitude;
-		float vAmp = isSprinting ? sprintBobVerticalAmplitude : walkBobVerticalAmplitude;
-		float smooth = isSprinting ? sprintBobSmooth : walkBobSmooth;
-
-		Vector3 targetPos = cameraStartLocalPos;
-
-		if (controller.isGrounded && magnitude > 0f)
-		{
-			bobTimer += Time.deltaTime * frequency * magnitude;
-			float xOffset = Mathf.Cos(bobTimer) * hAmp * magnitude;
-			float yOffset = Mathf.Sin(bobTimer * 2f) * vAmp * magnitude;
-			targetPos += new Vector3(xOffset, yOffset, 0f);
-		}
-		else
-		{
-			bobTimer = 0f;
-		}
-
-		if (shakeTimer > 0f)
-		{
-			float elapsed = shakeDuration - shakeTimer;
-			float progress = Mathf.Clamp01(elapsed / shakeDuration);
-			float damper = 1f - progress;
-			float shakeFreq = Mathf.PI * 4f;
-			float xShake = Mathf.Sin(elapsed * shakeFreq) * shakeAmplitude * damper;
-			float yShake = Mathf.Sin(elapsed * shakeFreq * 1.5f) * shakeAmplitude * damper;
-			targetPos += new Vector3(xShake, yShake, 0f);
-		}
-
-		playerCamera.localPosition = Vector3.Lerp(playerCamera.localPosition, targetPos, Time.deltaTime * smooth);
-	}
-
-	private void TriggerShake(float duration, float amplitude)
-	{
-		shakeDuration = duration;
-		shakeTimer = duration;
-		shakeAmplitude = amplitude;
-	}
-
-	#endregion
+    private void TriggerShake(float duration, float amplitude)
+    {
+        shakeDuration = duration;
+        shakeTimer = duration;
+        shakeAmplitude = amplitude;
+    }
 }
