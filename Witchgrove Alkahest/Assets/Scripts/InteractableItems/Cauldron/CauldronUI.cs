@@ -18,6 +18,8 @@ public class CauldronUI : MonoBehaviour
 	[Space(15f)]
 	[SerializeField] private Button craftButton;
 	[SerializeField] private Cauldron cauldronController;
+
+	private CellUI[] allCells;
 	
 	private void OnEnable()
 	{
@@ -30,21 +32,33 @@ public class CauldronUI : MonoBehaviour
 		craftButton.onClick.RemoveListener(Craft);
 		addWaterButton.onClick.RemoveListener(AddWater);
 	}
+	
+	private void Awake()
+	{
+		allCells = new CellUI[craftCells.Length + resultCells.Length];
+
+		for (int i = 0; i < craftCells.Length; i++)
+			allCells[i] = craftCells[i];
+
+		for (int i = 0; i < resultCells.Length; i++)
+			allCells[craftCells.Length + i] = resultCells[i];
+	}
+
 
 	private void Start()
 	{
 		UpdateWaterUI();
-		
+
 		for (int i = 0; i < craftCells.Length; i++)
-		{
 			craftCells[i].Setup(craftCells[i].SlotData, cauldronController.craftCellSlots, i);
-		}
+
 		for (int i = 0; i < resultCells.Length; i++)
-		{
 			resultCells[i].Setup(resultCells[i].SlotData, cauldronController.resultCellSlots, i);
-		}
-		
+
+		for (int i = 0; i < allCells.Length; i++)
+			allCells[i].Setup(allCells[i].SlotData, cauldronController.GetAllSlots(), i);
 	}
+
 
 	private void Craft()
 	{

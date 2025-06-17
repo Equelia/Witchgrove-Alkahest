@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
+//TODO: Change CellUI updates
 public class CellUI : MonoBehaviour,
 	IPointerEnterHandler, IPointerExitHandler, IPointerClickHandler,
 	IBeginDragHandler, IDragHandler, IEndDragHandler, IDropHandler
@@ -15,7 +16,7 @@ public class CellUI : MonoBehaviour,
 	public CellSlot SlotData { get; private set; } = new();
 	public int SlotIndex { get; private set; }
 
-	private List<CellSlot> slotList;
+	private List<CellSlot> slotList; 
 	private BaseItemData itemData;
 	private bool hasItem;
 
@@ -68,26 +69,35 @@ public class CellUI : MonoBehaviour,
 		}
 	}
 	
-	private void TryGiveOneItemToExternal()
+	private void TryTransferOneItem()
 	{
-		if (SlotData == null || SlotData.ItemData == null || SlotData.Count <= 0) return;
+		var receiver = InventorySystem.Instance.CurrentExternalReceiver;
+		if (receiver == null || SlotData.Count == 0) return;
 
-		var externalReceiver = InventorySystem.Instance.CurrentExternalReceiver;
-		if (externalReceiver == null) return;
+		var slot = slotList[SlotIndex]; 
 
-		if (!externalReceiver.CanReceiveItem(SlotData.ItemData)) return;
-
-		if (externalReceiver.ReceiveItem(SlotData.ItemData, 1))
+		if (slotList == receiver.GetAllSlots())
 		{
-			SlotData.Count -= 1;
-			if (SlotData.Count == 0)
+			if (InventorySystem.Instance.AddItem(slot.ItemData))
 			{
-				SlotData.ItemData = null;
+				receiver.TryTakeOneItem(slot.ItemData);
+				UpdateCellUI();
 			}
-			UpdateCellUI();
-			InventorySystem.Instance.inventoryUI.UpdateSlotUI(SlotIndex);
+		}
+		else
+		{
+			if (receiver.TryAddOneItem(slot.ItemData))
+			{
+				slot.Count--;
+				if (slot.Count <= 0)
+					slot.ItemData = null;
+
+				UpdateCellUI();
+			}
 		}
 	}
+
+
 
 
 	#region IPoint/IDrag implementation
@@ -108,7 +118,7 @@ public class CellUI : MonoBehaviour,
 	{
 		if (eventData.button == PointerEventData.InputButton.Right)
 		{
-			TryGiveOneItemToExternal();
+			TryTransferOneItem();
 		}	
 	}
 
@@ -162,8 +172,14 @@ public class CellUI : MonoBehaviour,
 			sourceSlot.Count = temp.Count;
 		}
 
+		//ACTION FOR UI UPDATE HERE
 		dragged.sourceSlot.UpdateCellUI();
 		UpdateCellUI();
+		var receiver = InventorySystem.Instance.CurrentExternalReceiver;
+		if (receiver is Basket basket && basket.taskBoardUI != null)
+		{
+			basket.taskBoardUI.UpdateAvailableItemsCount();
+		}
 	}
 
 	#endregion

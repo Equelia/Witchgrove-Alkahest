@@ -1,23 +1,30 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Serialization;
 
+[System.Serializable]
+public class PanelEntry
+{
+    public string name;
+    public GameObject panel;
+}
 
 /// <summary>
 /// Handles toggling the inventory panel and updating slot visuals.
 /// </summary>
 public class InventoryUI : MonoBehaviour
 {
+    [FormerlySerializedAs("panel")]
     [Header("UI Elements")]
     [Tooltip("UI Elements panel's to show/hide")]
-    [SerializeField] private GameObject panel;
-    [SerializeField] private GameObject cauldronPanel;
+    [SerializeField] private GameObject mainInventoryPanel;
+    [SerializeField] private List<PanelEntry> panels;
 
     [Header("Inventory Slot Cells")]
     [Tooltip("Assign inventory CellUI components ")]
     [SerializeField] private CellUI[] cells;
     
-    public bool IsOpen => panel.activeSelf;
+    public bool IsOpen => mainInventoryPanel.activeSelf;
 
     private void Start()
     {
@@ -34,7 +41,7 @@ public class InventoryUI : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Tab))
         {
             if (!IsOpen)
-                panel.SetActive(true);
+                mainInventoryPanel.SetActive(true);
             else
                 CloseInventory();
         }
@@ -42,20 +49,27 @@ public class InventoryUI : MonoBehaviour
 
     public void OpenInventory()
     {
-        panel.SetActive(true);
+        mainInventoryPanel.SetActive(true);
     }
 
-    private void CloseInventory()
+
+    public void CloseInventory()
     {
-        panel.SetActive(false);
-        cauldronPanel.SetActive(false);
+        mainInventoryPanel.SetActive(false);
+
+        foreach (var entry in panels)
+            entry.panel.SetActive(false);
+
         InventorySystem.Instance.CurrentExternalReceiver = null;
         Tooltip.Instance.Hide();
     }
-
-    public void OpenCauldron()
+    
+    public void OpenPanelByName(string panelName)
     {
-        cauldronPanel.SetActive(true);
+        foreach (var entry in panels)
+        {
+            entry.panel.SetActive(entry.name == panelName);
+        }
     }
 
     public void UpdateSlotUI(int index)

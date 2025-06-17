@@ -47,10 +47,11 @@ public class ObjectInteractor : MonoBehaviour
             interactableItem.Interact();        
             objectNameTextHolder.SetActive(false);
             
-            if (interactableItem is IExternalInventoryReceiver receiver)
-                InventorySystem.Instance.CurrentExternalReceiver = receiver;
-            else
-                InventorySystem.Instance.CurrentExternalReceiver = null;
+            var receiver = interactableItem.GetComponent<IExternalInventoryReceiver>();
+            if (receiver == null)
+                receiver = interactableItem.GetComponentInChildren<IExternalInventoryReceiver>();
+
+            InventorySystem.Instance.CurrentExternalReceiver = receiver;
         }
     }
     

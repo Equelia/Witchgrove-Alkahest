@@ -14,36 +14,46 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 	
 	[SerializeField] private CauldronUI cauldronUI;
 
+	private List<CellSlot> allSlots;
+
 	private PotionData garbagePotion;
 	private BaseItemData waterIngredient;
 
 	public override void Interact()
 	{
 		base.Interact();
-		InventorySystem.Instance.inventoryUI.OpenCauldron();
+		InventorySystem.Instance.inventoryUI.OpenPanelByName("Cauldron");
 	}
 
 	private void Awake()
 	{
 		waterIngredient = ItemDatabase.Instance.GetItemById("вода");
 		garbagePotion = ItemDatabase.Instance.GetPotionById("смущенноезелье");
-		
 		currentWaterAmount = 2;
 		
-		// Initialize empty craft slots
-		craftCellSlots = new List<CellSlot>(8);
+		craftCellSlots = new List<CellSlot>();
+		resultCellSlots = new List<CellSlot>();
+		allSlots = new List<CellSlot>();
+		
+		// Initialize craft slots
 		for (int i = 0; i < 8; i++)
 		{
-			craftCellSlots.Add(new CellSlot { ItemData = default, Count = 0 });
+			var slot = new CellSlot();
+			craftCellSlots.Add(slot);
+			allSlots.Add(slot);
 		}
 
-		// Initialize empty result slots
-		resultCellSlots = new List<CellSlot>(6);
+		// Initialize result slots
 		for (int i = 0; i < 6; i++)
 		{
-			resultCellSlots.Add(new CellSlot { ItemData = default, Count = 0 });
+			var slot = new CellSlot();
+			resultCellSlots.Add(slot);
+			allSlots.Add(slot);
 		}
+		
+		Debug.LogError(allSlots.Count.ToString());
 	}
+	
 	public void TryCraft()
 	{
 		if (CheckForEmptyIngredientSlots())
@@ -254,33 +264,47 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 		}
 	}
 
-	public bool CanReceiveItem(BaseItemData item)
-	{
-		return craftCellSlots.Any(slot => slot.ItemData == null || slot.ItemData == item && slot.Count < InventorySystem.Instance.maxStack);
-	}
+	public List<CellSlot> GetAllSlots() => allSlots;
 
 
-	public bool ReceiveItem(BaseItemData item, int amount)
+	public bool TryAddOneItem(BaseItemData item)
 	{
-		for (int i = 0; i < craftCellSlots.Count; i++)
+		for (int i = 0; i < allSlots.Count; i++)
 		{
-			var slot = craftCellSlots[i];
-
-			if (slot.ItemData == item && slot.Count < InventorySystem.Instance.maxStack)
+			var slot = allSlots[i];
+			
+			if (slot.ItemData == item && slot.Count < item.maxStack)
 			{
-				int addable = Mathf.Min(amount, InventorySystem.Instance.maxStack - slot.Count);
-				slot.Count += addable;
+				slot.Count++;
 				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
 				cauldronUI.RefreshCellsUI();
 				return true;
 			}
-
 			if (slot.ItemData == null)
 			{
 				slot.ItemData = item;
 				slot.Count = 1;
 				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
 				cauldronUI.RefreshCellsUI();
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	public bool TryTakeOneItem(BaseItemData item)
+	{
+		for (int i = 0; i < allSlots.Count; i++)
+		{
+			var slot = allSlots[i];
+		
+			if (slot.ItemData == item && slot.Count > 0)
+			{
+				slot.Count--;
+				if (slot.Count <= 0)
+					slot.ItemData = null;
+
+				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
 				return true;
 			}
 		}

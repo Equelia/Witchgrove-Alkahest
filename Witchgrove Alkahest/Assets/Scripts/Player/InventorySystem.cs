@@ -6,8 +6,9 @@ using UnityEngine;
 /// </summary>
 public interface IExternalInventoryReceiver
 {
-    bool CanReceiveItem(BaseItemData item);
-    bool ReceiveItem(BaseItemData item, int amount);
+    List<CellSlot> GetAllSlots();
+    bool TryAddOneItem(BaseItemData item);
+    bool TryTakeOneItem(BaseItemData item);
 }
 
 

@@ -12,9 +12,12 @@ public class ItemCreatorWindow : OdinEditorWindow
     private const string IngredientPath = "Assets/Resources/Items/Ingredients";
     private const string PotionPath = "Assets/Resources/Items/Potions";
     private const string DatabasePath = "Assets/Resources/ItemDatabase.asset";
+    private const string QuestDatabasePath = "Assets/Resources/QuestDatabase.asset";
 
     [MenuItem("Tools/Item & Recipe Creator")]
     private static void OpenWindow() => GetWindow<ItemCreatorWindow>("Item & Recipe Creator");
+
+    public enum ItemTypeToCreate { Ingredient, Potion }
 
     // === Создание предмета ===
     [TitleGroup("Создание предмета")]
@@ -121,8 +124,6 @@ public class ItemCreatorWindow : OdinEditorWindow
         Debug.Log("✅ Предмет добавлен в ItemDatabase.");
     }
 
-    public enum ItemTypeToCreate { Ingredient, Potion }
-
     // === Создание рецепта ===
     [PropertySpace(20)]
     [TitleGroup("Создание рецепта")]
@@ -186,6 +187,69 @@ public class ItemCreatorWindow : OdinEditorWindow
         ingredientInputs.Clear();
         resultItem = null;
         resultCount = 1;
+    }
+
+    // === Создание квеста ===
+    [PropertySpace(20)]
+    [TitleGroup("Создание квеста")]
+    [BoxGroup("Создание квеста/Настройки", showLabel: false)]
+    [Required]
+    [LabelText("База квестов")]
+    public QuestDatabase questDatabase;
+
+    [BoxGroup("Создание квеста/Настройки")]
+    [PropertySpace(5)]
+    [LabelText("ID квеста")]
+    [Required]
+    public string questId = "quest_id";
+
+    [BoxGroup("Создание квеста/Настройки")]
+    [LabelText("Описание")]
+    [TextArea(3, 5)]
+    public string questDescription = "Описание квеста";
+
+    [BoxGroup("Создание квеста/Настройки")]
+    [LabelText("Требуемый предмет")]
+    [ValueDropdown(nameof(GetAllItemsDropdown))]
+    public BaseItemData requiredItem;
+
+    [BoxGroup("Создание квеста/Настройки")]
+    [LabelText("Кол-во предметов")]
+    [MinValue(1)]
+    public int requiredCount = 1;
+
+    [BoxGroup("Создание квеста/Настройки")]
+    [PropertySpace(10)]
+    [Button("Добавить квест", ButtonSizes.Large), GUIColor(1f, 0.7f, 0.2f)]
+    private void AddQuest()
+    {
+        if (questDatabase == null)
+        {
+            Debug.LogWarning("Укажи QuestDatabase.");
+            return;
+        }
+
+        var newQuest = new QuestData()
+        {
+            questId = questId,
+            description = questDescription,
+            requiredItem = requiredItem,
+            requiredCount = requiredCount
+        };
+
+        questDatabase.quests ??= new List<QuestData>();
+        questDatabase.quests.Add(newQuest);
+
+        EditorUtility.SetDirty(questDatabase);
+        AssetDatabase.SaveAssets();
+
+        Debug.Log("✅ Квест добавлен в QuestDatabase!");
+
+        // Сброс
+        questId = "quest_id";
+        questDescription = "";
+        requiredItem = null;
+        requiredCount = 1;
     }
 
     private IEnumerable<BaseItemData> GetAllItemsDropdown()
