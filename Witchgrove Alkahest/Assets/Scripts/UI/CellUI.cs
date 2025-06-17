@@ -17,56 +17,53 @@ public class CellUI : MonoBehaviour,
 	public int SlotIndex { get; private set; }
 
 	private List<CellSlot> slotList; 
-	private BaseItemData itemData;
 	private bool hasItem;
-
-	public void Setup(CellSlot slot, List<CellSlot> sourceList, int index)
+	
+	private void OnDestroy()
 	{
+		if (SlotData != null)
+			SlotData.OnSlotChanged -= HandleSlotChanged;
+	}
+
+	public void Setup(CellSlot slot, List<CellSlot> sourceList, int index)	
+	{
+		if (SlotData != null)
+			SlotData.OnSlotChanged -= HandleSlotChanged;
+
 		SlotData = slot;
 		slotList = sourceList;
 		SlotIndex = index;
 		hasItem = slot.Count > 0;
-		itemData = slot.ItemData;
 
-		countText.text = slot.Count > 0 ? slot.Count.ToString() : "";
-		countText.enabled = slot.Count > 0;
+		slot.OnSlotChanged += HandleSlotChanged;
+		UpdateCellUI();
+
 	}
-
-	private void SetSprite(Sprite sprite)
+	
+	private void HandleSlotChanged(CellSlot changedSlot)
 	{
-		icon.sprite = sprite;
-		icon.gameObject.SetActive(sprite != null);
-		icon.enabled = sprite != null;
+		UpdateCellUI();
 	}
 
-	public void Clear()
-	{
-		hasItem = false;
-		itemData = default;
-		SlotData = new CellSlot { ItemData = default, Count = 0 };
-		icon.enabled = false;
-		countText.enabled = false;
-		Tooltip.Instance.Hide();
-	}
 
 	public void UpdateCellUI()
 	{
-		var updatedSlot = slotList[SlotIndex];
-
-		if (updatedSlot.Count > 0)
+		if (SlotData.Count == 0 || SlotData.ItemData == null)
 		{
-			SlotData = updatedSlot;
-			hasItem = true;
-			itemData = updatedSlot.ItemData;
-			countText.text = updatedSlot.Count.ToString();
-			countText.enabled = true;
-
-			SetSprite(itemData.icon);
+			hasItem = false;
+			icon.enabled = false;
+			icon.gameObject.SetActive(false);
+			countText.enabled = false;
+			return;
 		}
-		else
-		{
-			Clear();
-		}
+		
+		hasItem = true;
+		icon.sprite = SlotData.ItemData.icon;
+		icon.gameObject.SetActive(true);
+		icon.enabled = true;
+		countText.text = SlotData.Count.ToString();
+		countText.enabled = true;
+		Tooltip.Instance.Hide();
 	}
 	
 	private void TryTransferOneItem()
@@ -74,38 +71,33 @@ public class CellUI : MonoBehaviour,
 		var receiver = InventorySystem.Instance.CurrentExternalReceiver;
 		if (receiver == null || SlotData.Count == 0) return;
 
-		var slot = slotList[SlotIndex]; 
+		bool isPlayerInv = ReferenceEquals(slotList, InventorySystem.Instance.inventorySlots);
 
-		if (slotList == receiver.GetAllSlots())
+		if (isPlayerInv)
 		{
-			if (InventorySystem.Instance.AddItem(slot.ItemData))
+			if (receiver.TryAddOneItem(SlotData.ItemData))
 			{
-				receiver.TryTakeOneItem(slot.ItemData);
-				UpdateCellUI();
+				SlotData.Count--;
+				if (SlotData.Count == 0) SlotData.ItemData = null;
 			}
 		}
 		else
 		{
-			if (receiver.TryAddOneItem(slot.ItemData))
+			if (InventorySystem.Instance.AddItem(SlotData.ItemData))
 			{
-				slot.Count--;
-				if (slot.Count <= 0)
-					slot.ItemData = null;
-
-				UpdateCellUI();
+				SlotData.Count--;
+				if (SlotData.Count == 0) SlotData.ItemData = null;
 			}
 		}
 	}
 
-
-
-
+	
 	#region IPoint/IDrag implementation
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
 		if (hasItem && !DragManager.Instance.dragged)
-			Tooltip.Instance.Show(itemData.ToString(), eventData.position);
+			Tooltip.Instance.Show(SlotData.ItemData.displayName, eventData.position);
 	}
 
 	public void OnPointerExit(PointerEventData eventData)
@@ -146,9 +138,9 @@ public class CellUI : MonoBehaviour,
 		var targetSlot = slotList[SlotIndex];
 		var sourceSlot = dragged.sourceSlot.slotList[dragged.sourceIndex];
 
-		if (targetSlot.ItemData == sourceSlot.ItemData && targetSlot.Count < InventorySystem.Instance.maxStack)
+		if (targetSlot.ItemData == sourceSlot.ItemData && targetSlot.Count < targetSlot.ItemData.maxStack)
 		{
-			int spaceLeft = InventorySystem.Instance.maxStack - targetSlot.Count;
+			int spaceLeft = targetSlot.ItemData.maxStack - targetSlot.Count;
 			int transferAmount = Mathf.Min(spaceLeft, sourceSlot.Count);
 
 			targetSlot.Count += transferAmount;
@@ -170,15 +162,6 @@ public class CellUI : MonoBehaviour,
 
 			sourceSlot.ItemData = temp.ItemData;
 			sourceSlot.Count = temp.Count;
-		}
-
-		//ACTION FOR UI UPDATE HERE
-		dragged.sourceSlot.UpdateCellUI();
-		UpdateCellUI();
-		var receiver = InventorySystem.Instance.CurrentExternalReceiver;
-		if (receiver is Basket basket && basket.taskBoardUI != null)
-		{
-			basket.taskBoardUI.UpdateAvailableItemsCount();
 		}
 	}
 

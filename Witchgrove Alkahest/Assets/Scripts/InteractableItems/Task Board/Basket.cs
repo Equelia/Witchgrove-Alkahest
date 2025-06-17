@@ -4,10 +4,7 @@ using UnityEngine;
 
 public class Basket : MonoBehaviour, IExternalInventoryReceiver
 {
-	[SerializeField] public TaskBoardUI taskBoardUI;
-	
-	[HideInInspector] public List<CellSlot> basketCells = new();
-	public BasketUI basketUI;
+	public List<CellSlot> basketCells { get; private set; }
 
 	private void Awake()
 	{
@@ -21,16 +18,11 @@ public class Basket : MonoBehaviour, IExternalInventoryReceiver
 
 	public bool TryAddOneItem(BaseItemData item)
 	{
-		for (int i = 0; i < basketCells.Count; i++)
+		foreach (var slot in basketCells)
 		{
-			var slot = basketCells[i];
-
 			if (slot.ItemData == item && slot.Count < item.maxStack)
 			{
 				slot.Count++;
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				basketUI.RefreshCellsUI();
-				taskBoardUI.UpdateAvailableItemsCount();
 				return true;
 			}
 
@@ -38,36 +30,10 @@ public class Basket : MonoBehaviour, IExternalInventoryReceiver
 			{
 				slot.ItemData = item;
 				slot.Count = 1;
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				basketUI.RefreshCellsUI();
-				taskBoardUI.UpdateAvailableItemsCount();
 				return true;
 			}
 		}
 
 		return false;
 	}
-	
-	public bool TryTakeOneItem(BaseItemData item)
-	{
-		for (int i = 0; i < basketCells.Count; i++)
-		{
-			var slot = basketCells[i];
-		
-			if (slot.ItemData == item && slot.Count > 0)
-			{
-				slot.Count--;
-				if (slot.Count <= 0)
-					slot.ItemData = null;
-
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				basketUI.RefreshCellsUI();
-				taskBoardUI.UpdateAvailableItemsCount();
-				return true;
-			}
-		}
-
-		return false;
-	}
-
 }

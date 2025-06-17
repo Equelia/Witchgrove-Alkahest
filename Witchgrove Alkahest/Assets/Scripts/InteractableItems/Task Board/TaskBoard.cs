@@ -83,7 +83,5 @@ public class TaskBoard : InteractableItem
 					break;
 			}
 		}
-		
-		basket.basketUI.RefreshCellsUI();
 	}
 }

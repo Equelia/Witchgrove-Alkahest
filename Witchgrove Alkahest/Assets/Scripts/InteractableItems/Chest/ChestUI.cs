@@ -11,14 +11,11 @@ public class ChestUI : MonoBehaviour
 
 	private void Start()
 	{
-		for (int i = 0; i < chestCells.Length; i++)
-		{
-			chestCells[i].Setup(chestCells[i].SlotData, chestController.chestSlots, i);
-		}
-	}
+		var slots = chestController.GetAllSlots();  
 
-	public void RefreshCellsUI()
-	{
-		foreach (var cell in chestCells) cell.UpdateCellUI();
+		for (int i = 0; i < chestCells.Length && i < slots.Count; i++)
+		{
+			chestCells[i].Setup(slots[i], slots, i);
+		}
 	}
 }

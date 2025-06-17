@@ -34,39 +34,15 @@ public class Chest : InteractableItem, IExternalInventoryReceiver
 			if (slot.ItemData == item && slot.Count < item.maxStack)
 			{
 				slot.Count++;
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				chestUI.RefreshCellsUI();
 				return true;
 			}
 			if (slot.ItemData == null)
 			{
 				slot.ItemData = item;
 				slot.Count = 1;
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				chestUI.RefreshCellsUI();
 				return true;
 			}
 		}
-		return false;
-	}
-	
-	public bool TryTakeOneItem(BaseItemData item)
-	{
-		for (int i = 0; i < chestSlots.Count; i++)
-		{
-			var slot = chestSlots[i];
-		
-			if (slot.ItemData == item && slot.Count > 0)
-			{
-				slot.Count--;
-				if (slot.Count <= 0)
-					slot.ItemData = null;
-
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				return true;
-			}
-		}
-
 		return false;
 	}
 }

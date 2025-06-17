@@ -36,7 +36,7 @@ public class CauldronUI : MonoBehaviour
 	private void Awake()
 	{
 		allCells = new CellUI[craftCells.Length + resultCells.Length];
-
+		
 		for (int i = 0; i < craftCells.Length; i++)
 			allCells[i] = craftCells[i];
 
@@ -47,18 +47,21 @@ public class CauldronUI : MonoBehaviour
 
 	private void Start()
 	{
-		UpdateWaterUI();
+		var craftSlots = cauldronController.craftCellSlots;
+		var resultSlots = cauldronController.resultCellSlots;
+		var allSlots = cauldronController.GetAllSlots();
+		
+		for (int i = 0; i < craftCells.Length && i < craftSlots.Count; i++)
+			craftCells[i].Setup(craftSlots[i], craftSlots, i);
 
-		for (int i = 0; i < craftCells.Length; i++)
-			craftCells[i].Setup(craftCells[i].SlotData, cauldronController.craftCellSlots, i);
-
-		for (int i = 0; i < resultCells.Length; i++)
-			resultCells[i].Setup(resultCells[i].SlotData, cauldronController.resultCellSlots, i);
-
-		for (int i = 0; i < allCells.Length; i++)
-			allCells[i].Setup(allCells[i].SlotData, cauldronController.GetAllSlots(), i);
+		for (int i = 0; i < resultCells.Length && i < resultSlots.Count; i++)
+			resultCells[i].Setup(resultSlots[i], resultSlots, i);
+		
+		for (int i = 0; i < allCells.Length && i < allSlots.Count; i++)
+			allCells[i].Setup(allSlots[i], allSlots, i);
+		
+		RefreshCellsUI();
 	}
-
 
 	private void Craft()
 	{

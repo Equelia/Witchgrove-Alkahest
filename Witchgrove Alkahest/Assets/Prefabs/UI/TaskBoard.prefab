@@ -912,12 +912,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 535188e9aa5d25342ae4dc201b4a0001, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basketController: {fileID: 0}
   basketCells:
   - {fileID: 4163332910840746006}
   - {fileID: 759344450680181586}
   - {fileID: 3534179843294049332}
   - {fileID: 2406220350261966058}
+  basketController: {fileID: 0}
+  taskBoardUI: {fileID: 6021680136667626141}
 --- !u!1 &3015937027630067999
 GameObject:
   m_ObjectHideFlags: 0
