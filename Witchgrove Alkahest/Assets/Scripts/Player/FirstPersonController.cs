@@ -7,8 +7,8 @@ public class FirstPersonController : MonoBehaviour
     [Header("Movement Settings")]
     [SerializeField] private float walkSpeed = 5f;
     [SerializeField] private float sprintSpeed = 8f;
-    [SerializeField] private float minAirSpeed = 2f;                  // minimal horizontal speed in air
-    [SerializeField] private float airControlAcceleration = 3f;       // NEW: how fast to adjust direction in air
+    [SerializeField] private float minAirSpeed = 2f;                 
+    [SerializeField] private float airControlAcceleration = 3f;       
 
     [Header("Jump & Gravity Settings")]
     [SerializeField] private float jumpHeight = 1.5f;
@@ -16,7 +16,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform headTransform;
-    [SerializeField] private CinemachineVirtualCamera vCam;
+    [SerializeField] private CinemachineCamera cCam;
     [SerializeField] private GameObject inventoryPanel;
 
     [Header("Head Bob Settings")]
@@ -53,7 +53,7 @@ public class FirstPersonController : MonoBehaviour
         controller = GetComponent<CharacterController>();
         headStartLocalPos = headTransform.localPosition;
         previousGrounded = controller.isGrounded;
-        horizontalVelocity = Vector3.zero;  // initialize horizontal velocity
+        horizontalVelocity = Vector3.zero;  
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
     }
@@ -62,8 +62,8 @@ public class FirstPersonController : MonoBehaviour
     {
         bool invOpen = inventoryPanel.activeSelf;
 
-        if (vCam != null)
-            vCam.enabled = !invOpen;
+        if (cCam != null)
+            cCam.enabled = !invOpen;
 
         if (invOpen)
         {

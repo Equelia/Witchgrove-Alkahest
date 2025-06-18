@@ -162,11 +162,11 @@ MonoBehaviour:
   walkSpeed: 3
   sprintSpeed: 5
   minAirSpeed: 2
-  airControlAcceleration: 10
+  airControlAcceleration: 2
   jumpHeight: 1.5
   gravity: -15
   headTransform: {fileID: 5715120581807294260}
-  vCam: {fileID: 0}
+  cCam: {fileID: 0}
   inventoryPanel: {fileID: 0}
   walkBobFrequency: 5
   walkBobHorizontalAmplitude: 0.08

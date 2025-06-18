@@ -1046,10 +1046,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b89f0dc11ad7874eb20e7f165f6a0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxSlots: 4
-  maxStack: 5
-  inventorySlots: []
   inventoryUI: {fileID: 1256865989}
+  inventorySlots: []
 --- !u!4 &500786062
 Transform:
   m_ObjectHideFlags: 0
@@ -2227,17 +2225,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 66feaa2c14dd9cd44acdb5cf5d8293a8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1190382866 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5879331923803364475, guid: dbfdf48efad8471429539445801e0cbd, type: 3}
-  m_PrefabInstance: {fileID: 1415806735335755996}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf8992cbd50bf4d428ef8b2f759581ee, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1210776649
 GameObject:
   m_ObjectHideFlags: 0
@@ -2428,9 +2415,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0ea4116b000724091f15d422212439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  taskBoardUI: {fileID: 1190382866}
-  basketCells: []
-  basketUI: {fileID: 1415806735335756012}
 --- !u!1 &1245712443
 GameObject:
   m_ObjectHideFlags: 0
@@ -2988,8 +2972,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recipeDatabase: {fileID: 11400000, guid: de2626fb752a1b54da5e2a88827df517, type: 2}
-  craftCellSlots: []
-  resultCellSlots: []
   currentWaterAmount: 0
   maxWaterAmount: 10
   cauldronUI: {fileID: 1186484297}
@@ -4507,17 +4489,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea358d3028024c62ac37f82ad92373b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &1415806735335756012 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 6815378045718098528, guid: dbfdf48efad8471429539445801e0cbd, type: 3}
-  m_PrefabInstance: {fileID: 1415806735335755996}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 535188e9aa5d25342ae4dc201b4a0001, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &3119339874202804525
 GameObject:
   m_ObjectHideFlags: 0
@@ -4614,6 +4585,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 580360856}
     - target: {fileID: 4731223442925230267, guid: 0fb20aa45571c3f4f857b65f6bd73992, type: 3}
+      propertyPath: cCam
+      value: 
+      objectReference: {fileID: 724289721}
+    - target: {fileID: 4731223442925230267, guid: 0fb20aa45571c3f4f857b65f6bd73992, type: 3}
       propertyPath: vCam
       value: 
       objectReference: {fileID: 0}
@@ -4623,7 +4598,7 @@ PrefabInstance:
       objectReference: {fileID: 1995213483}
     - target: {fileID: 4731223442925230267, guid: 0fb20aa45571c3f4f857b65f6bd73992, type: 3}
       propertyPath: airControlAcceleration
-      value: 10
+      value: 2
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
