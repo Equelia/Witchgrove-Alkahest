@@ -2,20 +2,24 @@
 %TAG !u! tag:unity3d.com,2011:
 --- !u!21 &2100000
 Material:
-  serializedVersion: 6
+  serializedVersion: 8
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: Cliff
   m_Shader: {fileID: 4800000, guid: e5e37a7dbd9f7b849ac52740c30a6d17, type: 3}
-  m_ShaderKeywords: 
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
   disabledShaderPasses: []
+  m_LockedProperties: 
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
@@ -91,6 +95,7 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _AdditionalLightIgnoreCelShade: 0.9
     - _AlphaClip: 0
@@ -113,8 +118,8 @@ Material:
     - _GlossMapScale: 1
     - _Glossiness: 0
     - _GlossyReflections: 1
-    - _HeightGradient: 0.434
-    - _HeightStartGradient: 0.37
+    - _HeightGradient: 0.172
+    - _HeightStartGradient: 0
     - _IndirectLightMultiplier: 1
     - _IsFace: 0
     - _LightPower: 0.8
@@ -156,8 +161,9 @@ Material:
     - _OutlineColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
     - _ShadowMapColor: {r: 1, g: 1, b: 1, a: 1}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _Tint: {r: 0.8301887, g: 0.8301887, b: 0.8301887, a: 1}
+    - _Tint: {r: 0.5377358, g: 0.5377358, b: 0.5377358, a: 1}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &1965547239183330456
 MonoBehaviour:
   m_ObjectHideFlags: 11
