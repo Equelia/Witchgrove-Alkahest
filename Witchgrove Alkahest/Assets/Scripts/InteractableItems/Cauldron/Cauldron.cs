@@ -6,15 +6,14 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 {
 	[SerializeField] private RecipeDatabase recipeDatabase;
 
-	[HideInInspector] public List<CellSlot> craftCellSlots;
-	[HideInInspector] public List<CellSlot> resultCellSlots;
+	public List<CellSlot> craftCellSlots { get; private set; }
+	public List<CellSlot> resultCellSlots { get; private set; }
 	
 	[HideInInspector] public int currentWaterAmount;
 	[HideInInspector] public int maxWaterAmount = 10;
 	
 	[SerializeField] private CauldronUI cauldronUI;
 
-	private List<CellSlot> allSlots;
 
 	private PotionData garbagePotion;
 	private BaseItemData waterIngredient;
@@ -23,35 +22,21 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 	{
 		base.Interact();
 		InventorySystem.Instance.inventoryUI.OpenPanelByName("Cauldron");
+		InventorySystem.Instance.CurrentExternalReceiver = this;  
 	}
 
 	private void Awake()
 	{
+		currentWaterAmount = 2;
+		
 		waterIngredient = ItemDatabase.Instance.GetItemById("вода");
 		garbagePotion = ItemDatabase.Instance.GetPotionById("смущенноезелье");
-		currentWaterAmount = 2;
 		
 		craftCellSlots = new List<CellSlot>();
 		resultCellSlots = new List<CellSlot>();
-		allSlots = new List<CellSlot>();
 		
-		// Initialize craft slots
-		for (int i = 0; i < 8; i++)
-		{
-			var slot = new CellSlot();
-			craftCellSlots.Add(slot);
-			allSlots.Add(slot);
-		}
-
-		// Initialize result slots
-		for (int i = 0; i < 6; i++)
-		{
-			var slot = new CellSlot();
-			resultCellSlots.Add(slot);
-			allSlots.Add(slot);
-		}
-		
-		Debug.LogError(allSlots.Count.ToString());
+		for (int i = 0; i < 8; i++) craftCellSlots.Add(new CellSlot()); // Initialize craft slots
+		for (int i = 0; i < 6; i++) resultCellSlots.Add(new CellSlot()); // Initialize result slots
 	}
 	
 	public void TryCraft()
@@ -124,24 +109,23 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 		{
 			var slot = resultCellSlots[i];
 
-			if (slot.ItemData == type && slot.Count < InventorySystem.Instance.maxStack)
+			if (slot.ItemData == type && slot.Count < type.maxStack)
 			{
-				int space = InventorySystem.Instance.maxStack - slot.Count;
+				int space = type.maxStack - slot.Count;
 				if (space >= count)
 					return true;
-				else
-					count -= space;
+				count -= space;
 			}
 			else if (slot.Count == 0)
 			{
-				if (count <= InventorySystem.Instance.maxStack)
+				if (count <= type.maxStack)
 					return true;
-				else
-					count -= InventorySystem.Instance.maxStack;
+				count -= type.maxStack;
 			}
 		}
 		return false;
 	}
+
 
 
 	/// <summary>
@@ -218,9 +202,9 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 		{
 			var slot = resultCellSlots[i];
 			
-			if (slot.ItemData == type && slot.Count < InventorySystem.Instance.maxStack)
+			if (slot.ItemData == type && slot.Count < slot.ItemData.maxStack)
 			{
-				int space = InventorySystem.Instance.maxStack - slot.Count;
+				int space = slot.ItemData.maxStack - slot.Count;
 				int toAdd = Mathf.Min(space, count);
 				slot.Count += toAdd;
 				count -= toAdd;
@@ -232,11 +216,9 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 			if (slot.Count == 0)
 			{
 				slot.ItemData = type;
-				slot.Count = Mathf.Min(count, InventorySystem.Instance.maxStack);
+				slot.Count = Mathf.Min(count, slot.ItemData.maxStack);
 				return;
 			}
-			
-			InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
 		}
 
 		Debug.LogWarning($"[Cauldron] No space for result item: {type}");
@@ -264,51 +246,24 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 		}
 	}
 
-	public List<CellSlot> GetAllSlots() => allSlots;
-
+	public List<CellSlot> GetAllSlots() => craftCellSlots.Concat(resultCellSlots).ToList();
 
 	public bool TryAddOneItem(BaseItemData item)
 	{
-		for (int i = 0; i < allSlots.Count; i++)
+		foreach (var slot in GetAllSlots())
 		{
-			var slot = allSlots[i];
-			
 			if (slot.ItemData == item && slot.Count < item.maxStack)
 			{
 				slot.Count++;
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				cauldronUI.RefreshCellsUI();
 				return true;
 			}
 			if (slot.ItemData == null)
 			{
 				slot.ItemData = item;
 				slot.Count = 1;
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				cauldronUI.RefreshCellsUI();
 				return true;
 			}
 		}
-		return false;
-	}
-	
-	public bool TryTakeOneItem(BaseItemData item)
-	{
-		for (int i = 0; i < allSlots.Count; i++)
-		{
-			var slot = allSlots[i];
-		
-			if (slot.ItemData == item && slot.Count > 0)
-			{
-				slot.Count--;
-				if (slot.Count <= 0)
-					slot.ItemData = null;
-
-				InventorySystem.Instance.inventoryUI.UpdateSlotUI(i);
-				return true;
-			}
-		}
-
 		return false;
 	}
 }

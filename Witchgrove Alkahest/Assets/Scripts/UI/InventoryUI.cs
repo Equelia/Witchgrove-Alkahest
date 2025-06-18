@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -10,11 +11,10 @@ public class PanelEntry
 }
 
 /// <summary>
-/// Handles toggling the inventory panel and updating slot visuals.
+/// Handles the inventory UI and listens to slot changes.
 /// </summary>
 public class InventoryUI : MonoBehaviour
 {
-    [FormerlySerializedAs("panel")]
     [Header("UI Elements")]
     [Tooltip("UI Elements panel's to show/hide")]
     [SerializeField] private GameObject mainInventoryPanel;
@@ -26,13 +26,26 @@ public class InventoryUI : MonoBehaviour
     
     public bool IsOpen => mainInventoryPanel.activeSelf;
 
+    private void OnEnable()
+    {
+        foreach (var slot in InventorySystem.Instance.inventorySlots)
+            slot.OnSlotChanged += HandleSlotChanged;
+    }
+
+    private void OnDisable()
+    {
+        foreach (var slot in InventorySystem.Instance.inventorySlots)
+            slot.OnSlotChanged -= HandleSlotChanged;
+    }
+
     private void Start()
     {
         CloseInventory();
         
-        for (int i = 0; i < cells.Length; i++)
+        var slots = InventorySystem.Instance.inventorySlots;
+        for (int i = 0; i < cells.Length && i < slots.Count; i++)
         {
-            cells[i].Setup(cells[i].SlotData, InventorySystem.Instance.inventorySlots, i);
+            cells[i].Setup(slots[i], slots,i);
         }
     }
 
@@ -46,12 +59,13 @@ public class InventoryUI : MonoBehaviour
                 CloseInventory();
         }
     }
-
-    public void OpenInventory()
+    
+    private void HandleSlotChanged(CellSlot slot)
     {
-        mainInventoryPanel.SetActive(true);
+        int index = InventorySystem.Instance.inventorySlots.IndexOf(slot);
+        if (index >= 0 && index < cells.Length)
+            cells[index].UpdateCellUI();
     }
-
 
     public void CloseInventory()
     {
@@ -63,6 +77,11 @@ public class InventoryUI : MonoBehaviour
         InventorySystem.Instance.CurrentExternalReceiver = null;
         Tooltip.Instance.Hide();
     }
+
+    public void OpenInventory()
+    {
+        mainInventoryPanel.SetActive(true);
+    }
     
     public void OpenPanelByName(string panelName)
     {
@@ -70,11 +89,5 @@ public class InventoryUI : MonoBehaviour
         {
             entry.panel.SetActive(entry.name == panelName);
         }
-    }
-
-    public void UpdateSlotUI(int index)
-    {
-        if (index >= 0 && index < cells.Length)
-            cells[index].UpdateCellUI();
     }
 }

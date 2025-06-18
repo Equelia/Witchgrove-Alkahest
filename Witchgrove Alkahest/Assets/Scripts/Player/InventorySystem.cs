@@ -8,7 +8,6 @@ public interface IExternalInventoryReceiver
 {
     List<CellSlot> GetAllSlots();
     bool TryAddOneItem(BaseItemData item);
-    bool TryTakeOneItem(BaseItemData item);
 }
 
 
@@ -18,8 +17,33 @@ public interface IExternalInventoryReceiver
 [Serializable]
 public class CellSlot
 {
-    public BaseItemData ItemData;
-    public int Count;
+    private BaseItemData _itemData;
+    private int _count;
+
+    //Fire when something changes in a slot
+    public event Action<CellSlot> OnSlotChanged;
+
+    public BaseItemData ItemData
+    {
+        get => _itemData;
+        set
+        {
+            if (_itemData == value) return;
+            _itemData = value;
+            OnSlotChanged?.Invoke(this);
+        }
+    }
+
+    public int Count
+    {
+        get => _count;
+        set
+        {
+            if (_count == value) return;
+            _count = value;
+            OnSlotChanged?.Invoke(this);
+        }
+    }
 }
 
 /// <summary>
@@ -28,18 +52,10 @@ public class CellSlot
 public class InventorySystem : MonoBehaviour
 {
     public static InventorySystem Instance { get; private set; }
-
-    [Header("Inventory Settings")]
-    [Tooltip("Maximum number of slots allowed")]
-    [SerializeField] private int maxSlots = 4;
-    [Tooltip("Maximum stack size per slot")]
-    public int maxStack = 5;
-    
-    [HideInInspector] public List<CellSlot> inventorySlots;
     
     public InventoryUI inventoryUI;
     public IExternalInventoryReceiver CurrentExternalReceiver;
-
+    [HideInInspector] public List<CellSlot> inventorySlots;
     
     private void Awake()
     {
@@ -52,8 +68,8 @@ public class InventorySystem : MonoBehaviour
         DontDestroyOnLoad(gameObject);
 
         // Initialize empty slots
-        inventorySlots = new List<CellSlot>(maxSlots);
-        for (int i = 0; i < maxSlots; i++)
+        inventorySlots = new List<CellSlot>(4);
+        for (int i = 0; i < 4; i++)
         {
             inventorySlots.Add(new CellSlot { ItemData = default, Count = 0 });
         }
@@ -70,11 +86,9 @@ public class InventorySystem : MonoBehaviour
             var slot = inventorySlots[i];
             
             // 1) Try stacking onto existing slot
-            if (slot.Count > 0 && slot.ItemData == item && slot.Count < maxStack)
+            if (slot.Count > 0 && slot.ItemData == item && slot.Count < slot.ItemData.maxStack)
             {
                 slot.Count++;
-                inventoryUI.UpdateSlotUI(i);
-                Debug.Log($"[Inventory] Stacked one more {item}. Now: {slot.Count}");
                 return true;
             }
             // 2) Get in the empty slot
@@ -82,8 +96,6 @@ public class InventorySystem : MonoBehaviour
             {
                 slot.ItemData = item;
                 slot.Count = 1;
-                inventoryUI.UpdateSlotUI(i);
-                Debug.Log($"[Inventory] Added new slot for {item}.");
                 return true;
             }
         }
@@ -104,8 +116,6 @@ public class InventorySystem : MonoBehaviour
                 slot.Count -= amount;
                 if (slot.Count == 0)
                     slot.ItemData = default;
-
-                inventoryUI.UpdateSlotUI(i);
                 return true;
             }
         }
