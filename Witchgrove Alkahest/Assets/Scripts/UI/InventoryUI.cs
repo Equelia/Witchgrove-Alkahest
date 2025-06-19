@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
@@ -66,11 +67,19 @@ public class InventoryUI : MonoBehaviour
 
 	private void Update()
 	{
+		bool anySubPanelOpen = panels.Any(entry => entry.panel.activeSelf);
+        
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			if (!IsOpen)
-				mainInventoryPanel.SetActive(true);
-			else
+				OpenInventory();
+			else if (!anySubPanelOpen)
+				CloseInventory();
+		}
+
+		if (Input.GetKeyDown(KeyCode.Escape))
+		{
+			if (IsOpen)
 				CloseInventory();
 		}
 
