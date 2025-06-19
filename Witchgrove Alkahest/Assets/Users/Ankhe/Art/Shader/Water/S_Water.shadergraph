@@ -677,20 +677,6 @@
         {
             "m_OutputSlot": {
                 "m_Node": {
-                    "m_Id": "55e8b90f8cbb4009a2350afb08a0aaac"
-                },
-                "m_SlotId": 3
-            },
-            "m_InputSlot": {
-                "m_Node": {
-                    "m_Id": "66437eaade5246aaa658e2f12198f462"
-                },
-                "m_SlotId": 1
-            }
-        },
-        {
-            "m_OutputSlot": {
-                "m_Node": {
                     "m_Id": "623922380b9e421db3e0ae1a9e665da3"
                 },
                 "m_SlotId": 0
@@ -1251,8 +1237,8 @@
     ],
     "m_VertexContext": {
         "m_Position": {
-            "x": -88.0001449584961,
-            "y": -610.0
+            "x": 0.0000133514404296875,
+            "y": -586.9999389648438
         },
         "m_Blocks": [
             {
@@ -2319,7 +2305,7 @@
     "m_Title": "Refreaction",
     "m_Position": {
         "x": -2722.0,
-        "y": -291.9998779296875
+        "y": -292.0001220703125
     }
 }
 
@@ -2974,8 +2960,8 @@
         "m_Expanded": true,
         "m_Position": {
             "serializedVersion": "2",
-            "x": -667.9999389648438,
-            "y": 948.0,
+            "x": -641.9999389648438,
+            "y": 988.0,
             "width": 128.0001220703125,
             "height": 94.0
         }
@@ -4052,7 +4038,7 @@
     "m_ObjectId": "5ed2becc36f14df280123ff1aad6a02b",
     "m_Title": "Normals",
     "m_Position": {
-        "x": -1571.0001220703125,
+        "x": -1571.0,
         "y": 394.0
     }
 }
@@ -5119,7 +5105,7 @@
     "m_Title": "FoamControls",
     "m_Position": {
         "x": -2348.0,
-        "y": 944.0
+        "y": 943.999755859375
     }
 }
 
@@ -5349,7 +5335,7 @@
         "linear interpolate"
     ],
     "m_Precision": 0,
-    "m_PreviewExpanded": true,
+    "m_PreviewExpanded": false,
     "m_DismissedVersion": 0,
     "m_PreviewMode": 0,
     "m_CustomColors": {
@@ -7406,7 +7392,7 @@
     "m_Title": "WaterColor",
     "m_Position": {
         "x": -2416.0,
-        "y": 442.000244140625
+        "y": 442.0
     }
 }
 
