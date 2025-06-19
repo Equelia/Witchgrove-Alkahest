@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: M_Water
+  m_Name: M_Lava
   m_Shader: {fileID: -6465566751694194690, guid: 02ac4fbdb98b10846aec92384c6387a4, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -102,8 +102,8 @@ Material:
     - _DstBlend: 0
     - _DstBlendAlpha: 0
     - _EnvironmentReflections: 1
-    - _FoamAmount: 0.03
-    - _FoamCuttoff: 0.03
+    - _FoamAmount: 0.001
+    - _FoamCuttoff: 0.001
     - _FoamScale: 103.67
     - _FoamSpeed: 1
     - _GlossMapScale: 0
@@ -125,19 +125,19 @@ Material:
     - _SrcBlend: 1
     - _SrcBlendAlpha: 1
     - _Surface: 0
-    - _WaveMplitude: 0.03
+    - _WaveMplitude: 0.001
     - _WaveSpeed: 1
     - _WorkflowMode: 1
     - _ZWrite: 1
     m_Colors:
     - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
     - _Color: {r: 1, g: 1, b: 1, a: 1}
-    - _DeepColor: {r: 0.04743683, g: 0.33789614, b: 0.7735849, a: 0}
+    - _DeepColor: {r: 0.8679245, g: 0.06959773, b: 0.06959773, a: 0}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _FoamColor: {r: 0, g: 0, b: 0, a: 0}
-    - _RefreactionScale: {r: 11, g: 11, b: 0, a: 0}
+    - _RefreactionScale: {r: 20, g: 20, b: 0, a: 0}
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
-    - _SurfaceColor: {r: 0.20714669, g: 0.7120757, b: 0.8962264, a: 0}
+    - _SurfaceColor: {r: 1, g: 0.28235295, b: 0, a: 0}
     - _UV: {r: 0, g: 0, b: 0, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
