@@ -13,7 +13,7 @@ public class DragManager : MonoBehaviour
 
 	public DragItemData draggedItem;
 	
-	public bool dragged = false;
+	[HideInInspector] public bool dragged = false;
 
 	private void Awake()
 	{
