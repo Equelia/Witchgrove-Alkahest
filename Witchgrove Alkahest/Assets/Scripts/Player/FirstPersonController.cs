@@ -11,7 +11,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float airControlAcceleration = 3f;       
 
     [Header("Slide Settings")]
-    [SerializeField] private float slideSpeed = 5f;  // ADDED: speed when sliding down slopes steeper than slopeLimit
+    [SerializeField] private float slideSpeed = 5f;  // speed when sliding down slopes steeper than slopeLimit
 
     [Header("Jump & Gravity Settings")]
     [SerializeField] private float jumpHeight = 1.5f;
@@ -51,7 +51,7 @@ public class FirstPersonController : MonoBehaviour
     private float shakeDuration;
     private float shakeAmplitude;
 
-    private Vector3 contactNormal = Vector3.up;  // ADDED: stores the normal of the last surface we touched
+    private Vector3 contactNormal = Vector3.up;  // stores the normal of the last surface we touched
 
     void Start()
     {
@@ -66,9 +66,8 @@ public class FirstPersonController : MonoBehaviour
     void Update()
     {
         bool invOpen = inventoryPanel.activeSelf;
-
-        if (cCam != null)
-            cCam.enabled = !invOpen;
+        
+        cCam.enabled = !invOpen;
 
         if (invOpen)
         {
@@ -97,7 +96,7 @@ public class FirstPersonController : MonoBehaviour
         HandlePlayerRotation();
     }
 
-    // ADDED: capture the normal of whatever we collide with
+    // capture the normal of whatever we collide with
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         contactNormal = hit.normal;
@@ -109,7 +108,7 @@ public class FirstPersonController : MonoBehaviour
         if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
-        // ADDED: if standing on too-steep slope, slide down and skip the rest of movement logic
+        // if standing on too-steep slope, slide down and skip the rest of movement logic
         if (isGrounded)
         {
             float slopeAngle = Vector3.Angle(contactNormal, Vector3.up);
@@ -174,7 +173,7 @@ public class FirstPersonController : MonoBehaviour
         Vector3 finalMove = horizontalVelocity + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
 
-        // ADDED: if landing on a too-steep slope, reset horizontal speed to prevent climbing
+        // if landing on a too-steep slope, reset horizontal speed to prevent climbing
         if (!previousGrounded && isGrounded)
         {
             float landAngle = Vector3.Angle(contactNormal, Vector3.up);
