@@ -13,17 +13,11 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
     [SerializeField] private RecipeDatabase recipeDatabase;
 
     [Tooltip("If true, ingredient order matters for matching recipes")] 
-    [SerializeField] private bool useSpecificOrder = false; // *** Modified: added option to enforce ingredient order
+    [SerializeField] private bool useSpecificOrder = false; 
 
     public List<CellSlot> craftCellSlots { get; private set; }
 
-    [HideInInspector] public int currentWaterAmount;
-    [HideInInspector] public int maxWaterAmount = 10;
-
-    [SerializeField] private CauldronUI cauldronUI;
-
     private PotionData garbagePotion;
-    private BaseItemData waterIngredient;
 
     public override void Interact()
     {
@@ -34,8 +28,6 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
 
     private void Awake()
     {
-        currentWaterAmount = 2;
-        waterIngredient = ItemDatabase.Instance.GetItemById("вода");
         garbagePotion = ItemDatabase.Instance.GetPotionById("смущенноезелье");
 
         craftCellSlots = new List<CellSlot>();
@@ -49,14 +41,8 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
     /// </summary>
     public void TryCraft()
     {
-        if (craftCellSlots.All(slot => slot.Count == 0)) // *** Modified: directly check empty slots
+        if (craftCellSlots.All(slot => slot.Count == 0)) 
             return;
-
-        if (currentWaterAmount <= 0)
-        {
-            Debug.Log("[Cauldron] Нет воды в котле. Крафт невозможен.");
-            return;
-        }
 
         Recipe matchedRecipe = null;
         foreach (var recipe in recipeDatabase.recipes)
@@ -81,7 +67,7 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
             resultCount = 1;
         }
 
-        if (!HasInventorySpace(resultType, resultCount)) // *** Modified: check player inventory instead of result slots
+        if (!HasInventorySpace(resultType, resultCount)) 
         {
             Debug.LogWarning("[Cauldron] Not enough inventory space. Craft cancelled.");
             return;
@@ -92,17 +78,14 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
             Debug.Log("[Cauldron] Recipe matched: " + matchedRecipe.result.displayName);
             ConsumeIngredients(matchedRecipe);
             for (int i = 0; i < resultCount; i++)
-                InventorySystem.Instance.AddItem(resultType); // *** Modified: add directly to player inventory
+                InventorySystem.Instance.AddItem(resultType);
         }
         else
         {
             Debug.LogWarning("[Cauldron] Craft failed. Making Смущенное зелье!");
             ClearCraftSlots();
-            InventorySystem.Instance.AddItem(resultType); // *** Modified: add garbage potion to inventory
+            InventorySystem.Instance.AddItem(resultType); 
         }
-
-        currentWaterAmount--;
-        cauldronUI.RefreshCellsUI();
     }
 
     private bool Matches(Recipe recipe)
@@ -111,7 +94,7 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
         if (nonEmpty.Count != recipe.ingredients.Count)
             return false;
 
-        if (useSpecificOrder) // *** Modified: order-specific matching
+        if (useSpecificOrder)
         {
             for (int i = 0; i < recipe.ingredients.Count; i++)
             {
@@ -122,7 +105,7 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
             }
             return true;
         }
-        else // *** Modified: order-agnostic matching
+        else 
         {
             var slotsCopy = new List<CellSlot>(nonEmpty);
             foreach (var expected in recipe.ingredients)
@@ -160,7 +143,7 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
         }
     }
 
-    private bool HasInventorySpace(BaseItemData type, int count) // *** Modified: new method replacing result slot check
+    private bool HasInventorySpace(BaseItemData type, int count) 
     {
         var inv = InventorySystem.Instance.inventorySlots;
         foreach (var slot in inv)
