@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 /// <summary>
 /// Interface for every Inventory
@@ -55,7 +57,11 @@ public class InventorySystem : MonoBehaviour
     
     public InventoryUI inventoryUI;
     public IExternalInventoryReceiver CurrentExternalReceiver;
+    
     [HideInInspector] public List<CellSlot> inventorySlots;
+    [HideInInspector] public List<CellSlot> trashBinSlots;
+    
+    private readonly Dictionary<CellSlot, CancellationTokenSource> _trashCts = new();
     
     private void Awake()
     {
@@ -70,9 +76,13 @@ public class InventorySystem : MonoBehaviour
         // Initialize empty slots
         inventorySlots = new List<CellSlot>(4);
         for (int i = 0; i < 4; i++)
-        {
             inventorySlots.Add(new CellSlot { ItemData = default, Count = 0 });
-        }
+
+        for (int i = 0; i < 1; i++)
+            trashBinSlots.Add(new CellSlot { ItemData = default, Count = 0 });
+        
+        foreach (var slot in trashBinSlots)
+            slot.OnSlotChanged += HandleTrashSlotChanged;
     }
 
     /// <summary>
@@ -120,5 +130,79 @@ public class InventorySystem : MonoBehaviour
             }
         }
         return false;
+    }
+    
+    /// <summary>
+    /// Delete items in trash bib
+    /// </summary>
+    private void HandleTrashSlotChanged(CellSlot slot)
+    {
+        // if trash bin contain item
+        if (slot.Count > 0 && slot.ItemData != null)
+        {
+            // Cancel old one
+            CancelTrashDeletion(slot);
+
+            // Start delete timer
+            var cts = new CancellationTokenSource();
+            _trashCts[slot] = cts;
+            ClearTrashSlotAfterDelay(slot, cts.Token).Forget();
+        }
+        else
+        {
+            // Cancel timer
+            CancelTrashDeletion(slot);
+        }
+    }
+
+    /// <summary>
+    /// Cancel trash bin delete operation
+    /// </summary>
+    private void CancelTrashDeletion(CellSlot slot)
+    {
+        if (_trashCts.TryGetValue(slot, out var cts))
+        {
+            cts.Cancel();
+            cts.Dispose();
+            _trashCts.Remove(slot);
+        }
+    }
+
+    /// <summary>
+    /// Clear trash bin slot after 3 second
+    /// </summary>
+    private async UniTaskVoid ClearTrashSlotAfterDelay(CellSlot slot, CancellationToken ct)
+    {
+        try
+        {
+            await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: ct);
+            //Clear slot
+            slot.Count    = 0;
+            slot.ItemData = null;
+            DragManager.Instance.EndDrag();
+        }
+        catch (OperationCanceledException)
+        {
+            
+        }
+    }
+
+    private float trashStartTime = -1f;
+    public void StartTrashTimer()
+    {
+        trashStartTime = Time.time;
+    }
+    
+    public void CancelTrashTimer()
+    {
+        trashStartTime = -1f;
+    }
+    
+    public float GetTrashProgress()
+    {
+        if (trashStartTime < 0f)
+            return 0f;
+
+        return Mathf.Clamp01((Time.time - trashStartTime) / 3f);
     }
 }
