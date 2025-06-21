@@ -46,12 +46,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   soundEntries:
-  - name: Jump
-    clip: {fileID: 8300000, guid: 2e1aeb6fca231804cb22fb1f384d33e9, type: 3}
-    volume: 0.472
-  - name: Landing
-    clip: {fileID: 8300000, guid: 11104ddb36ddb2845b82b137a5435a40, type: 3}
-    volume: 0.472
+  - name: MeadowStep1
+    clip: {fileID: 8300000, guid: 861abd4d8e4d30e4492440602cba9652, type: 3}
+    volume: 0.2
+  - name: MeadowStep2
+    clip: {fileID: 8300000, guid: 3acb274a926e6a94893defd0c3fde9bf, type: 3}
+    volume: 0.2
+  - name: MeadowStep3
+    clip: {fileID: 8300000, guid: bdf9efbdb0033304a8c6c9bf54b130be, type: 3}
+    volume: 0.2
+  - name: MeadowStep4
+    clip: {fileID: 8300000, guid: 05e74473769be1346b28e013d9d8de52, type: 3}
+    volume: 0.2
+  - name: LavaStep
+    clip: {fileID: 8300000, guid: 0ec01b863cefc9e4483111b2da432799, type: 3}
+    volume: 0.2
+  - name: SandStep
+    clip: {fileID: 8300000, guid: eb64e6f7c51176b4b825536ca0221fa6, type: 3}
+    volume: 0.2
+  - name: CauldronCraft
+    clip: {fileID: 8300000, guid: 449d4629422d9504cb76dd790dd3b7ff, type: 3}
+    volume: 0.1
+  - name: CauldronDrop
+    clip: {fileID: 8300000, guid: 0e20a0fe5252d4344944a04a61d507e5, type: 3}
+    volume: 0.1
+  bgMusicEntries:
+  - name: MeadowLvl
+    clip: {fileID: 8300000, guid: c26ed8876e334ba4a90b2d2a721a0981, type: 3}
+    volume: 0.02
+  - name: CryingForestLvl
+    clip: {fileID: 8300000, guid: 4bf0ff1a00fdc674cb6d935dae00f043, type: 3}
+    volume: 0.02
   musicSource: {fileID: 3126257551769893453}
   initialSfxPoolSize: 10
 --- !u!1 &7695549599964030266

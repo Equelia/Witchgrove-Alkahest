@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -24,6 +25,10 @@ public class SoundManager : MonoBehaviour
     [Header("Sound Library")]
     [Tooltip("List of named sounds")]
     [SerializeField] private SoundEntry[] soundEntries;
+    
+    [Header("BG Music library")]
+    [Tooltip("List of bg music files")]
+    [SerializeField] private SoundEntry[] bgMusicEntries;
 
     [Header("Music Settings")]
     [Tooltip("AudioSource for background music")]    
@@ -34,8 +39,10 @@ public class SoundManager : MonoBehaviour
     [SerializeField] private int initialSfxPoolSize = 10;
     private List<AudioSource> sfxPool;
 
-    // Internal lookup dictionary
+    // Internal  sound lookup dictionary
     private Dictionary<string, SoundEntry> soundDict;
+    // Internal  bg music lookup dictionary
+    private Dictionary<string, SoundEntry> bgMusicDict;
 
     void Awake()
     {
@@ -48,13 +55,21 @@ public class SoundManager : MonoBehaviour
         Instance = this;
         DontDestroyOnLoad(gameObject);
 
-        // Build lookup
+        // Build sound lookup
         soundDict = new Dictionary<string, SoundEntry>(soundEntries.Length);
         foreach (var entry in soundEntries)
         {
             if (entry == null || string.IsNullOrEmpty(entry.name) || entry.clip == null)
                 continue;
             soundDict[entry.name] = entry;
+        }
+        // Build bg music lookup
+        bgMusicDict = new Dictionary<string, SoundEntry>(bgMusicEntries.Length);
+        foreach (var entry in bgMusicEntries)
+        {
+            if (entry == null || string.IsNullOrEmpty(entry.name) || entry.clip == null)
+                continue;
+            bgMusicDict[entry.name] = entry;
         }
 
         // Initialize SFX pool
@@ -66,6 +81,11 @@ public class SoundManager : MonoBehaviour
             src.loop = false;
             sfxPool.Add(src);
         }
+    }
+
+    private void Start()
+    {
+        PlayMusic("MeadowLvl", true);
     }
 
     /// <summary>
@@ -90,7 +110,7 @@ public class SoundManager : MonoBehaviour
     {
         if (musicSource == null)
             return;
-        if (!soundDict.TryGetValue(soundName, out var entry))
+        if (!bgMusicDict.TryGetValue(soundName, out var entry))
         {
             Debug.LogWarning($"Music '{soundName}' not found in SoundManager library.");
             return;

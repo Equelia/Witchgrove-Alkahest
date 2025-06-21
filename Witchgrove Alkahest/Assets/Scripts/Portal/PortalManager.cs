@@ -1,3 +1,4 @@
+using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public static class PortalManager
@@ -6,6 +7,8 @@ public static class PortalManager
 	
 	public static void OnSceneLoaded(Scene scene, LoadSceneMode mode)
 	{
-		SceneManager.sceneLoaded -= OnSceneLoaded;
+		SoundManager.Instance.StopMusic();
+		SoundManager.Instance.PlayMusic(scene.name, true);
+		Debug.Log("OnSceneLoaded" + scene.name);
 	}
 }

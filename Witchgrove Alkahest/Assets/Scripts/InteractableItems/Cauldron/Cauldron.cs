@@ -79,12 +79,15 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
             ConsumeIngredients(matchedRecipe);
             for (int i = 0; i < resultCount; i++)
                 InventorySystem.Instance.AddItem(resultType);
+            
+            SoundManager.Instance.PlaySound("CauldronCraft");
         }
         else
         {
             Debug.LogWarning("[Cauldron] Craft failed. Making Смущенное зелье!");
             ClearCraftSlots();
             InventorySystem.Instance.AddItem(resultType); 
+            SoundManager.Instance.PlaySound("CauldronCraft");
         }
     }
 
@@ -174,12 +177,14 @@ public class Cauldron : InteractableItem, IExternalInventoryReceiver
             if (slot.ItemData == item && slot.Count < item.maxStack)
             {
                 slot.Count++;
+                SoundManager.Instance.PlaySound("CauldronDrop");
                 return true;
             }
             if (slot.Count == 0)
             {
                 slot.ItemData = item;
                 slot.Count = 1;
+                SoundManager.Instance.PlaySound("CauldronDrop");
                 return true;
             }
         }

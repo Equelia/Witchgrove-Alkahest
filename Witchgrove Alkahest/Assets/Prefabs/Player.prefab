@@ -46,6 +46,7 @@ GameObject:
   - component: {fileID: 4731223442925230267}
   - component: {fileID: 4323390067861445944}
   - component: {fileID: 4651126064310033641}
+  - component: {fileID: 591291957029007761}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -212,3 +213,29 @@ MonoBehaviour:
     m_Bits: 64
   objectNameTextHolder: {fileID: 0}
   objectNameText: {fileID: 0}
+--- !u!114 &591291957029007761
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3944788617286504911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 335799f4514777345a9315f627aa04ca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  footstepSounds:
+  - surfaceTag: Grass
+    soundNames:
+    - MeadowStep3
+    - MeadowStep4
+  - surfaceTag: Lava
+    soundNames:
+    - LavaStep
+  - surfaceTag: Sand
+    soundNames:
+    - SandStep
+  walkStepInterval: 0.8
+  sprintStepInterval: 0.5
+  raycastDistance: 1.5
