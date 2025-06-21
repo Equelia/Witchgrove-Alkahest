@@ -17,8 +17,8 @@ public class PanelEntry
 /// </summary>
 public class InventoryUI : MonoBehaviour
 {
-	[Header("UI Elements")] [Tooltip("UI Elements panel's to show/hide")] [SerializeField]
-	private GameObject mainInventoryPanel;
+	[Header("UI Elements")] [Tooltip("UI Elements panel's to show/hide")] 
+	[SerializeField] private GameObject mainInventoryPanel;
 
 	[SerializeField] private List<PanelEntry> panels;
 
@@ -73,6 +73,17 @@ public class InventoryUI : MonoBehaviour
 		{
 			if (!IsOpen)
 				OpenInventory();
+			else if (!anySubPanelOpen)
+				CloseInventory();
+		}
+
+		if (Input.GetKeyDown(KeyCode.J))
+		{
+			if (!IsOpen)
+			{
+				OpenInventory();
+				OpenPanelByName("RecipeBook");
+			}
 			else if (!anySubPanelOpen)
 				CloseInventory();
 		}
@@ -137,6 +148,17 @@ public class InventoryUI : MonoBehaviour
 		foreach (var entry in panels)
 		{
 			entry.panel.SetActive(entry.name == panelName);
+		}
+	}
+
+	public void ClosePanelByName(string panelName)
+	{
+		foreach (var entry in panels)
+		{
+			if (entry.panel.name == panelName)
+			{
+				entry.panel.SetActive(false);
+			}
 		}
 	}
 }
