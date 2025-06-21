@@ -1,3 +1,4 @@
+// FirstPersonController.cs
 using Unity.Cinemachine;
 using UnityEngine;
 
@@ -19,7 +20,7 @@ public class FirstPersonController : MonoBehaviour
 
     [Header("References")]
     [SerializeField] private Transform headTransform;
-    [SerializeField] private CinemachineCamera cCam;
+    [SerializeField] private CinemachineInputAxisController cCam;
     [SerializeField] private GameObject inventoryPanel;
 
     [Header("Head Bob Settings")]
@@ -51,7 +52,10 @@ public class FirstPersonController : MonoBehaviour
     private float shakeDuration;
     private float shakeAmplitude;
 
-    private Vector3 contactNormal = Vector3.up;  // stores the normal of the last surface we touched
+    private Vector3 contactNormal = Vector3.up;
+
+    // Expose inventory state so FootStepController can check it
+    public bool InventoryOpen => inventoryPanel.activeSelf; // Modified: added public property
 
     void Start()
     {
@@ -67,7 +71,9 @@ public class FirstPersonController : MonoBehaviour
     {
         bool invOpen = inventoryPanel.activeSelf;
         
-        cCam.enabled = !invOpen;
+
+        // Removed disabling virtual camera to prevent jitter on reopen
+        // cCam.enabled = !invOpen; // Modified: this line was removed
 
         if (invOpen)
         {
@@ -75,13 +81,22 @@ public class FirstPersonController : MonoBehaviour
             {
                 Cursor.lockState = CursorLockMode.None;
                 Cursor.visible = true;
+                cCam.enabled = false;
             }
+
+            // Modified: reset velocities so camera & movement stop completely
+            horizontalVelocity = Vector3.zero;
+            velocity = Vector3.zero;
+
+            // Skip all movement, bob, shake etc.
             return;
         }
+
         if (Cursor.lockState != CursorLockMode.Locked)
         {
             Cursor.lockState = CursorLockMode.Locked;
             Cursor.visible = false;
+            cCam.enabled = true;
         }
 
         HandleHeadBob();
@@ -96,19 +111,17 @@ public class FirstPersonController : MonoBehaviour
         HandlePlayerRotation();
     }
 
-    // capture the normal of whatever we collide with
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         contactNormal = hit.normal;
     }
-
+    
     private void HandleMovement()
     {
         bool isGrounded = controller.isGrounded;
         if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
-        // if standing on too-steep slope, slide down and skip the rest of movement logic
         if (isGrounded)
         {
             float slopeAngle = Vector3.Angle(contactNormal, Vector3.up);
@@ -120,7 +133,6 @@ public class FirstPersonController : MonoBehaviour
             }
         }
 
-        // use raw input for instant respond/release
         Vector3 rawInput = new Vector3(
             Input.GetAxisRaw("Horizontal"),
             0f,
@@ -128,20 +140,17 @@ public class FirstPersonController : MonoBehaviour
         );
         Vector3 inputDir = rawInput.sqrMagnitude > 0f ? rawInput.normalized : Vector3.zero;
 
-        // calculate camera-based axes
         Transform cam = Camera.main.transform;
         Vector3 forward = cam.forward; forward.y = 0f; forward.Normalize();
         Vector3 right   = cam.right;   right.y   = 0f; right.Normalize();
 
         if (isGrounded)
         {
-            // update horizontal velocity on ground
             float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
             horizontalVelocity = (forward * inputDir.z + right * inputDir.x) * speed;
         }
         else
         {
-            // IN AIR: apply directional control
             if (inputDir != Vector3.zero)
             {
                 float targetSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
@@ -152,7 +161,6 @@ public class FirstPersonController : MonoBehaviour
                     airControlAcceleration * Time.deltaTime
                 );
             }
-            // enforce minimal air speed if below threshold
             if (horizontalVelocity.magnitude < minAirSpeed)
             {
                 horizontalVelocity = horizontalVelocity.normalized * minAirSpeed;
@@ -166,14 +174,10 @@ public class FirstPersonController : MonoBehaviour
         }
         jumpRequested = false;
 
-        // apply gravity
         velocity.y += gravity * Time.deltaTime;
-
-        // move character
         Vector3 finalMove = horizontalVelocity + Vector3.up * velocity.y;
         controller.Move(finalMove * Time.deltaTime);
 
-        // if landing on a too-steep slope, reset horizontal speed to prevent climbing
         if (!previousGrounded && isGrounded)
         {
             float landAngle = Vector3.Angle(contactNormal, Vector3.up);

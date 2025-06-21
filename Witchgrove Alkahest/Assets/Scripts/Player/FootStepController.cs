@@ -1,3 +1,4 @@
+// FootStepController.cs
 using System;
 using UnityEngine;
 
@@ -23,15 +24,23 @@ public class FootStepController : MonoBehaviour
     [SerializeField] private float raycastDistance = 1.5f;
 
     private CharacterController controller;
+    private FirstPersonController fps;
     private float stepTimer;
 
     void Awake()
     {
         controller = GetComponent<CharacterController>();
+        fps = GetComponent<FirstPersonController>();
     }
 
     void Update()
     {
+        if (fps != null && fps.InventoryOpen) // Modified: skip and reset if inventory open
+        {
+            stepTimer = 0f;
+            return;
+        }
+
         if (!controller.isGrounded)
         {
             stepTimer = 0f;
@@ -67,7 +76,6 @@ public class FootStepController : MonoBehaviour
             {
                 if (surface.surfaceTag == tag && surface.soundNames.Length > 0)
                 {
-                    // Select a random sound name from the list
                     string randomName = surface.soundNames[UnityEngine.Random.Range(0, surface.soundNames.Length)];
                     SoundManager.Instance.PlaySound(randomName);
                     return;
