@@ -49,22 +49,22 @@ Material:
     - _AlphaCutoff: 0.5
     - _Clip: 0.597
     - _EnvironmentReflections: 1
-    - _FresnalBias: 0
-    - _FresnalPower: 0
-    - _FresnalScale: 0
-    - _HeightGradient: 2.62
-    - _HeightStartGradient: 3.92
+    - _FresnalBias: 0.86
+    - _FresnalPower: 0.67
+    - _FresnalScale: 0.66
+    - _HeightGradient: 4.01
+    - _HeightStartGradient: 10
     - _Metalic: 0
     - _Occlusion: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SpecularHighlights: 1
-    - _SurfaceDistortion: 0
+    - _SurfaceDistortion: 2.6
     - _WindFoliageAmplitude: 0
-    - _WindFoliageSpeed: 0
-    - _WindTrunkAmplitude: 0
-    - _WindTrunkSpeed: 0
+    - _WindFoliageSpeed: 0.289
+    - _WindTrunkAmplitude: 0.303
+    - _WindTrunkSpeed: 0.01
     m_Colors:
     - _Color0: {r: 0.13725491, g: 0.29411766, b: 0.06666667, a: 0}
     - _Color1: {r: 0.19607845, g: 0.40000004, b: 0.09019608, a: 0}
