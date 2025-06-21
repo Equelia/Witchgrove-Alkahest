@@ -3734,7 +3734,7 @@ Transform:
   m_GameObject: {fileID: 692615832}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -185.48, y: 37.050003, z: -172.26}
+  m_LocalPosition: {x: -185.48, y: 37.050003, z: -185.44}
   m_LocalScale: {x: 0.66593975, y: 15.154966, z: 7.424937}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -3754,8 +3754,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSceneName: MeadowLvl
-  portalID: 2
-  targetPortalID: 1
+  portalID: 4
+  targetPortalID: 4
   spawnPoint: {fileID: 2098468422}
 --- !u!65 &692615835
 BoxCollider:
@@ -4076,7 +4076,7 @@ Transform:
   m_GameObject: {fileID: 782341245}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: 1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -5.16, y: -0.108, z: 0.005}
+  m_LocalPosition: {x: -7.5, y: -0.248, z: 0.005}
   m_LocalScale: {x: 1.5016373, y: 0.06598497, z: 0.13468128}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -4111,7 +4111,7 @@ Transform:
   m_GameObject: {fileID: 799234053}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -185.48, y: 37.050003, z: -158.18}
+  m_LocalPosition: {x: -185.48, y: 37.050003, z: -165.3}
   m_LocalScale: {x: 0.66593975, y: 15.154966, z: 7.424937}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4131,8 +4131,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSceneName: MeadowLvl
-  portalID: 4
-  targetPortalID: 1
+  portalID: 5
+  targetPortalID: 5
   spawnPoint: {fileID: 1457269242}
 --- !u!65 &799234056
 BoxCollider:
@@ -5356,7 +5356,7 @@ Transform:
   m_GameObject: {fileID: 1028453089}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0.0000029504295}
-  m_LocalPosition: {x: -185.48, y: 37.050003, z: -144.79}
+  m_LocalPosition: {x: -185.48, y: 37.050003, z: -135.24}
   m_LocalScale: {x: 0.66593975, y: 15.154966, z: 7.424937}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5376,7 +5376,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetSceneName: MeadowLvl
-  portalID: 2
+  portalID: 1
   targetPortalID: 1
   spawnPoint: {fileID: 782341246}
 --- !u!1 &1031574548
@@ -7615,8 +7615,8 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1028453093}
-  - {fileID: 799234054}
   - {fileID: 692615833}
+  - {fileID: 799234054}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1440387387
