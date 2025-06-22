@@ -9,6 +9,7 @@ public class QuestData
 	[TextArea] public string description;
 	public BaseItemData  requiredItem;
 	public int requiredCount = 1;
+	public float expAmount;
 }
 
 [CreateAssetMenu(menuName = "Quest/QuestDatabase")]

@@ -1193,13 +1193,17 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3858355521214455386, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5689204201657256351, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
       propertyPath: m_Name
       value: InventoryPanel
       objectReference: {fileID: 0}
     - target: {fileID: 5689204201657256351, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7565663247792306321, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1215,6 +1219,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7565663247792306321, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
       propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851240820316707583, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7851240820316707583, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
+      propertyPath: m_FillAmount
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

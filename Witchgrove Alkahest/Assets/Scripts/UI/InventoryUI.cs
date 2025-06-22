@@ -29,24 +29,7 @@ public class InventoryUI : MonoBehaviour
 	[SerializeField, Space(10f)] private Image trashSlotRadialTimer;
 
 	public bool IsOpen => mainInventoryPanel.activeSelf;
-
-	private void OnEnable()
-	{
-		foreach (var slot in InventorySystem.Instance.inventorySlots)
-			slot.OnSlotChanged += HandleSlotChanged;
-
-		foreach (var slot in InventorySystem.Instance.trashBinSlots)
-			slot.OnSlotChanged += HandleTrashBinSlotChanged;
-	}
-
-	private void OnDisable()
-	{
-		foreach (var slot in InventorySystem.Instance.inventorySlots)
-			slot.OnSlotChanged -= HandleSlotChanged;
-		
-		foreach (var slot in InventorySystem.Instance.trashBinSlots)
-			slot.OnSlotChanged -= HandleTrashBinSlotChanged;
-	}
+	
 
 	private void Start()
 	{
@@ -63,6 +46,12 @@ public class InventoryUI : MonoBehaviour
 		{
 			trashBinCell[i].Setup(trashBinSlot[i], trashBinSlot, i);
 		}
+		
+		foreach (var slot in InventorySystem.Instance.inventorySlots)
+			slot.OnSlotChanged += HandleSlotChanged;
+
+		foreach (var slot in InventorySystem.Instance.trashBinSlots)
+			slot.OnSlotChanged += HandleTrashBinSlotChanged;
 	}
 
 	private void Update()
@@ -118,8 +107,7 @@ public class InventoryUI : MonoBehaviour
 			trashSlotRadialTimer.gameObject.SetActive(false);
 		}
 	}
-
-
+	
 	private void HandleSlotChanged(CellSlot slot)
 	{
 		int index = InventorySystem.Instance.inventorySlots.IndexOf(slot);

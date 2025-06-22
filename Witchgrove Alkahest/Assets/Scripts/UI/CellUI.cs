@@ -18,6 +18,9 @@ public class CellUI : MonoBehaviour,
 
 	private List<CellSlot> slotList; 
 	private bool hasItem;
+	private int lastCount;
+	private string addSoundName;
+	private const string DefaultAddSound = "CellPop";
 	
 	private void OnDestroy()
 	{
@@ -25,7 +28,7 @@ public class CellUI : MonoBehaviour,
 			SlotData.OnSlotChanged -= HandleSlotChanged;
 	}
 
-	public void Setup(CellSlot slot, List<CellSlot> sourceList, int index)	
+	public void Setup(CellSlot slot, List<CellSlot> sourceList, int index, string onAddSound  = null)	
 	{
 		if (SlotData != null)
 			SlotData.OnSlotChanged -= HandleSlotChanged;
@@ -33,6 +36,8 @@ public class CellUI : MonoBehaviour,
 		SlotData = slot;
 		slotList = sourceList;
 		SlotIndex = index;
+		addSoundName = onAddSound;
+		lastCount = slot.Count;
 		hasItem = slot.Count > 0;
 
 		slot.OnSlotChanged += HandleSlotChanged;
@@ -42,10 +47,25 @@ public class CellUI : MonoBehaviour,
 	
 	private void HandleSlotChanged(CellSlot changedSlot)
 	{
+		HandleSlotSound(changedSlot);
 		UpdateCellUI();
 	}
 
-
+	private void HandleSlotSound(CellSlot changedSlot)
+	{
+		int newCount = changedSlot.Count;
+		
+		if (newCount > lastCount)
+		{
+			var sound = string.IsNullOrEmpty(addSoundName)
+				? DefaultAddSound
+				: addSoundName;
+			SoundManager.Instance.PlaySound(sound);
+		}
+		
+		lastCount = newCount;
+	}
+	
 	public void UpdateCellUI()
 	{
 		if (SlotData.Count == 0 || SlotData.ItemData == null)
@@ -138,32 +158,40 @@ public class CellUI : MonoBehaviour,
 		var targetSlot = slotList[SlotIndex];
 		var sourceSlot = dragged.sourceSlot.slotList[dragged.sourceIndex];
 
-		if (targetSlot.ItemData == sourceSlot.ItemData && targetSlot.Count < targetSlot.ItemData.maxStack)
+		bool targetWasEmpty = (targetSlot.Count == 0);
+
+		if (targetSlot.ItemData == sourceSlot.ItemData 
+		    && targetSlot.Count < targetSlot.ItemData.maxStack)
 		{
-			int spaceLeft = targetSlot.ItemData.maxStack - targetSlot.Count;
+			int spaceLeft     = targetSlot.ItemData.maxStack - targetSlot.Count;
 			int transferAmount = Mathf.Min(spaceLeft, sourceSlot.Count);
 
-			targetSlot.Count += transferAmount;
-			sourceSlot.Count -= transferAmount;
-
+			targetSlot.Count  += transferAmount;
+			sourceSlot.Count  -= transferAmount;
 			if (sourceSlot.Count == 0)
-				sourceSlot.ItemData = default;
+				sourceSlot.ItemData = null;
 		}
 		else
 		{
-			var temp = new CellSlot
-			{
-				ItemData = targetSlot.ItemData,
-				Count = targetSlot.Count
-			};
+			var tempItem  = targetSlot.ItemData;
+			var tempCount = targetSlot.Count;
 
 			targetSlot.ItemData = sourceSlot.ItemData;
-			targetSlot.Count = sourceSlot.Count;
+			targetSlot.Count    = sourceSlot.Count;
 
-			sourceSlot.ItemData = temp.ItemData;
-			sourceSlot.Count = temp.Count;
+			sourceSlot.ItemData = tempItem;
+			sourceSlot.Count    = tempCount;
+			
+			if (!targetWasEmpty)
+			{
+				var sound = string.IsNullOrEmpty(addSoundName) 
+					? DefaultAddSound 
+					: addSoundName;
+				SoundManager.Instance.PlaySound(sound);
+			}
 		}
 	}
+
 
 	#endregion
 	

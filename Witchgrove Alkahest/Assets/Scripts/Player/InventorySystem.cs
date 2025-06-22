@@ -78,6 +78,7 @@ public class InventorySystem : MonoBehaviour
         for (int i = 0; i < 4; i++)
             inventorySlots.Add(new CellSlot { ItemData = default, Count = 0 });
 
+        trashBinSlots = new List<CellSlot>(1);
         for (int i = 0; i < 1; i++)
             trashBinSlots.Add(new CellSlot { ItemData = default, Count = 0 });
         
@@ -113,6 +114,21 @@ public class InventorySystem : MonoBehaviour
         // 3) Inventory full
         Debug.LogWarning($"[Inventory] Cannot add {item}: inventory full.");
         return false;
+    }
+    
+    public void ClearSlots()
+    {
+        foreach (var s in inventorySlots)
+        {
+            s.ItemData = null;
+            s.Count = 0;
+        }
+    }
+
+    public void AddToFirstEmpty(BaseItemData item, int count)
+    {
+        for (int i = 0; i < count; i++)
+            AddItem(item);
     }
     
     public bool TryConsumeItem(BaseItemData item, int amount)

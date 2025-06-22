@@ -5,8 +5,9 @@ using UnityEngine;
 
 public class TaskBoard : InteractableItem
 {
-	[Header("Basket Component")]
+	[Header("Basket & PlayerExperience Components")]
 	[SerializeField] private Basket basket;
+	[SerializeField] private PlayerExperience playerExperience;
 	
 	[Header("Quest's Data")]
 	[Tooltip("Assign current location quest list")]
@@ -37,13 +38,30 @@ public class TaskBoard : InteractableItem
 		return availableQuests;
 	}
 	
+	public List<QuestData> GetCompletedQuests()
+	{
+		return completedQuest;
+	}
+	
+	public void SetCompletedQuestsByIds(List<string> ids)
+	{
+		completedQuest.Clear();
+		foreach (var id in ids)
+		{
+			var q = allQuests.FirstOrDefault(x => x.questId == id);
+			if (q != null)
+				completedQuest.Add(q);
+		}
+	}
+	
 	public void MarkQuestCompleted()
 	{
 		if (!completedQuest.Contains(activeQuest))
 			completedQuest.Add(activeQuest);
 
 		ConsumeItems();
-		Debug.Log($"Задание \"{activeQuest.questId}\" выполнено!");
+		playerExperience.AddExp(activeQuest.expAmount);
+		Debug.Log($"Задание \"{activeQuest.questId}\" выполнено! Начисленно \"{activeQuest.expAmount}\" опыта!");
 		activeQuest = null;
 	}
 

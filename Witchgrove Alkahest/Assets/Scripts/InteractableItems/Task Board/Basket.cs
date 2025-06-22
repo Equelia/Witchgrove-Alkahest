@@ -36,4 +36,19 @@ public class Basket : MonoBehaviour, IExternalInventoryReceiver
 
 		return false;
 	}
+	
+	public void ClearSlots()
+	{
+		foreach (var s in basketCells)
+		{
+			s.ItemData = null;
+			s.Count = 0;
+		}
+	}
+
+	public void AddToFirstEmpty(BaseItemData item, int count)
+	{
+		for (int i = 0; i < count; i++)
+			TryAddOneItem(item);
+	}
 }

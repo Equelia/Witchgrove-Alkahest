@@ -8,6 +8,7 @@ public class Chest : InteractableItem, IExternalInventoryReceiver
 	[SerializeField] private ChestUI chestUI;
 	
 	[HideInInspector] public List<CellSlot> chestSlots = new();
+	[HideInInspector] public string ChestId;
 	
 	private void Awake()
 	{
@@ -44,5 +45,20 @@ public class Chest : InteractableItem, IExternalInventoryReceiver
 			}
 		}
 		return false;
+	}
+	
+	public void ClearSlots()
+	{
+		foreach (var s in chestSlots)
+		{
+			s.ItemData = null;
+			s.Count = 0;
+		}
+	}
+	
+	public void AddToFirstEmpty(BaseItemData item, int count)
+	{
+		for (int i = 0; i < count; i++)
+			TryAddOneItem(item);
 	}
 }

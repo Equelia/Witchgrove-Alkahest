@@ -69,7 +69,10 @@ MonoBehaviour:
     volume: 0.1
   - name: CauldronDrop
     clip: {fileID: 8300000, guid: 0e20a0fe5252d4344944a04a61d507e5, type: 3}
-    volume: 0.1
+    volume: 0.08
+  - name: CellPop
+    clip: {fileID: 8300000, guid: e43cf79f92f48954ebf4f23dd85dc33e, type: 3}
+    volume: 0.05
   bgMusicEntries:
   - name: MeadowLvl
     clip: {fileID: 8300000, guid: c26ed8876e334ba4a90b2d2a721a0981, type: 3}
