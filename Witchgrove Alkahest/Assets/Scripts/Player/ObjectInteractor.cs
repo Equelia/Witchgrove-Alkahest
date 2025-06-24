@@ -31,7 +31,7 @@ public class ObjectInteractor : MonoBehaviour
 
     void Update()
     {
-        if (InventorySystem.Instance.inventoryUI.IsOpen)
+        if (PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.IsOpen)
         {
             ClearHover();
             return;
@@ -51,7 +51,7 @@ public class ObjectInteractor : MonoBehaviour
             if (receiver == null)
                 receiver = interactableItem.GetComponentInChildren<IExternalInventoryReceiver>();
 
-            InventorySystem.Instance.CurrentExternalReceiver = receiver;
+            PlayerInventorySystem.Instance.CurrentExternalReceiver = receiver;
         }
     }
     
@@ -106,7 +106,7 @@ public class ObjectInteractor : MonoBehaviour
     /// </summary>
     private void PickUpHoveredItem()
     {
-        bool added = InventorySystem.Instance.AddItem(pickupableItem.ingredientData);
+        bool added = PlayerInventorySystem.Instance.TryAddOneItem(pickupableItem.ingredientData);
 
         if (!added)
         {
@@ -120,5 +120,7 @@ public class ObjectInteractor : MonoBehaviour
             pickupableItem = null;
             objectNameTextHolder.SetActive(false);
         }
+        
+        SoundManager.Instance.PlaySound("CellPop");
     }
 }

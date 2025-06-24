@@ -8,7 +8,7 @@ using UnityEngine.UI;
 public class CauldronUI : MonoBehaviour
 {
 	[Tooltip("Assign craft CellUI components ")]
-	[SerializeField] private CellUI[] craftCells;
+	[SerializeField] private CellController[] craftCells;
 	
 	[Space(15f)]
 	[SerializeField] private Button craftButton;
@@ -26,13 +26,11 @@ public class CauldronUI : MonoBehaviour
 
 	private void Start()
 	{
-		var craftSlots = cauldronController.craftCellSlots;
+		var craftSlots = cauldronController.GetAllSlots();
 		for (int i = 0; i < craftCells.Length && i < craftSlots.Count; i++)
 		{
 			craftCells[i].Setup(craftSlots[i], craftSlots, i, "CauldronDrop");
 		}
-
-		RefreshCellsUI(); 
 	}
 
 	private void Craft()
@@ -40,9 +38,4 @@ public class CauldronUI : MonoBehaviour
 		cauldronController.TryCraft();
 	}
 	
-	public void RefreshCellsUI()
-	{
-		foreach (var cell in craftCells)
-			cell.UpdateCellUI(); 
-	}
 }

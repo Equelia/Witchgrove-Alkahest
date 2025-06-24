@@ -11,6 +11,6 @@ public abstract class InteractableItem : MonoBehaviour
 {
 	public virtual void Interact()
 	{
-		InventorySystem.Instance.inventoryUI.OpenInventory();
+		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenInventory();
 	}
 }

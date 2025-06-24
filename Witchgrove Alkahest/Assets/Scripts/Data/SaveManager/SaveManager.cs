@@ -75,7 +75,7 @@ public class SaveManager : MonoBehaviour
     public void SaveInventoryModule(SaveData data)
     {
         data.playerInventory.Clear();
-        foreach (var slot in InventorySystem.Instance.inventorySlots)
+        foreach (var slot in PlayerInventorySystem.Instance.GetAllSlots())
         {
             if (slot.Count == 0) continue;
             data.playerInventory.Add(new SaveData.SlotData {
@@ -87,11 +87,11 @@ public class SaveManager : MonoBehaviour
 
     public void LoadInventoryModule(SaveData data)
     {
-        InventorySystem.Instance.ClearSlots();
+        PlayerInventorySystem.Instance.ClearAllSlots();
         foreach (var sd in data.playerInventory)
         {
             var item = ItemDatabase.Instance.GetItemById(sd.itemId);
-            InventorySystem.Instance.AddToFirstEmpty(item, sd.count);
+            PlayerInventorySystem.Instance.AddToFirstEmpty(item, sd.count);
         }
     }
 
@@ -106,7 +106,7 @@ public class SaveManager : MonoBehaviour
                 chestId = chest.ChestId,
                 slots   = new List<SaveData.SlotData>()
             };
-            foreach (var slot in chest.chestSlots)
+            foreach (var slot in chest.GetAllSlots())
             {
                 if (slot.Count == 0) continue;
                 save.slots.Add(new SaveData.SlotData {
@@ -125,7 +125,7 @@ public class SaveManager : MonoBehaviour
             var chest = chestSystem.GetChestById(save.chestId);
             if (chest == null) continue;
 
-            chest.ClearSlots();
+            chest.ClearAllSlots();
             foreach (var sd in save.slots)
             {
                 var item = ItemDatabase.Instance.GetItemById(sd.itemId);
@@ -139,7 +139,7 @@ public class SaveManager : MonoBehaviour
     public void SaveBasketModule(SaveData data)
     {
         data.basketSlots.Clear();
-        foreach (var slot in basket.basketCells)
+        foreach (var slot in basket.GetAllSlots())
         {
             if (slot.Count == 0) continue;
             data.basketSlots.Add(new SaveData.SlotData {
@@ -151,7 +151,7 @@ public class SaveManager : MonoBehaviour
 
     public void LoadBasketModule(SaveData data)
     {
-        basket.ClearSlots();
+        basket.ClearAllSlots();
         foreach (var sd in data.basketSlots)
         {
             var item = ItemDatabase.Instance.GetItemById(sd.itemId);
@@ -176,7 +176,7 @@ public class SaveManager : MonoBehaviour
     public void SaveCauldronModule(SaveData data)
     {
         data.cauldronCraftSlots.Clear();
-        foreach (var slot in cauldron.craftCellSlots)
+        foreach (var slot in cauldron.GetAllSlots())
         {
             if (slot.Count == 0) continue;
             data.cauldronCraftSlots.Add(new SaveData.SlotData {
@@ -192,7 +192,7 @@ public class SaveManager : MonoBehaviour
         foreach (var sd in data.cauldronCraftSlots)
         {
             var item = ItemDatabase.Instance.GetItemById(sd.itemId);
-            cauldron.AddToCraftSlot(item, sd.count);
+            cauldron.AddToFirstEmpty(item, sd.count);
         }
     }
     

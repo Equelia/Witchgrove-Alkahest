@@ -26,7 +26,7 @@ public class TaskBoard : InteractableItem
 	public override void Interact()
 	{
 		base.Interact();
-		InventorySystem.Instance.inventoryUI.OpenPanelByName("TaskBoard");
+		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("TaskBoard");
 	}
 
 	public List<QuestData> GetAvailableQuests()
@@ -71,7 +71,7 @@ public class TaskBoard : InteractableItem
 
 		if (quest != null)
 		{
-			foreach (var slot in basket.basketCells)
+			foreach (var slot in basket.GetAllSlots())
 			{
 				if (slot.ItemData == quest.requiredItem)
 					count += slot.Count;
@@ -86,7 +86,7 @@ public class TaskBoard : InteractableItem
 	{
 		int remaining = activeQuest.requiredCount;
 		
-		foreach (var slot in basket.basketCells)
+		foreach (var slot in basket.GetAllSlots())
 		{
 			if (slot.ItemData == activeQuest.requiredItem)
 			{

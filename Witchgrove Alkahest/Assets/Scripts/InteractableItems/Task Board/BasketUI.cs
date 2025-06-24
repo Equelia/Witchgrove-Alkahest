@@ -4,7 +4,7 @@ using UnityEngine;
 public class BasketUI : MonoBehaviour
 {
     [Tooltip("Assign Basket CellUI components ")] 
-    [SerializeField] private CellUI[] basketCells;
+    [SerializeField] private CellController[] basketCells;
     
     [SerializeField] private Basket basketController;
     [SerializeField] private TaskBoardUI taskBoardUI;
@@ -28,17 +28,8 @@ public class BasketUI : MonoBehaviour
             basketCells[i].Setup(slots[i], slots, i);
     }
     
-    private void HandleSlotChanged(CellSlot changedSlot)
+    private void HandleSlotChanged(Cell changed)
     {
-        RefreshCellsUI();
-    }
-
-    public void RefreshCellsUI()
-    {
-        for (int i = 0; i < basketCells.Length; i++)
-        {
-            basketCells[i].UpdateCellUI();
-            taskBoardUI.UpdateAvailableItemsCount();
-        }
+        taskBoardUI.UpdateAvailableItemsCount();
     }
 }

@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 public class ChestUI : MonoBehaviour
 {
 	[Tooltip("Assign Chest CellUI components ")]
-	[SerializeField] private CellUI[] chestCells;
+	[SerializeField] private CellController[] chestCells;
 	
 	[SerializeField] private Chest chestController;
 
