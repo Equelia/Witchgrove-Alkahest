@@ -15,5 +15,7 @@ public class QuestData
 [CreateAssetMenu(menuName = "Quest/QuestDatabase")]
 public class QuestDatabase : ScriptableObject
 {
+	public int requiredLevel = 1;
+	[Space (10f)]
 	public List<QuestData> quests;
 }

@@ -8,10 +8,11 @@ public class TaskBoard : InteractableItem
 	[Header("Basket & PlayerExperience Components")]
 	[SerializeField] private Basket basket;
 	[SerializeField] private PlayerExperience playerExperience;
+	[SerializeField] private PlayerData playerData;
 	
 	[Header("Quest's Data")]
-	[Tooltip("Assign current location quest list")]
-	[SerializeField] private QuestDatabase questDatabase;
+	[Tooltip("Quest Databases by Level Index (e.g. 0 → 1-lvl quests, 1 → 2-lvl, etc.)")]
+	[SerializeField] private QuestDatabase[] questDatabases;
 	
 	[HideInInspector] public QuestData activeQuest;
 	private List<QuestData> completedQuest = new();
@@ -20,7 +21,10 @@ public class TaskBoard : InteractableItem
 	private void Awake()
 	{
 		activeQuest = null;
-		allQuests = questDatabase.quests;
+		allQuests = questDatabases
+			.Where(qd => qd != null)
+			.SelectMany(qd => qd.quests)
+			.ToList();
 	}
 
 	public override void Interact()
@@ -31,26 +35,37 @@ public class TaskBoard : InteractableItem
 
 	public List<QuestData> GetAvailableQuests()
 	{
-		List<QuestData> availableQuests = allQuests
-			.Where(q => !completedQuest.Contains(q))
-			.ToList();
-		
-		return availableQuests;
+		var available = new List<QuestData>();
+
+		foreach (var db in questDatabases)
+		{
+			if (db == null) continue;
+			if (playerData.Level < db.requiredLevel) continue;
+
+			var levelQuests = db.quests
+				.Where(q => !completedQuest.Contains(q));
+			available.AddRange(levelQuests);
+		}
+
+		return available;
 	}
+
 	
-	public List<QuestData> GetCompletedQuests()
-	{
-		return completedQuest;
-	}
+	public List<QuestData> GetCompletedQuests() => completedQuest;
 	
 	public void SetCompletedQuestsByIds(List<string> ids)
 	{
 		completedQuest.Clear();
-		foreach (var id in ids)
+
+		foreach (var qd in questDatabases)
 		{
-			var q = allQuests.FirstOrDefault(x => x.questId == id);
-			if (q != null)
-				completedQuest.Add(q);
+			if (qd == null) continue;
+
+			foreach (var q in qd.quests)
+			{
+				if (ids.Contains(q.questId))
+					completedQuest.Add(q);
+			}
 		}
 	}
 	
@@ -67,19 +82,11 @@ public class TaskBoard : InteractableItem
 
 	public int GetBasketAvailableItems(QuestData quest)
 	{
-		int count = 0;
+		if (quest == null) return 0;
 
-		if (quest != null)
-		{
-			foreach (var slot in basket.GetAllSlots())
-			{
-				if (slot.ItemData == quest.requiredItem)
-					count += slot.Count;
-			}
-		}
-		
-		
-		return count;
+		return basket.GetAllSlots()
+			.Where(slot => slot.ItemData == quest.requiredItem)
+			.Sum(slot => slot.Count);
 	}
 
 	private void ConsumeItems()
@@ -88,18 +95,17 @@ public class TaskBoard : InteractableItem
 		
 		foreach (var slot in basket.GetAllSlots())
 		{
-			if (slot.ItemData == activeQuest.requiredItem)
-			{
-				int used = Mathf.Min(remaining, slot.Count);
-				slot.Count -= used;
-				remaining -= used;
+			if (slot.ItemData != activeQuest.requiredItem) continue;
 
-				if (slot.Count <= 0)
-					slot.ItemData = null;
+			int used = Mathf.Min(remaining, slot.Count);
+			slot.Count -= used;
+			remaining -= used;
 
-				if (remaining <= 0)
-					break;
-			}
+			if (slot.Count <= 0)
+				slot.ItemData = null;
+
+			if (remaining <= 0)
+				break;
 		}
 	}
 }

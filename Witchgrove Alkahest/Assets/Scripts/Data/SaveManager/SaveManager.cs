@@ -66,7 +66,7 @@ public class SaveManager : MonoBehaviour
 
     public void LoadPlayerModule(SaveData data)
     {
-        playerData.Level    = data.playerLevel;
+        playerData.Level = Mathf.Max(1, data.playerLevel); 
         playerData.TotalExp = data.playerExp;
     }
 

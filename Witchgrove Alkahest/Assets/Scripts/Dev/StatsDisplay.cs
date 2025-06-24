@@ -41,7 +41,7 @@ public class StatsDisplay : MonoBehaviour
 			normal = { textColor = Color.white }
 		};
 
-		GUI.Label(new Rect(10, 10, 300, 30), $"Скорость: {_smoothSpeed:F2} м/с", style);
-		GUI.Label(new Rect(10, 40, 300, 30), $"FPS: {_smoothFps:F0}", style);
+		GUI.Label(new Rect(10, 100, 300, 30), $"Скорость: {_smoothSpeed:F2} м/с", style);
+		GUI.Label(new Rect(10, 140, 300, 30), $"FPS: {_smoothFps:F0}", style);
 	}
 }

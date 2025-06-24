@@ -2060,7 +2060,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   basket: {fileID: 1232499905}
   playerExperience: {fileID: 1099833112}
-  questDatabase: {fileID: 11400000, guid: 2e6b6450d6a30ec439cb1f2ec5991f48, type: 2}
+  playerData: {fileID: 1099833110}
+  questDatabases:
+  - {fileID: 11400000, guid: 2e6b6450d6a30ec439cb1f2ec5991f48, type: 2}
+  - {fileID: 11400000, guid: 9be28ff7526204a448f2c844a2767269, type: 2}
+  - {fileID: 11400000, guid: e319ab60f2ec1164c82cac90e43d15de, type: 2}
+  - {fileID: 11400000, guid: a8fbd4ddd8609df4aaf102dd07a2fe1d, type: 2}
   activeQuest:
     questId: 
     description: 
@@ -3684,10 +3689,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3303325082934944939, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 3862754053621876226, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: chestController
       value: 
       objectReference: {fileID: 418723284}
+    - target: {fileID: 5925517445306894404, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 1099833110}
     - target: {fileID: 7133689807106184243, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

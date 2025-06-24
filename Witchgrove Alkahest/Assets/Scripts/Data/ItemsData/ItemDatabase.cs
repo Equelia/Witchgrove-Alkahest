@@ -35,7 +35,7 @@ public class ItemDatabase : ScriptableObject
 	}
 
 	// From Resources/ItemDatabase.asset
-	public static ItemDatabase Instance => Resources.Load<ItemDatabase>("ItemDatabase");
+	public static ItemDatabase Instance => Resources.Load<ItemDatabase>("Items/ItemDatabase");
 
 	/// <summary>
 	///  Get item by ID

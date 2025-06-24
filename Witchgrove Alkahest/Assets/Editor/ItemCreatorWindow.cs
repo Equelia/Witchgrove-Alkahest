@@ -11,7 +11,7 @@ public class ItemCreatorWindow : OdinEditorWindow
 {
     private const string IngredientPath = "Assets/Resources/Items/Ingredients";
     private const string PotionPath = "Assets/Resources/Items/Potions";
-    private const string DatabasePath = "Assets/Resources/ItemDatabase.asset";
+    private const string DatabasePath = "Assets/Resources/Items/ItemDatabase.asset";
     private const string QuestDatabasePath = "Assets/Resources/QuestDatabase.asset";
 
     [MenuItem("Tools/Item & Recipe Creator")]

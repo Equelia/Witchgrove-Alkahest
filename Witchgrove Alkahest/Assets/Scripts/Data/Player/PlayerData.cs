@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerData : MonoBehaviour
 {
-	private int _level;
+	private int _level = 1;
 	private float _totalExp;
 	private int goldAmountAmount;
 	
