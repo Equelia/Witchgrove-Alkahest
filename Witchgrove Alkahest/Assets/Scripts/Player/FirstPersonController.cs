@@ -41,7 +41,7 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float landShakeAmplitude = 0.15f;
 
     private CharacterController controller;
-    private Vector3 velocity;            // vertical velocity
+    private Vector3 velocity; // vertical velocity
     private Vector3 horizontalVelocity;  // horizontal movement stored between frames
     private bool previousGrounded;
     private bool jumpRequested;
@@ -51,7 +51,11 @@ public class FirstPersonController : MonoBehaviour
     private float shakeTimer;
     private float shakeDuration;
     private float shakeAmplitude;
-
+    
+    private bool isLaunched = false;
+    private Vector3 launchVelocity;
+    private bool allowAirControlDuringLaunch = false;
+    
     private Vector3 contactNormal = Vector3.up;
 
     // Expose inventory state so FootStepController can check it
@@ -110,16 +114,60 @@ public class FirstPersonController : MonoBehaviour
         HandleMovement();
         HandlePlayerRotation();
     }
+    
+    public void AddExternalForce(Vector3 force, bool allowAirControl = false)
+    {
+        isLaunched = true;
+        launchVelocity = force;
+        allowAirControlDuringLaunch = allowAirControl;
+        controller.Move(Vector3.zero); // обнулим старое движение
+    }
 
     private void OnControllerColliderHit(ControllerColliderHit hit)
     {
         contactNormal = hit.normal;
     }
-    
+
     private void HandleMovement()
     {
         bool isGrounded = controller.isGrounded;
-        if (isGrounded && velocity.y < 0f)
+        
+        if (isLaunched)
+        {
+            // Управление в воздухе, если включено
+            if (allowAirControlDuringLaunch)
+            {
+                Vector3 _rawInput = new Vector3(
+                    Input.GetAxisRaw("Horizontal"),
+                    0f,
+                    Input.GetAxisRaw("Vertical")
+                );
+                Vector3 inputDir = _rawInput.sqrMagnitude > 0f ? _rawInput.normalized : Vector3.zero;
+
+                Transform cam = Camera.main.transform;
+                Vector3 forward = cam.forward; forward.y = 0f; forward.Normalize();
+                Vector3 _right = cam.right;     _right.y = 0f;   _right.Normalize();
+
+                float speed = walkSpeed;
+                Vector3 moveDir = forward * inputDir.z + _right * inputDir.x;
+                launchVelocity += moveDir * airControlAcceleration * Time.deltaTime;
+            }
+
+            // Применяем гравитацию и двигаем
+            launchVelocity += Physics.gravity * Time.deltaTime;
+            controller.Move(launchVelocity * Time.deltaTime);
+
+            if (isGrounded && launchVelocity.y < 0f)
+            {
+                isLaunched = false;
+                launchVelocity = Vector3.zero;
+            }
+
+            return;
+        }
+
+
+    if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
         if (isGrounded)
@@ -138,23 +186,23 @@ public class FirstPersonController : MonoBehaviour
             0f,
             Input.GetAxisRaw("Vertical")
         );
-        Vector3 inputDir = rawInput.sqrMagnitude > 0f ? rawInput.normalized : Vector3.zero;
+        Vector3 _inputDir = rawInput.sqrMagnitude > 0f ? rawInput.normalized : Vector3.zero;
 
-        Transform cam = Camera.main.transform;
-        Vector3 forward = cam.forward; forward.y = 0f; forward.Normalize();
-        Vector3 right   = cam.right;   right.y   = 0f; right.Normalize();
+        Transform _cam = Camera.main.transform;
+        Vector3 _forward = _cam.forward; _forward.y = 0f; _forward.Normalize();
+        Vector3 right   = _cam.right;   right.y   = 0f; right.Normalize();
 
         if (isGrounded)
         {
             float speed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
-            horizontalVelocity = (forward * inputDir.z + right * inputDir.x) * speed;
+            horizontalVelocity = (_forward * _inputDir.z + right * _inputDir.x) * speed;
         }
         else
         {
-            if (inputDir != Vector3.zero)
+            if (_inputDir != Vector3.zero)
             {
                 float targetSpeed = Input.GetKey(KeyCode.LeftShift) ? sprintSpeed : walkSpeed;
-                Vector3 targetVel = (forward * inputDir.z + right * inputDir.x) * targetSpeed;
+                Vector3 targetVel = (_forward * _inputDir.z + right * _inputDir.x) * targetSpeed;
                 horizontalVelocity = Vector3.MoveTowards(
                     horizontalVelocity,
                     targetVel,

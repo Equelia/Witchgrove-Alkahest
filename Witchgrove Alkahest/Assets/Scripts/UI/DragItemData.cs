@@ -1,5 +1,5 @@
 public class DragItemData
 {
-	public CellUI sourceSlot;
+	public CellController sourceSlot;
 	public int sourceIndex; 
 }

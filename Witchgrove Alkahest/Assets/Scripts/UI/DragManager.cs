@@ -27,9 +27,9 @@ public class DragManager : MonoBehaviour
 		draggedIconObject.SetActive(false);
 	}
 
-	public void BeginDrag(CellUI cell, Sprite icon)
+	public void BeginDrag(CellController cell, Sprite icon)
 	{
-		if (cell == null || cell.SlotData.Count == 0) return;
+		if (cell == null || cell.data.Count == 0) return;
 		
 		dragged = true;
 		
