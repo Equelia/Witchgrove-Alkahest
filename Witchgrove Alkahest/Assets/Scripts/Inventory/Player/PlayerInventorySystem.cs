@@ -13,6 +13,12 @@ public class PlayerInventorySystem : InventoryProvider
 	public static PlayerInventorySystem Instance { get; private set; }
 
 	[Header("Player Inventory UI")] public PlayerInventoryUI playerInventoryUI;
+	
+	[Header("InventorySlots")]
+	[SerializeField] private GameObject[] inventoryRows; 
+	public int maxInventoryLevel = 3;
+	
+	public PlayerData playerData;
 
 	public IExternalInventoryReceiver CurrentExternalReceiver;
 
@@ -40,7 +46,7 @@ public class PlayerInventorySystem : InventoryProvider
 		trashSlot.OnSlotChanged += HandleTrashSlotChanged;
 		trashBinSlots.Add(trashSlot);
 	}
-
+	
 	public void AddToFirstEmpty(BaseItemData item, int count)
 	{
 		for (int i = 0; i < count; i++)
@@ -62,6 +68,48 @@ public class PlayerInventorySystem : InventoryProvider
 		}
 
 		return false;
+	}
+	
+	
+	public void UpgradeInventory()
+	{
+		if (playerData.InventoryLevel >= maxInventoryLevel)
+			return;
+
+		playerData.InventoryLevel++;
+		ApplyInventorySize();
+		SaveManager.Instance.SaveGame();
+	}
+	
+	public void ApplyInventorySize()
+	{
+		// Включаем нужные строки UI
+		for (int i = 0; i < inventoryRows.Length; i++)
+			inventoryRows[i].SetActive(i < playerData.InventoryLevel);
+
+		// Обновляем количество слотов (точно)
+		int requiredSlotCount = GetUnlockedSlotCount();
+
+		// Если слотов меньше — добавляем
+		while (slots.Count < requiredSlotCount)
+		{
+			slots.Add(new Cell());
+		}
+
+		// Если слотов больше — обрезаем (на случай отладки)
+		if (slots.Count > requiredSlotCount)
+		{
+			slots.RemoveRange(requiredSlotCount, slots.Count - requiredSlotCount);
+		}
+
+		playerInventoryUI.RefreshUI();
+	}
+
+
+	
+	public int GetUnlockedSlotCount()
+	{
+		return playerData.InventoryLevel * 4;
 	}
 
 	#region TrashBin

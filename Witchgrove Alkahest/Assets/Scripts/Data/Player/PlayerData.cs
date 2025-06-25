@@ -6,10 +6,12 @@ public class PlayerData : MonoBehaviour
 	private int _level = 1;
 	private float _totalExp;
 	private int goldAmountAmount;
+	private int inventoryLevel = 1;
 	
 	public event Action OnLevelChanged;
 	public event Action OnExpChanged;
 	public event Action OnGoldChanged;
+	public event Action OnInventoryLevelChanged;
 
 	public int Level
 	{
@@ -40,4 +42,16 @@ public class PlayerData : MonoBehaviour
 			OnGoldChanged?.Invoke();
 		}
 	}
+	
+	
+	public int InventoryLevel
+	{
+		get => inventoryLevel;
+		set
+		{
+			inventoryLevel = Mathf.Clamp(value, 1, 3);
+			OnInventoryLevelChanged?.Invoke();
+		}
+	} 
+
 }

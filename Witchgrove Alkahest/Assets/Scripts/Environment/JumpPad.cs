@@ -22,7 +22,7 @@ public class JumpPad : MonoBehaviour
 		}
 	}
 
-	private void OnDrawGizmos()
+	private void OnDrawGizmosSelected()
 	{
 		Gizmos.color = trajectoryColor;
 

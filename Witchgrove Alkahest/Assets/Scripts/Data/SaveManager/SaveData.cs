@@ -6,6 +6,8 @@ public class SaveData
 	// 1) Player
 	public int playerLevel;
 	public float playerExp;
+	public int playerGold;
+	public int playerInventoryLevel;
 
 	// 2) Player inventory
 	[System.Serializable]

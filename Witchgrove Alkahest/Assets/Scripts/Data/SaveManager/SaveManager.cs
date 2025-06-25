@@ -61,13 +61,19 @@ public class SaveManager : MonoBehaviour
     public void SavePlayerModule(SaveData data)
     {
         data.playerLevel = playerData.Level;
-        data.playerExp   = playerData.TotalExp;
+        data.playerExp = playerData.TotalExp;
+        data.playerGold = playerData.GoldAmount;
+        data.playerInventoryLevel = playerData.InventoryLevel;
+        
     }
 
     public void LoadPlayerModule(SaveData data)
     {
         playerData.Level = Mathf.Max(1, data.playerLevel); 
         playerData.TotalExp = data.playerExp;
+        playerData.GoldAmount = data.playerGold;
+        playerData.InventoryLevel = data.playerInventoryLevel;
+        PlayerInventorySystem.Instance.ApplyInventorySize();
     }
 
     

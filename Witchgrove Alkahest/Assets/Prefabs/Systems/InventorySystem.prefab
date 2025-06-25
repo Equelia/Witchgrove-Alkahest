@@ -28,7 +28,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6118447368741277824}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 7.8200006, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -64,15 +64,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mainInventoryPanel: {fileID: 0}
   panels:
-  - name: InventoryPanel
+  - name: Cauldron
     panel: {fileID: 0}
-  - name: CauldronPanel
+  - name: Chest
     panel: {fileID: 0}
-  - name: ChestPanel
-    panel: {fileID: 0}
-  - name: TaskBoardPanel
+  - name: TaskBoard
     panel: {fileID: 0}
   - name: RecipeBook
+    panel: {fileID: 0}
+  - name: Trader
     panel: {fileID: 0}
 --- !u!114 &8433245895623045950
 MonoBehaviour:

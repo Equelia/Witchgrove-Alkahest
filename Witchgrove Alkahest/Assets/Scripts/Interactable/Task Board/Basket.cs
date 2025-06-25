@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class Basket : InventoryProvider
 {
-	[SerializeField] private BasketUI basketUI;
+	
 }

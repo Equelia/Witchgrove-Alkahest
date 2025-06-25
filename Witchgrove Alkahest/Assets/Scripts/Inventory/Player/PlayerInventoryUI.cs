@@ -1,26 +1,55 @@
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
-/// <summary>
-/// Handles the inventory UI and listens to slot changes.
-/// </summary>
 public class PlayerInventoryUI : MonoBehaviour
 {
 	[Header("Inventory Slot Cells")]
 	[SerializeField] private CellController[] inventoryCells;
-	
+
 	public InventoryWindowManager inventoryWindowManager;
 
 	private void Start()
 	{
+		RefreshUI(); 
+	}
+
+	private void OnEnable()
+	{
+		PlayerInventorySystem.Instance.playerData.OnInventoryLevelChanged += RefreshUI;
+	}
+
+	private void OnDisable()
+	{
+		PlayerInventorySystem.Instance.playerData.OnInventoryLevelChanged -= RefreshUI;
+	}
+
+	public void RefreshUI()
+	{
 		var inventorySlots = PlayerInventorySystem.Instance.GetAllSlots();
-		for (int i = 0; i < inventoryCells.Length && i < inventorySlots.Count; i++)
+		int unlockedCellsCount = PlayerInventorySystem.Instance.GetUnlockedSlotCount();
+
+		for (int i = 0; i < inventoryCells.Length; i++)
 		{
-			inventoryCells[i].Setup(inventorySlots[i], inventorySlots, i);
+			bool isUnlocked = i < unlockedCellsCount;
+
+			if (inventoryCells[i] != null)
+			{
+				inventoryCells[i].gameObject.SetActive(isUnlocked);
+
+				if (isUnlocked)
+				{
+					if (i < inventorySlots.Count)
+					{
+						inventoryCells[i].Setup(inventorySlots[i], inventorySlots, i);
+					}
+					else
+					{
+						Debug.LogWarning($"[PlayerInventoryUI] Нет слота с индексом {i}, всего {inventorySlots.Count}");
+					}
+				}
+			}
 		}
 	}
+
 }
