@@ -47,8 +47,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b89f0dc11ad7874eb20e7f165f6a0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotCount: 8
+  slotCount: 4
   playerInventoryUI: {fileID: 0}
+  inventoryRows:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  maxInventoryLevel: 3
+  playerData: {fileID: 0}
   trashBinSlots: []
 --- !u!114 &4494123138496227675
 MonoBehaviour:

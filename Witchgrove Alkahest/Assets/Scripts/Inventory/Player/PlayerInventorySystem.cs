@@ -13,9 +13,7 @@ public class PlayerInventorySystem : InventoryProvider
 	public static PlayerInventorySystem Instance { get; private set; }
 
 	[Header("Player Inventory UI")] public PlayerInventoryUI playerInventoryUI;
-	
-	[Header("InventorySlots")]
-	[SerializeField] private GameObject[] inventoryRows; 
+
 	public int maxInventoryLevel = 3;
 	
 	public PlayerData playerData;
@@ -83,20 +81,13 @@ public class PlayerInventorySystem : InventoryProvider
 	
 	public void ApplyInventorySize()
 	{
-		// Включаем нужные строки UI
-		for (int i = 0; i < inventoryRows.Length; i++)
-			inventoryRows[i].SetActive(i < playerData.InventoryLevel);
-
-		// Обновляем количество слотов (точно)
 		int requiredSlotCount = GetUnlockedSlotCount();
 
-		// Если слотов меньше — добавляем
 		while (slots.Count < requiredSlotCount)
 		{
 			slots.Add(new Cell());
 		}
 
-		// Если слотов больше — обрезаем (на случай отладки)
 		if (slots.Count > requiredSlotCount)
 		{
 			slots.RemoveRange(requiredSlotCount, slots.Count - requiredSlotCount);

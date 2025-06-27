@@ -29,7 +29,7 @@ public class CauldronUI : MonoBehaviour
 		var craftSlots = cauldronController.GetAllSlots();
 		for (int i = 0; i < craftCells.Length && i < craftSlots.Count; i++)
 		{
-			craftCells[i].Setup(craftSlots[i], craftSlots, i, "CauldronDrop");
+			craftCells[i].Setup(craftSlots[i], craftSlots, i, false, "CauldronDrop");
 		}
 	}
 

@@ -35,21 +35,20 @@ public class PlayerInventoryUI : MonoBehaviour
 
 			if (inventoryCells[i] != null)
 			{
-				inventoryCells[i].gameObject.SetActive(isUnlocked);
+				inventoryCells[i].gameObject.SetActive(true);
 
-				if (isUnlocked)
+				if (i < inventorySlots.Count)
 				{
-					if (i < inventorySlots.Count)
-					{
-						inventoryCells[i].Setup(inventorySlots[i], inventorySlots, i);
-					}
-					else
-					{
-						Debug.LogWarning($"[PlayerInventoryUI] Нет слота с индексом {i}, всего {inventorySlots.Count}");
-					}
+					inventoryCells[i].Setup(inventorySlots[i], inventorySlots, i, !isUnlocked);
+				}
+				else
+				{
+					inventoryCells[i].Setup(new Cell(), inventorySlots, i, !isUnlocked);
 				}
 			}
 		}
+
 	}
+
 
 }

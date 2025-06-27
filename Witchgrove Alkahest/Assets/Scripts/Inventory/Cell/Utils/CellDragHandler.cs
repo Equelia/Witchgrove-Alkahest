@@ -32,6 +32,8 @@ public class CellDragHandler : MonoBehaviour,
 
 	public void OnDrop(PointerEventData eventData)
 	{
+		if (cellController.IsLocked) return;
+		
 		var dragged = DragManager.Instance.draggedItem;
 		if (dragged == null || dragged.sourceSlot == cellController)
 			return;
