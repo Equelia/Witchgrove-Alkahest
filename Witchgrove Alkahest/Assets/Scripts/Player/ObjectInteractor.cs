@@ -64,6 +64,19 @@ public class ObjectInteractor : MonoBehaviour
         Ray ray = mainCamera.ViewportPointToRay(new Vector3(0.5f, 0.5f, 0f));
         if (Physics.Raycast(ray, out RaycastHit hit, interactDistance, interactLayer))
         {
+            Vector3 origin = mainCamera.transform.position;
+            Vector3 dirToHit = hit.point - origin;
+
+            if (Physics.Raycast(origin, dirToHit.normalized, out RaycastHit blockCheck, dirToHit.magnitude))
+            {
+                if (!blockCheck.collider.gameObject.Equals(hit.collider.gameObject))
+                {
+                    pickupableItem = null;
+                    interactableItem = null;
+                    objectNameTextHolder.SetActive(false);
+                    return;
+                }
+            }
             // Try to get a PickupableItem component
             if (hit.collider.TryGetComponent<PickupableItem>(out var pickupable_item))
             {

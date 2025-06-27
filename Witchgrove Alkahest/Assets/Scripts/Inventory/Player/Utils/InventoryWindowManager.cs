@@ -14,6 +14,8 @@ public class InventoryWindowManager : MonoBehaviour
 {
 	[SerializeField] private GameObject mainInventoryPanel;
 	public List<PanelEntry> panels;
+	
+	public event Action OnInventoryClosed;
 
 	public bool IsOpen => mainInventoryPanel.activeSelf;
 
@@ -34,6 +36,7 @@ public class InventoryWindowManager : MonoBehaviour
 			entry.panel.SetActive(false);
 		PlayerInventorySystem.Instance.CurrentExternalReceiver = null;
 		Tooltip.Instance.Hide();
+		OnInventoryClosed?.Invoke();
 	}
 
 	public void OpenPanelByName(string panelName)

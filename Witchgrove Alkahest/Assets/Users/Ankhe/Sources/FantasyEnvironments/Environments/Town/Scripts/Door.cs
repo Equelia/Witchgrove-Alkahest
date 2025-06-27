@@ -2,28 +2,27 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour {
+public class Door : InteractableItem 
+{
 	public Animator anim;
-
-	// Use this for initialization
+	private bool opened = false;
+	
 	void Start () {
 		anim = GetComponent<Animator> ();
 	}
 
-	void OnTriggerEnter (Collider other) {
-		anim.SetBool ("DoorOpen", true);
-		anim.SetBool ("DoorClose", false);
-
-	}
-
-	void OnTriggerExit (Collider other) {
-		anim.SetBool ("DoorOpen", false);
-		anim.SetBool ("DoorClose", true);
-
-	}
-
-	// Update is called once per frame
-	void Update () {
-		
+	public override void Interact()
+	{
+		if (!opened)
+		{
+			anim.SetBool ("DoorOpen", true);
+			anim.SetBool ("DoorClose", false);
+			opened = true;
+		}
+		else
+		{
+			anim.SetBool ("DoorOpen", false);
+			anim.SetBool ("DoorClose", true);
+		}
 	}
 }

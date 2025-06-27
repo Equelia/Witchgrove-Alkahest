@@ -1,14 +1,50 @@
+using DG.Tweening;
 using UnityEngine;
 
 public class Chest : InventoryProvider
 {
-	[SerializeField] private ChestUI chestUI;
-
 	public string ChestId;
+
+	[Header("Lid Settings")] public Transform lidObject;
+	public float openAngle = -45f;
+	public float duration = 1f;
+
+	private bool isOpen = false;
+
+	private void OnEnable()
+	{
+		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OnInventoryClosed +=
+			HandleInventoryClosed;
+	}
+
+	private void OnDisable()
+	{
+		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OnInventoryClosed -=
+			HandleInventoryClosed;
+	}
 
 	public override void Interact()
 	{
 		base.Interact();
+
+		PlayerInventorySystem.Instance.CurrentExternalReceiver = this;
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Chest");
+		ToggleLid();
+	}
+
+	private void HandleInventoryClosed()
+	{
+		if (isOpen)
+			ToggleLid();
+	}
+
+	public void ToggleLid()
+	{
+		float targetAngle = isOpen ? 0f : openAngle;
+
+		if (lidObject != null)
+			lidObject.DOLocalRotate(new Vector3(targetAngle, 0f, 0f), duration, RotateMode.Fast);
+
+		isOpen = !isOpen;
 	}
 }

@@ -170,17 +170,6 @@ public class FirstPersonController : MonoBehaviour
     if (isGrounded && velocity.y < 0f)
             velocity.y = -2f;
 
-        if (isGrounded)
-        {
-            float slopeAngle = Vector3.Angle(contactNormal, Vector3.up);
-            if (slopeAngle > controller.slopeLimit)
-            {
-                Vector3 slideDir = new Vector3(contactNormal.x, -contactNormal.y, contactNormal.z);
-                controller.Move(slideDir.normalized * slideSpeed * Time.deltaTime);
-                return;
-            }
-        }
-
         Vector3 rawInput = new Vector3(
             Input.GetAxisRaw("Horizontal"),
             0f,
@@ -255,7 +244,7 @@ public class FirstPersonController : MonoBehaviour
             Input.GetAxisRaw("Horizontal"),
             Input.GetAxisRaw("Vertical")
         );
-        float magnitude = movementInput.magnitude;
+        float magnitude = Mathf.Clamp01(movementInput.magnitude);
         bool isSprinting = Input.GetKey(KeyCode.LeftShift);
 
         float frequency = isSprinting ? sprintBobFrequency : walkBobFrequency;
