@@ -1,3 +1,4 @@
+#if UNITY_EDITOR
 using UnityEngine;
 using UnityEditor;
 using Sirenix.OdinInspector.Editor;
@@ -161,7 +162,8 @@ public class ItemDatabaseWindow : OdinEditorWindow
 					style.padding = new RectOffset(2, 2, 2, 2);
 					style.margin = new RectOffset(2, 2, 2, 2);
 
-					Rect rect = GUILayoutUtility.GetRect(content, GUI.skin.box, GUILayout.Width(itemSize), GUILayout.Height(itemSize));
+					Rect rect = GUILayoutUtility.GetRect(content, GUI.skin.box, GUILayout.Width(itemSize),
+						GUILayout.Height(itemSize));
 					GUI.Box(rect, content, style);
 
 					if (rect.Contains(Event.current.mousePosition))
@@ -182,6 +184,7 @@ public class ItemDatabaseWindow : OdinEditorWindow
 
 				GUILayout.EndVertical();
 			}
+
 			GUILayout.Space(margin);
 			GUILayout.EndHorizontal();
 		}
@@ -218,7 +221,8 @@ public class ItemDatabaseWindow : OdinEditorWindow
 					padding = new RectOffset(2, 2, 2, 2)
 				};
 
-				Rect rect = GUILayoutUtility.GetRect(content, style, GUILayout.Width(itemSize), GUILayout.Height(itemSize));
+				Rect rect = GUILayoutUtility.GetRect(content, style, GUILayout.Width(itemSize),
+					GUILayout.Height(itemSize));
 
 				if (GUI.Button(rect, content, style))
 				{
@@ -234,8 +238,8 @@ public class ItemDatabaseWindow : OdinEditorWindow
 				float scrollBottom = databaseScroll.y + 320;
 
 				if ((Event.current.type == EventType.Repaint || Event.current.type == EventType.MouseMove)
-					&& itemBottom >= scrollTop && itemTop <= scrollBottom
-					&& rect.Contains(localMouse))
+				    && itemBottom >= scrollTop && itemTop <= scrollBottom
+				    && rect.Contains(localMouse))
 				{
 					currentTooltip = content.tooltip;
 					currentTooltipRect = rect;
@@ -249,3 +253,4 @@ public class ItemDatabaseWindow : OdinEditorWindow
 		GUILayout.EndScrollView();
 	}
 }
+#endif
