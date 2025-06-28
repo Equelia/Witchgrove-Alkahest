@@ -47,4 +47,14 @@ public class Chest : InventoryProvider
 
 		isOpen = !isOpen;
 	}
+	
+	public void ClearSlots()
+	{
+		for (int i = 0; i < slots.Count; i++)
+		{
+			slots[i].ItemData = null;
+			slots[i].Count = 0;
+		}
+	}
+
 }

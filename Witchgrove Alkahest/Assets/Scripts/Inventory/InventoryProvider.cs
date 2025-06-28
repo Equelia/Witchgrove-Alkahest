@@ -48,6 +48,12 @@ public abstract class InventoryProvider : InteractableItem, IExternalInventoryRe
 
 	public bool TryAddOneItem(BaseItemData item)
 	{
+		if (item is TraderItemData traderItem && traderItem.usable)
+		{
+			traderItem.Use();
+			return true;
+		}
+		
 		foreach (var slot in slots)
 		{
 			if (slot.ItemData == item && slot.Count < item.maxStack)
@@ -65,6 +71,8 @@ public abstract class InventoryProvider : InteractableItem, IExternalInventoryRe
 				return true;
 			}
 		}
+		
+		Debug.Log("Inventory is full");
 		return false;
 	}
 

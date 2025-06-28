@@ -9,7 +9,7 @@ public class SaveManager : MonoBehaviour
     private string savePath;
 
     [Header("Systems")]
-    [SerializeField] private PlayerData playerData;
+    public PlayerData playerData;
     [SerializeField] private СhestController chestSystem; 
     [SerializeField] private Basket basket;
     [SerializeField] private TaskBoard taskBoard;

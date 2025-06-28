@@ -26,24 +26,22 @@ public class Trader : InventoryProvider
 			return false;
 		}
 
-		if (item.usable)
-		{
-			playerData.GoldAmount -= item.price;
-			item.Use();
-
-			if (playerData.InventoryLevel >= PlayerInventorySystem.Instance.maxInventoryLevel)
-			{
-				itemsForSale.Remove(item);
-				traderUI.InstantiateTraderItems();
-			}
-
-			Debug.Log($"[Trader] Purchased usable item: {item.displayName} for {item.price} gold");
-			return true;
-		}
-
 		if (PlayerInventorySystem.Instance.TryAddOneItem(item))
 		{
 			playerData.GoldAmount -= item.price;
+			
+			if (item.usable)
+			{
+				if (playerData.InventoryLevel >= PlayerInventorySystem.Instance.maxInventoryLevel)
+				{
+					itemsForSale.Remove(item);
+					traderUI.InstantiateTraderItems();
+				}
+
+				Debug.Log($"[Trader] Purchased usable item: {item.displayName} for {item.price} gold");
+				return true;
+			}
+			
 			Debug.Log($"[Trader] Purchased: {item.displayName} for {item.price} gold");
 			return true;
 		}

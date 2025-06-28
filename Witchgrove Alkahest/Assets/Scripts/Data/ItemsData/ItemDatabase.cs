@@ -7,12 +7,12 @@ public class ItemDatabase : ScriptableObject
 {
 	public List<IngredientData> ingredients;
 	public List<PotionData> potions;
+	public List<TraderItemData> traderItems;
 	
 	private Dictionary<string, BaseItemData> itemMap;
 
 	public void OnEnable()
 	{
-		// Построим единую карту по id -> объект
 		itemMap = new Dictionary<string, BaseItemData>();
 
 		if (ingredients != null)
