@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vfx_Alpha_bubbles
+  m_Name: vfxRing_Akvalist
   m_Shader: {fileID: -6465566751694194690, guid: 17d927eb9f2939f42907a1183d0ce973, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -48,10 +48,10 @@ Material:
     - _AlphaClip: 0
     - _AlphaClipT: 0
     - _AlphaToMask: 0
-    - _Blend: 0
+    - _Blend: 2
     - _CastShadows: 1
     - _Cull: 0
-    - _DstBlend: 10
+    - _DstBlend: 1
     - _QueueControl: 0
     - _QueueOffset: 0
     - _SrcBlend: 5
@@ -60,7 +60,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.9737293, g: 7.552344, b: 1.3533666, a: 1}
+    - _Color: {r: 191.74901, g: 191.74901, b: 191.74901, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5160136662650301007
