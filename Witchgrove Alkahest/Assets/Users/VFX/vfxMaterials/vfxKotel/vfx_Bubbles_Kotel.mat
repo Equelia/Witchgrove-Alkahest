@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: vfx_Alpha_bubbles
+  m_Name: vfx_Bubbles_Kotel
   m_Shader: {fileID: -6465566751694194690, guid: 17d927eb9f2939f42907a1183d0ce973, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -60,7 +60,7 @@ Material:
     - _ZWrite: 0
     - _ZWriteControl: 0
     m_Colors:
-    - _Color: {r: 0.9737293, g: 7.552344, b: 1.3533666, a: 1}
+    - _Color: {r: 0, g: 2.1185472, b: 0.31245095, a: 1}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
 --- !u!114 &5160136662650301007

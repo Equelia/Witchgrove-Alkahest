@@ -62,16 +62,19 @@ Material:
     - _Cull: 0
     - _DstBlend: 10
     - _Float_Metallic: 0.2
-    - _Float_NormalSthrengh: 0.03
+    - _Float_NormalSthrengh: 0.0093
     - _Float_Smoothness: 1
     - _Float_Trancperency: 0
-    - _Float_VoronoiAgitation: 5
-    - _Float_VoronoiPower: 1
-    - _Float_VoronoiScale: 5
+    - _Float_VoronoiAgitation: 7
+    - _Float_VoronoiPower: 3
+    - _Float_VoronoiScale: 8
     - _QueueControl: 0
     - _QueueOffset: 0
     - _ReceiveShadows: 1
     - _SrcBlend: 1
+    - _Sthrenght: 4
+    - _SthrenghtVoronoi: 4
+    - _Sthrenht: 3
     - _Surface: 1
     - _TransperenciMask: 1
     - _WorkflowMode: 1
@@ -79,8 +82,8 @@ Material:
     - _ZWrite: 1
     - _ZWriteControl: 1
     m_Colors:
-    - _Color_Base: {r: 0, g: 0.34591186, b: 0.020607233, a: 1}
-    - _Color_Voronoi: {r: 0, g: 0.34591186, b: 0.06738541, a: 1}
+    - _Color_Base: {r: 0, g: 0.7924528, b: 0.04502578, a: 1}
+    - _Color_Voronoi: {r: 0.68194216, g: 5.9921575, b: 0, a: 1}
     - _Vector2_NormalSpeedProperty: {r: 0, g: 0.2, b: 0, a: 0}
     - _Vector2_VoronoiSpeed: {r: 0, g: 0.1, b: 0, a: 0}
     - _Vector2_VoronoiTiling: {r: 1, g: 1, b: 0, a: 0}
