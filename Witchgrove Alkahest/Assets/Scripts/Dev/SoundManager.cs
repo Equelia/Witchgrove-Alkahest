@@ -91,16 +91,17 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Play a named sound as one-shot SFX.
     /// </summary>
-    public void PlaySound(string soundName)
+    public AudioClip  PlaySound(string soundName)
     {
         if (!soundDict.TryGetValue(soundName, out var entry))
         {
             Debug.LogWarning($"Sound '{soundName}' not found in SoundManager library.");
-            return;
+            return null;
         }
         var src = sfxPool.Find(s => !s.isPlaying) ?? ExpandSfxPool(1)[0];
         src.volume = entry.volume;
         src.PlayOneShot(entry.clip);
+        return entry.clip;
     }
 
     /// <summary>

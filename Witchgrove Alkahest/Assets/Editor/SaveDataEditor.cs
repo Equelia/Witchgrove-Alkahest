@@ -103,14 +103,12 @@ public class SaveDataEditor : OdinEditorWindow
 	[Button(ButtonSizes.Medium), GUIColor(1f, 0.4f, 0.4f), LabelText("Удалить все сохранения")]
 	private void DeleteAllSaveData()
 	{
-		// 1. Удалить файл
 		if (File.Exists(savePath))
 		{
 			File.Delete(savePath);
 			Debug.Log("[SaveDataEditor] Сейв файл удалён.");
 		}
 
-		// 2. Создать пустой SaveData
 		currentSaveData = new SaveData();
 
 		playerLevel = 1;
@@ -118,21 +116,19 @@ public class SaveDataEditor : OdinEditorWindow
 		playerGold = 0;
 		inventoryLevel = 1;
 
-		// 3. Сохранить пустой файл
 		var json = JsonUtility.ToJson(currentSaveData, true);
 		File.WriteAllText(savePath, json);
 
 		if (Application.isPlaying && SaveManager.Instance != null)
 		{
-			SaveManager.Instance.LoadGame(); // загрузит пустые данные
+			SaveManager.Instance.LoadGame();
 
-			// ОЧИЩАЕМ сундуки вручную
 			var chestController = GameObject.FindObjectOfType<СhestController>();
 			if (chestController != null)
 			{
 				foreach (var chest in chestController.chests)
 				{
-					chest.ClearSlots(); // <== новый метод
+					chest.ClearSlots();
 				}
 			}
 
@@ -143,6 +139,13 @@ public class SaveDataEditor : OdinEditorWindow
 			Debug.Log("[SaveDataEditor] Всё удалено. Новый пустой файл сохранён.");
 		}
 	}
-}
 
+	[Button(ButtonSizes.Medium), GUIColor(1f, 0.6f, 0.6f), LabelText("Удалить PlayerPrefs")]
+	private void DeletePlayerPrefs()
+	{
+		PlayerPrefs.DeleteAll();
+		PlayerPrefs.Save();
+		Debug.Log("[SaveDataEditor] PlayerPrefs удалены.");
+	}
+}
 #endif

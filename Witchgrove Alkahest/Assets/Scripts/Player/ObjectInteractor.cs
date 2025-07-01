@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,9 @@ public class ObjectInteractor : MonoBehaviour
     [Tooltip("UI Text to display hovered object name")]
     [SerializeField] private GameObject objectNameTextHolder;
     [SerializeField] private TMP_Text objectNameText;
+    
+    [Header("Tutorial")]
+    [SerializeField] private TutorialUIGroup tutorialUIGroup;
 
     private Camera mainCamera;
     private PickupableItem pickupableItem;
@@ -27,6 +31,11 @@ public class ObjectInteractor : MonoBehaviour
     {
         mainCamera = Camera.main;
         objectNameTextHolder.SetActive(false);
+    }
+
+    private void Start()
+    {
+        tutorialUIGroup?.Show();
     }
 
     void Update()
