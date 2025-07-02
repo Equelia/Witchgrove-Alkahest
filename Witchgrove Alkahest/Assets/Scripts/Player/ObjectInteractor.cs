@@ -86,6 +86,10 @@ public class ObjectInteractor : MonoBehaviour
                     return;
                 }
             }
+            
+            if (hit.collider.TryGetComponent<SpecificIngredientTutorial>(out var specific_ingredient_tutorial))
+                specific_ingredient_tutorial.Interact();
+            
             // Try to get a PickupableItem component
             if (hit.collider.TryGetComponent<PickupableItem>(out var pickupable_item))
             {
@@ -128,6 +132,8 @@ public class ObjectInteractor : MonoBehaviour
     /// </summary>
     private void PickUpHoveredItem()
     {
+        pickupableItem.Interact();
+        
         bool added = PlayerInventorySystem.Instance.TryAddOneItem(pickupableItem.ingredientData);
 
         if (!added)

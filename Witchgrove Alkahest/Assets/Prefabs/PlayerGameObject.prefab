@@ -458,6 +458,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7165119209625225872}
     - target: {fileID: 4651126064310033641, guid: 0fb20aa45571c3f4f857b65f6bd73992, type: 3}
+      propertyPath: tutorialUIGroup
+      value: 
+      objectReference: {fileID: 3065876134339439464}
+    - target: {fileID: 4651126064310033641, guid: 0fb20aa45571c3f4f857b65f6bd73992, type: 3}
       propertyPath: objectNameTextHolder
       value: 
       objectReference: {fileID: 2932908033180396481}
@@ -610,6 +614,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 8673356529077438554, guid: dbfdf48efad8471429539445801e0cbd, type: 3}
   m_PrefabInstance: {fileID: 5831664119050314651}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &3065876134339439464 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8818634693428955379, guid: dbfdf48efad8471429539445801e0cbd, type: 3}
+  m_PrefabInstance: {fileID: 5831664119050314651}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52298fb34c4a4dbda6c77d463a96f653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!224 &3287031855877871753 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 9039808093312842514, guid: dbfdf48efad8471429539445801e0cbd, type: 3}

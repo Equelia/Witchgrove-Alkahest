@@ -10,6 +10,9 @@ public class TaskBoard : InteractableItem
 	[SerializeField] private PlayerExperience playerExperience;
 	[SerializeField] private PlayerData playerData;
 	
+	[Header("Tutorial")]
+	[SerializeField] private TutorialUIGroup tutorialUIGroup;
+	
 	[Header("Quest's Data")]
 	[Tooltip("Quest Databases by Level Index (e.g. 0 → 1-lvl quests, 1 → 2-lvl, etc.)")]
 	[SerializeField] private QuestDatabase[] questDatabases;
@@ -31,6 +34,7 @@ public class TaskBoard : InteractableItem
 	{
 		base.Interact();
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("TaskBoard");
+		tutorialUIGroup?.Show();
 	}
 
 	public List<QuestData> GetAvailableQuests()

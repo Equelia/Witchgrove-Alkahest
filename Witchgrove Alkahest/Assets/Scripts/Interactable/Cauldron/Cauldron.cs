@@ -12,6 +12,9 @@ public class Cauldron : InventoryProvider
     [SerializeField] private bool useSpecificOrder = false;
     
     [SerializeField] private ParticleSystem[] bublesParticles;
+    
+    [Header("Tutorial")]
+    [SerializeField] private TutorialUIGroup tutorialUIGroup;
 
     private PotionData garbagePotion;
 
@@ -25,6 +28,7 @@ public class Cauldron : InventoryProvider
     {
         base.Interact();
         PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Cauldron");
+        tutorialUIGroup?.Show();
     }
 
     public void TryCraft()
