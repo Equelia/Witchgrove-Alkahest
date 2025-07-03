@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Linq;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
@@ -9,6 +10,11 @@ public class Cauldron : InventoryProvider
 {
     [SerializeField] private RecipeDatabase recipeDatabase;
     [SerializeField] private bool useSpecificOrder = false;
+    
+    [SerializeField] private ParticleSystem[] bublesParticles;
+    
+    [Header("Tutorial")]
+    [SerializeField] private TutorialUIGroup tutorialUIGroup;
 
     private PotionData garbagePotion;
 
@@ -22,6 +28,7 @@ public class Cauldron : InventoryProvider
     {
         base.Interact();
         PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Cauldron");
+        tutorialUIGroup?.Show();
     }
 
     public void TryCraft()
@@ -63,7 +70,7 @@ public class Cauldron : InventoryProvider
             PlayerInventorySystem.Instance.TryAddOneItem(resultType);
         }
 
-        SoundManager.Instance.PlaySound("CauldronCraft");
+        PlayCraftEffectsAsync().Forget();
     }
 
     private bool Matches(Recipe recipe)
@@ -133,5 +140,22 @@ public class Cauldron : InventoryProvider
             }
         }
         return false;
+    }
+    
+    
+    private async UniTaskVoid PlayCraftEffectsAsync()
+    {
+        foreach (var ps in bublesParticles)
+            ps.Play();
+
+        AudioClip clip = SoundManager.Instance.PlaySound("CauldronCraft");
+
+        if (clip != null)
+        {
+            await UniTask.Delay(System.TimeSpan.FromSeconds(clip.length), cancellationToken: this.GetCancellationTokenOnDestroy());
+        }
+
+        foreach (var ps in bublesParticles)
+            ps.Stop();
     }
 }

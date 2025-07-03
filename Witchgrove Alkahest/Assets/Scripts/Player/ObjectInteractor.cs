@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -18,6 +19,9 @@ public class ObjectInteractor : MonoBehaviour
     [Tooltip("UI Text to display hovered object name")]
     [SerializeField] private GameObject objectNameTextHolder;
     [SerializeField] private TMP_Text objectNameText;
+    
+    [Header("Tutorial")]
+    [SerializeField] private TutorialUIGroup tutorialUIGroup;
 
     private Camera mainCamera;
     private PickupableItem pickupableItem;
@@ -27,6 +31,11 @@ public class ObjectInteractor : MonoBehaviour
     {
         mainCamera = Camera.main;
         objectNameTextHolder.SetActive(false);
+    }
+
+    private void Start()
+    {
+        tutorialUIGroup?.Show();
     }
 
     void Update()
@@ -77,6 +86,10 @@ public class ObjectInteractor : MonoBehaviour
                     return;
                 }
             }
+            
+            if (hit.collider.TryGetComponent<SpecificIngredientTutorial>(out var specific_ingredient_tutorial))
+                specific_ingredient_tutorial.Interact();
+            
             // Try to get a PickupableItem component
             if (hit.collider.TryGetComponent<PickupableItem>(out var pickupable_item))
             {
@@ -119,6 +132,8 @@ public class ObjectInteractor : MonoBehaviour
     /// </summary>
     private void PickUpHoveredItem()
     {
+        pickupableItem.Interact();
+        
         bool added = PlayerInventorySystem.Instance.TryAddOneItem(pickupableItem.ingredientData);
 
         if (!added)

@@ -6,22 +6,22 @@ public class CellUI : MonoBehaviour
 {
 	[SerializeField] private Image icon;
 	[SerializeField] private TMP_Text countText;
+	[SerializeField] private GameObject itemCountHolder;
 
 	public void UpdateVisuals(Cell cell)
 	{
-		if (cell.Count == 0 || cell.ItemData == null)
-		{
-			icon.enabled = false;
-			icon.gameObject.SetActive(false);
-			countText.enabled = false;
-			return;
-		}
+		bool hasItem = cell.Count > 0 && cell.ItemData != null;
 
-		icon.sprite = cell.ItemData.icon;
-		icon.enabled = true;
-		icon.gameObject.SetActive(true);
-		countText.text = cell.Count.ToString();
-		countText.enabled = true;
+		icon.enabled = hasItem;
+		icon.gameObject.SetActive(hasItem);
+		countText.enabled = hasItem;
+		itemCountHolder.SetActive(hasItem);
+
+		if (hasItem)
+		{
+			icon.sprite = cell.ItemData.icon;
+			countText.text = cell.Count.ToString();
+		}
 	}
 
 	public void Clear()
@@ -29,5 +29,6 @@ public class CellUI : MonoBehaviour
 		icon.enabled = false;
 		icon.gameObject.SetActive(false);
 		countText.enabled = false;
+		itemCountHolder.SetActive(false);
 	}
 }

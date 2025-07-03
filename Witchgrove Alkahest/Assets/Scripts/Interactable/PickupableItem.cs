@@ -10,4 +10,12 @@ public class PickupableItem : InteractableItem
 	[Tooltip("Type of ingredient this object yields")]
 	public IngredientData ingredientData;
 	public bool consumable = true;
+	
+	[Header("Tutorial")]
+	[SerializeField] private TutorialUIGroup tutorialUIGroup;
+	
+	public override void Interact()
+	{
+		tutorialUIGroup?.Show();
+	}
 }
