@@ -7,7 +7,6 @@ public class CellController : MonoBehaviour
 	[SerializeField] private CellUI visuals;
 	[SerializeField] private CellTooltipHandler tooltipHandler;
 	[SerializeField] private Image lockImage;
-	[SerializeField] private GameObject itemCountHolder;
 
 
 	public CellSoundHandler soundHandler;
@@ -26,8 +25,6 @@ public class CellController : MonoBehaviour
 		IsLocked = isLocked;
 
 		lockImage.gameObject.SetActive(IsLocked);
-		itemCountHolder.SetActive(!IsLocked); 
-
 
 		if (!IsLocked)
 		{
@@ -44,6 +41,7 @@ public class CellController : MonoBehaviour
 			tooltipHandler.enabled = false;
 		}
 	}
+
 
 	private void HandleSlotChanged(Cell changed)
 	{

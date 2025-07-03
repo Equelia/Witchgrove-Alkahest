@@ -98,7 +98,6 @@ MonoBehaviour:
   visuals: {fileID: 7453868790567030006}
   tooltipHandler: {fileID: 5196514477415027634}
   lockImage: {fileID: 1137682225314096821}
-  itemCountHolder: {fileID: 4510796053244363194}
   soundHandler: {fileID: 1433908423040298701}
   slotList: []
 --- !u!114 &7453868790567030006
@@ -115,6 +114,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   icon: {fileID: 5383169533477623367}
   countText: {fileID: 545962055314955389}
+  itemCountHolder: {fileID: 4510796053244363194}
 --- !u!114 &5196514477415027634
 MonoBehaviour:
   m_ObjectHideFlags: 0
