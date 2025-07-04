@@ -16,7 +16,7 @@ Material:
   - _BLENDNORMALS_ON
   - _VERTEXCOLORCHANNEL_B
   m_LightmapFlags: 4
-  m_EnableInstancingVariants: 0
+  m_EnableInstancingVariants: 1
   m_DoubleSidedGI: 0
   m_CustomRenderQueue: -1
   stringTagMap: {}
@@ -196,6 +196,7 @@ Material:
     - _SpecColor: {r: 0.19999996, g: 0.19999996, b: 0.19999996, a: 1}
     - _Tint: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 0}
   m_BuildTextureStacks: []
+  m_AllowLocking: 1
 --- !u!114 &581381841201640716
 MonoBehaviour:
   m_ObjectHideFlags: 11
