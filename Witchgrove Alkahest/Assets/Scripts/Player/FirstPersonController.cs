@@ -69,6 +69,8 @@ public class FirstPersonController : MonoBehaviour
         horizontalVelocity = Vector3.zero;  
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
+
+        var asd = controller.attachedRigidbody.interpolation == RigidbodyInterpolation.Interpolate;
     }
 
     void Update()
