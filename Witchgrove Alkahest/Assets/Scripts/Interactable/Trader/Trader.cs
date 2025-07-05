@@ -4,12 +4,12 @@ using UnityEngine;
 public class Trader : InventoryProvider
 {
 	[Header("Items available for purchase")]
-	[SerializeField] private List<TraderItemData> itemsForSale = new();
+	[SerializeField] private List<BaseItemData> itemsForSale = new();
 	
 	[SerializeField] private PlayerData playerData;
 	[SerializeField] private TraderUI traderUI;
 
-	public List<TraderItemData> GetItemsForSale() => itemsForSale;
+	public List<BaseItemData> GetItemsForSale() => itemsForSale;
 
 	public override void Interact()
 	{
@@ -18,7 +18,7 @@ public class Trader : InventoryProvider
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Trader");
 	}
 
-	public bool TryBuyItem(TraderItemData item)
+	public bool TryBuyItem(BaseItemData  item)
 	{
 		if (playerData.GoldAmount < item.price)
 		{
@@ -30,7 +30,7 @@ public class Trader : InventoryProvider
 		{
 			playerData.GoldAmount -= item.price;
 			
-			if (item.usable)
+			if (item is IUsableItem usableItem)
 			{
 				if (playerData.InventoryLevel >= PlayerInventorySystem.Instance.maxInventoryLevel)
 				{

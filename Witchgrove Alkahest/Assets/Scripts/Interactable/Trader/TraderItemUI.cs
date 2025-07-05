@@ -9,10 +9,10 @@ public class TraderItemUI : MonoBehaviour
 	[SerializeField] private TMP_Text priceText;
 	[SerializeField] private Button buyButton;
 
-	private TraderItemData itemData;
+	private BaseItemData itemData;
 	private Trader trader;
 
-	public void Setup(TraderItemData item, Trader traderContext)
+	public void Setup(BaseItemData item, Trader traderContext)
 	{
 		itemData = item;
 		trader = traderContext;

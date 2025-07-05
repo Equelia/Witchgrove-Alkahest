@@ -36419,10 +36419,42 @@ PrefabInstance:
       propertyPath: trader
       value: 
       objectReference: {fileID: 1885156957}
+    - target: {fileID: 8139364730588748611, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139364730588748611, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139364730588748611, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8139364730588748611, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8198303292840793103, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: cauldronController
       value: 
       objectReference: {fileID: 813177135}
+    - target: {fileID: 8904563504528745578, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904563504528745578, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904563504528745578, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8904563504528745578, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8994162997187954946, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -399727,6 +399759,9 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ba8ec927c54934f48a45423a9e289bfe, type: 2}
   - {fileID: 11400000, guid: 7f051aeacfa69aa41b1057fe5834b0aa, type: 2}
   - {fileID: 11400000, guid: e2e735eea28d6e24eba00d894493c5fa, type: 2}
+  - {fileID: 11400000, guid: 97bac5a7693d4d742a6f0b92c36c2116, type: 2}
+  - {fileID: 11400000, guid: 350587e3e85ccdf43a5b8f5e07b1f3c9, type: 2}
+  - {fileID: 11400000, guid: e6b1b6fa3444ab1468b5cd7bd51fb2f0, type: 2}
   playerData: {fileID: 93099103}
   traderUI: {fileID: 1547578183}
 --- !u!136 &1885156958
