@@ -78,7 +78,7 @@ public class FirstPersonController : MonoBehaviour
 
         // Removed disabling virtual camera to prevent jitter on reopen
         // cCam.enabled = !invOpen; // Modified: this line was removed
-
+        
         if (invOpen)
         {
             if (Cursor.lockState != CursorLockMode.None)
@@ -88,13 +88,24 @@ public class FirstPersonController : MonoBehaviour
                 cCam.enabled = false;
             }
 
-            // Modified: reset velocities so camera & movement stop completely
-            horizontalVelocity = Vector3.zero;
-            velocity = Vector3.zero;
+            if (controller.isGrounded)
+            {
+                horizontalVelocity = Vector3.zero;
+                velocity.y = -2f;
+            }
+            else
+            {
+                velocity.y += gravity * Time.deltaTime;
+            }
 
-            // Skip all movement, bob, shake etc.
+            Vector3 finalMove = horizontalVelocity + Vector3.up * velocity.y;
+            controller.Move(finalMove * Time.deltaTime);
+
             return;
         }
+
+
+
 
         if (Cursor.lockState != CursorLockMode.Locked)
         {
