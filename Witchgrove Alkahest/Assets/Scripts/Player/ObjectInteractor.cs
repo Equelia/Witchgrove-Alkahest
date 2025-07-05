@@ -24,8 +24,7 @@ public class ObjectInteractor : MonoBehaviour
     [SerializeField] private TutorialUIGroup tutorialUIGroup;
 
     private Camera mainCamera;
-    private PickupableItem pickupableItem;
-    private InteractableItem interactableItem;
+    private InteractableItem selectedItem;
 
     void Awake()
     {
@@ -49,18 +48,23 @@ public class ObjectInteractor : MonoBehaviour
         HandleHover();
 
         //Interact with pickupable item
-        if (pickupableItem != null && Input.GetKeyDown(KeyCode.E))
-            PickUpHoveredItem();
-        else if (interactableItem != null && Input.GetKeyDown(KeyCode.E))         //Interact with interactable item
+        if (selectedItem != null && Input.GetKeyDown(KeyCode.E))
         {
-            interactableItem.Interact();        
-            objectNameTextHolder.SetActive(false);
-            
-            var receiver = interactableItem.GetComponent<IExternalInventoryReceiver>();
-            if (receiver == null)
-                receiver = interactableItem.GetComponentInChildren<IExternalInventoryReceiver>();
+            if (selectedItem.TryGetComponent<SpecificIngredientTutorial>(out var specific_ingredient_tutorial))
+                specific_ingredient_tutorial.Interact();
+            if (selectedItem.TryGetComponent<PickupableItem>(out var pickupable_item))
+                PickUpHoveredItem(pickupable_item);
+            if (selectedItem.TryGetComponent<InteractableItem>(out var interactable_item))
+            {
+                interactable_item.Interact();
+                objectNameTextHolder.SetActive(false);
 
-            PlayerInventorySystem.Instance.CurrentExternalReceiver = receiver;
+                var receiver = interactable_item.GetComponent<IExternalInventoryReceiver>();
+                if (receiver == null)
+                    receiver = interactable_item.GetComponentInChildren<IExternalInventoryReceiver>();
+
+                PlayerInventorySystem.Instance.CurrentExternalReceiver = receiver;
+            }
         }
     }
     
@@ -80,49 +84,39 @@ public class ObjectInteractor : MonoBehaviour
             {
                 if (!blockCheck.collider.gameObject.Equals(hit.collider.gameObject))
                 {
-                    pickupableItem = null;
-                    interactableItem = null;
+                    selectedItem = null;
                     objectNameTextHolder.SetActive(false);
                     return;
                 }
             }
             
-            if (hit.collider.TryGetComponent<SpecificIngredientTutorial>(out var specific_ingredient_tutorial))
-                specific_ingredient_tutorial.Interact();
-            
             // Try to get a PickupableItem component
             if (hit.collider.TryGetComponent<PickupableItem>(out var pickupable_item))
             {
-                pickupableItem = pickupable_item;
+                selectedItem = pickupable_item;
                 objectNameText.text = pickupable_item.ingredientData.ToString();
                 if (!objectNameTextHolder.activeSelf)
                     objectNameTextHolder.SetActive(true);
-
-                interactableItem = null;
                 return;
             }
             // Then try to get a InteractableItem component
             if (hit.collider.TryGetComponent<InteractableItem>(out var interactable_item))
             {
-                interactableItem = interactable_item;
+                selectedItem = interactable_item;
                 objectNameText.text = interactable_item.gameObject.name;
                 if (!objectNameTextHolder.activeSelf)
                     objectNameTextHolder.SetActive(true);
-                
-                pickupableItem = null;
                 return;
             }
         }
 
-        pickupableItem = null;
-        interactableItem = null;
+        selectedItem = null;
         objectNameTextHolder.SetActive(false);
     }
 
     private void ClearHover()
     {
-        pickupableItem = null;
-        interactableItem = null;
+        selectedItem = null;
         objectNameTextHolder.SetActive(false);
     }
 
@@ -130,7 +124,7 @@ public class ObjectInteractor : MonoBehaviour
     /// <summary>
     /// Adds the hovered item to inventory, deactivates it, and hides UI.
     /// </summary>
-    private void PickUpHoveredItem()
+    private void PickUpHoveredItem(PickupableItem pickupableItem)
     {
         pickupableItem.Interact();
         
