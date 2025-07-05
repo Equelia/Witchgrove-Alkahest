@@ -4,8 +4,12 @@ using UnityEngine;
 public class Chest : InventoryProvider
 {
 	public string ChestId;
+	
+	[Header("Tutorial")]
+	[SerializeField] private TutorialUIGroup tutorialUIGroup;
 
-	[Header("Lid Settings")] public Transform lidObject;
+	[Header("Lid Settings")] 
+	public Transform lidObject;
 	public float openAngle = -45f;
 	public float duration = 1f;
 
@@ -30,6 +34,7 @@ public class Chest : InventoryProvider
 		PlayerInventorySystem.Instance.CurrentExternalReceiver = this;
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Chest");
 		ToggleLid();
+		tutorialUIGroup?.Show();
 	}
 
 	private void HandleInventoryClosed()
