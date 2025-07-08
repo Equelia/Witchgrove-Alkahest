@@ -23,8 +23,6 @@ public class CellSoundHandler : MonoBehaviour
 
 		string sound = string.IsNullOrEmpty(addSoundName) ? DefaultAddSound : addSoundName;
 		SoundManager.Instance.PlaySound(sound);
-		
-		Debug.Log(sound);
 	}
 
 	private void OnDestroy()

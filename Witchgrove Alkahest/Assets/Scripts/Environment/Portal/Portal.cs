@@ -22,7 +22,6 @@ public class Portal : MonoBehaviour
 
     private void Reset()
     {
-        // чтобы в инспекторе всегда был триггер
         var col = GetComponent<Collider>();
         col.isTrigger = true;
     }
@@ -32,28 +31,22 @@ public class Portal : MonoBehaviour
         if (!other.CompareTag("Player"))
             return;
 
-        // 1) Запоминаем, в какой портал хотим попасть
         PortalManager.NextPortalID = targetPortalID;
 
-        // 2) Подписываемся на событие, чтобы очистить подписку сразу после загрузки
         SceneManager.sceneLoaded += PortalManager.OnSceneLoaded;
-
-        // 3) Загружаем сцену
+        
+        SaveManager.Instance.SaveGame();
         SceneManager.LoadScene(targetSceneName);
     }
 
     private void Awake()
     {
-        // Когда сцена загружена, все порталы Awake() отработают.
-        // Мы проверяем, совпадает ли наш portalID с тем, что запомнили ранее.
         if (PortalManager.NextPortalID == portalID)
         {
-            // найдём игрока и временно выключим его контроллер, чтобы избежать конфликтов при телепорте
             var player = GameObject.FindGameObjectWithTag("Player");
             var cc = player.GetComponent<CharacterController>();
             if (cc != null) cc.enabled = false;
 
-            // ставим позицию и ротацию
             if (spawnPoint != null)
             {
                 player.transform.position = spawnPoint.position;
@@ -65,10 +58,8 @@ public class Portal : MonoBehaviour
                 player.transform.rotation = transform.rotation;
             }
 
-            // включаем контроллер обратно
             if (cc != null) cc.enabled = true;
 
-            // сбрасываем, чтобы другие порталы не подхватили это значение
             PortalManager.NextPortalID = 0;
         }
     }

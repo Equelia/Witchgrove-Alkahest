@@ -23,7 +23,6 @@ public class DragManager : MonoBehaviour
 			return;
 		}
 		Instance = this;
-		DontDestroyOnLoad(gameObject);
 		draggedIconObject.SetActive(false);
 	}
 
