@@ -9,6 +9,5 @@ public static class PortalManager
 	{
 		SoundManager.Instance.StopMusic();
 		SoundManager.Instance.PlayMusic(scene.name, true);
-		Debug.Log("OnSceneLoaded" + scene.name);
 	}
 }

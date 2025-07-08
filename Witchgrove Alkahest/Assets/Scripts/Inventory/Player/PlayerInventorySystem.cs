@@ -36,7 +36,6 @@ public class PlayerInventorySystem : InventoryProvider
 		}
 
 		Instance = this;
-		DontDestroyOnLoad(gameObject);
 
 		// Set up trash bin
 		trashBinSlots = new List<Cell>(1);

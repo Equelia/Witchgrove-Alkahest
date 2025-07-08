@@ -14,12 +14,11 @@ public class SaveManager : MonoBehaviour
     [SerializeField] private Basket basket;
     [SerializeField] private TaskBoard taskBoard;
     [SerializeField] private Cauldron cauldron;
-
+    
     private void Awake()
     {
         if (Instance != null && Instance != this) { Destroy(gameObject); return; }
         Instance = this;
-        DontDestroyOnLoad(gameObject);
 
         savePath = Path.Combine(Application.persistentDataPath, "savegame.json");
         LoadGame();  // load everything on start
@@ -105,7 +104,11 @@ public class SaveManager : MonoBehaviour
     // Chests
     public void SaveChestsModule(SaveData data)
     {
+        if (chestSystem == null)
+            return;
+        
         data.chests.Clear();
+        
         foreach (var chest in chestSystem.chests)
         {
             var save = new ChestSave {
@@ -126,6 +129,9 @@ public class SaveManager : MonoBehaviour
     
     public void LoadChestsModule(SaveData data)
     {
+        if (chestSystem == null)
+            return;
+        
         foreach (var save in data.chests)
         {
             var chest = chestSystem.GetChestById(save.chestId);
@@ -144,6 +150,9 @@ public class SaveManager : MonoBehaviour
 
     public void SaveBasketModule(SaveData data)
     {
+        if (basket == null)
+            return;
+        
         data.basketSlots.Clear();
         foreach (var slot in basket.GetAllSlots())
         {
@@ -157,6 +166,9 @@ public class SaveManager : MonoBehaviour
 
     public void LoadBasketModule(SaveData data)
     {
+        if (basket == null)
+            return;
+        
         basket.ClearAllSlots();
         foreach (var sd in data.basketSlots)
         {
@@ -168,6 +180,9 @@ public class SaveManager : MonoBehaviour
     // TaskBoard / Quests
     public void SaveQuestsModule(SaveData data)
     {
+        if (taskBoard == null)
+            return;
+        
         data.completedQuestIds = taskBoard
             .GetCompletedQuests()
             .ConvertAll(q => q.questId);
@@ -175,12 +190,18 @@ public class SaveManager : MonoBehaviour
     
     public void LoadQuestsModule(SaveData data)
     {
+        if (taskBoard == null)
+            return;
+        
         taskBoard.SetCompletedQuestsByIds(data.completedQuestIds);
     }
     
     // Cauldron
     public void SaveCauldronModule(SaveData data)
     {
+        if (cauldron == null)
+            return;
+        
         data.cauldronCraftSlots.Clear();
         foreach (var slot in cauldron.GetAllSlots())
         {
@@ -194,6 +215,9 @@ public class SaveManager : MonoBehaviour
 
     public void LoadCauldronModule(SaveData data)
     {
+        if (cauldron == null)
+            return;
+        
         cauldron.ClearAllSlots();
         foreach (var sd in data.cauldronCraftSlots)
         {

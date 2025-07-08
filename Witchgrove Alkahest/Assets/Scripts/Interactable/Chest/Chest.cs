@@ -1,3 +1,4 @@
+using System;
 using DG.Tweening;
 using UnityEngine;
 
@@ -17,15 +18,15 @@ public class Chest : InventoryProvider
 	[SerializeField] private GameObject vfxChestActive;
 	[SerializeField] private GameObject vfxChestStatic;
 
-	private bool isOpen = false;
+	private bool isOpen;
 
-	private void OnEnable()
+	private void Start()
 	{
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OnInventoryClosed +=
 			HandleInventoryClosed;
 	}
 
-	private void OnDisable()
+	private void OnDestroy()
 	{
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OnInventoryClosed -=
 			HandleInventoryClosed;
