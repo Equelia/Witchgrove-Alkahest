@@ -12,6 +12,10 @@ public class Chest : InventoryProvider
 	public Transform lidObject;
 	public float openAngle = -45f;
 	public float duration = 1f;
+	
+	[Header("VFX")]
+	[SerializeField] private GameObject vfxChestActive;
+	[SerializeField] private GameObject vfxChestStatic;
 
 	private bool isOpen = false;
 
@@ -49,8 +53,15 @@ public class Chest : InventoryProvider
 
 		if (lidObject != null)
 			lidObject.DOLocalRotate(new Vector3(targetAngle, 0f, 0f), duration, RotateMode.Fast);
-
+		
 		isOpen = !isOpen;
+
+		if (vfxChestActive != null)
+			vfxChestActive.SetActive(isOpen);
+
+		if (vfxChestStatic != null)
+			vfxChestStatic.SetActive(!isOpen);
+		
 	}
 	
 	public void ClearSlots()
