@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 1493565230086587409}
   - component: {fileID: 470269850484276704}
   - component: {fileID: 4567362929276325011}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingSmall (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4902,7 +4902,7 @@ GameObject:
   - component: {fileID: 8943850269640067671}
   - component: {fileID: 4751067115147538209}
   - component: {fileID: 9042863063684605633}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: RingSmall
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9791,7 +9791,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4540884037076164016}
-  m_Layer: 0
+  - component: {fileID: 3324025136170701371}
+  - component: {fileID: -3453680122414153858}
+  m_Layer: 6
   m_Name: "Prefab\u0410\u043A\u0432\u0430\u043B\u0438\u0441\u0442"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -9808,13 +9810,49 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.816, y: 0.47, z: -3.623}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 0.57, y: 0.57, z: 0.57}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8751383330981419259}
   - {fileID: 4862098058859444944}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &3324025136170701371
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625283926457637074}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-3453680122414153858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3625283926457637074}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
+  consumable: 1
+  tutorialUIGroup: {fileID: 0}
 --- !u!1001 &4563707071272049569
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9895,9 +9933,25 @@ PrefabInstance:
       propertyPath: m_LocalPosition.y
       value: 0.684
       objectReference: {fileID: 0}
+    - target: {fileID: 3051976059216306873, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5446551975919676671, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 6471169222273043132, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
       propertyPath: m_Name
       value: vfxAkvalist(Forest)
+      objectReference: {fileID: 0}
+    - target: {fileID: 6471169222273043132, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8495676954536559547, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8947578281141805425, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
       propertyPath: m_LocalPosition.x
@@ -9946,6 +10000,10 @@ PrefabInstance:
     - target: {fileID: 8980269099470358927, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
       propertyPath: startDelay.minMaxState
       value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9161336828399431036, guid: c5aa85d2537a0094ab8b2204efb08e16, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -10018,6 +10076,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: bc73538202870db4cb320243b0c9814c, type: 3}
       propertyPath: m_Name
       value: aqualist2
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: bc73538202870db4cb320243b0c9814c, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
