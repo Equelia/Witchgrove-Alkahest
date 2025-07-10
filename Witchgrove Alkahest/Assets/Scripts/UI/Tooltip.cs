@@ -36,7 +36,7 @@ public class Tooltip : MonoBehaviour
 
 		// Resize background to fit text plus padding
 		Vector2 size = tooltipText.GetPreferredValues(formatted);
-		background.sizeDelta = size + new Vector2(12, 12);
+		background.sizeDelta = size + new Vector2(28, 28);
 
 		// Position at cursor
 		(transform as RectTransform).position = screenPosition;

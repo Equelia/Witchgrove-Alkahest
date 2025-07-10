@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,6 +13,8 @@ public class DragManager : MonoBehaviour
 	public Image draggedIcon;
 
 	public DragItemData draggedItem;
+	public Cell currentDraggedCell;
+
 	
 	[HideInInspector] public bool dragged = false;
 
@@ -38,6 +41,7 @@ public class DragManager : MonoBehaviour
 			sourceIndex = cell.SlotIndex
 		};
 
+		currentDraggedCell = cell.data;
 		draggedIcon.sprite = icon;
 		draggedIconObject.SetActive(true);
 	}
@@ -51,6 +55,7 @@ public class DragManager : MonoBehaviour
 	{
 		dragged = false;
 		draggedItem = null;
+		currentDraggedCell = null;
 		draggedIconObject.SetActive(false);
 	}
 }

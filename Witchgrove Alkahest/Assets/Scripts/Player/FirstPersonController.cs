@@ -39,6 +39,9 @@ public class FirstPersonController : MonoBehaviour
     [SerializeField] private float jumpShakeAmplitude = 0.1f;
     [SerializeField] private float landShakeDuration = 0.3f;
     [SerializeField] private float landShakeAmplitude = 0.15f;
+    
+    [Header("Tutorial Settings")]
+    [SerializeField] private TutorialManager tutorialManager;
 
     private CharacterController controller;
     private Vector3 velocity; // vertical velocity
@@ -73,7 +76,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        bool invOpen = inventoryPanel.activeSelf;
+        bool invOpen = inventoryPanel.activeSelf || tutorialManager.IsTutorialActive();
         
 
         // Removed disabling virtual camera to prevent jitter on reopen

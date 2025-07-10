@@ -1,29 +1,46 @@
+using System;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
 public class TutorialUIGroup : MonoBehaviour
 {
-	[Tooltip("Уникальный ID этого окна, чтобы показывать только один раз")]
+	[Tooltip("Uniqe Id of the Tutorial UI Group")]
 	public string tutorialId;
 
 	[Header("DOTween Settings")]
 	[SerializeField] private float fadeDuration = 0.4f;
 	[SerializeField] private float scaleDuration = 0.4f;
-	[SerializeField] private float displayTime = 3f;
+
+	[Header("UI References")]
+	[SerializeField] private Button closeButton;
+	[SerializeField] private CanvasGroup holderGroup;
+	[SerializeField] private Transform holderTransform;
 
 	private CanvasGroup canvasGroup;
-	private Transform uiTransform;
 	private Sequence showSequence;
 
 	private void Awake()
 	{
 		canvasGroup = GetComponent<CanvasGroup>();
-		uiTransform = transform;
+		
+		closeButton.onClick.AddListener(Hide);
 
 		canvasGroup.alpha = 0f;
-		uiTransform.localScale = Vector3.zero;
+		
+		if(holderGroup != null)
+			holderGroup.alpha = 0f;
+		
+		if(holderTransform != null)
+			holderTransform.localScale = Vector3.zero;
+		
 		gameObject.SetActive(false);
+	}
+
+	private void OnDestroy()
+	{
+		closeButton.onClick.RemoveListener(Hide);
 	}
 
 	private void Start()
@@ -47,19 +64,21 @@ public class TutorialUIGroup : MonoBehaviour
 
 		showSequence
 			.Append(canvasGroup.DOFade(1f, fadeDuration))
-			.Join(uiTransform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.OutBack))
-			.AppendInterval(displayTime)
-			.Append(canvasGroup.DOFade(0f, fadeDuration))
-			.Join(uiTransform.DOScale(Vector3.zero, scaleDuration).SetEase(Ease.InBack))
-			.OnComplete(() => gameObject.SetActive(false));
+			.Join(transform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.OutQuad))
+			.Append(holderGroup.DOFade(1f, fadeDuration))
+			.Join(holderTransform.DOScale(Vector3.one, scaleDuration).SetEase(Ease.OutBack));
 	}
 
 	public void Hide()
 	{
 		showSequence?.Kill();
 
-		// Instantly hide
-		canvasGroup.DOFade(0f, fadeDuration);
-		uiTransform.DOScale(Vector3.zero, scaleDuration).OnComplete(() => gameObject.SetActive(false));
+		Sequence hideSequence = DOTween.Sequence();
+
+		hideSequence
+			.Append(holderGroup.DOFade(0f, fadeDuration))
+			.Join(holderTransform.DOScale(Vector3.zero, scaleDuration))
+			.Append(canvasGroup.DOFade(0f, fadeDuration))
+			.OnComplete(() => gameObject.SetActive(false));
 	}
 }

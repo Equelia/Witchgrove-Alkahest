@@ -43,7 +43,7 @@ public class PlayerInventorySystem : InventoryProvider
 		trashSlot.OnSlotChanged += HandleTrashSlotChanged;
 		trashBinSlots.Add(trashSlot);
 	}
-	
+
 	public void AddToFirstEmpty(BaseItemData item, int count)
 	{
 		for (int i = 0; i < count; i++)
@@ -109,6 +109,10 @@ public class PlayerInventorySystem : InventoryProvider
 		if (slot.Count > 0 && slot.ItemData != null)
 		{
 			CancelTrashDeletion(slot);
+
+			if (DragManager.Instance.currentDraggedCell == slot)
+				return;
+
 			var cts = new CancellationTokenSource();
 			_trashCts[slot] = cts;
 			ClearTrashSlotAfterDelay(slot, cts.Token).Forget();
@@ -134,16 +138,24 @@ public class PlayerInventorySystem : InventoryProvider
 		try
 		{
 			await UniTask.Delay(TimeSpan.FromSeconds(3), cancellationToken: ct);
-			slot.Count = 0;
-			slot.ItemData = null;
-			DragManager.Instance.EndDrag();
+			if (DragManager.Instance.currentDraggedCell != slot)
+			{
+				slot.Count = 0;
+				slot.ItemData = null;
+			}
+			else
+			{
+				slot.Count = 0;
+				slot.ItemData = null;
+				DragManager.Instance.EndDrag();
+			}
 		}
 		catch (OperationCanceledException)
 		{
 			// Canceled deletion
 		}
 	}
-
+	
 	public void StartTrashTimer() => trashStartTime = Time.time;
 
 	public void CancelTrashTimer() => trashStartTime = -1f;

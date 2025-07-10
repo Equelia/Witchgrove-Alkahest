@@ -37,10 +37,6 @@ public class Cell
 			int delta = value - _count;
 			_count = value;
 			OnSlotChanged?.Invoke(this);
-
-			// Эти события можно использовать отдельно, если нужно
-			// if (delta > 0) OnItemReceived?.Invoke(this, delta);
-			// if (delta < 0) OnItemTaken?.Invoke(this, -delta);
 		}
 	}
 
