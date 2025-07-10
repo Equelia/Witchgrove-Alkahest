@@ -12,10 +12,10 @@ public class PickupableItem : InteractableItem
 	public bool consumable = true;
 	
 	[Header("Tutorial")]
-	[SerializeField] private TutorialUIGroup tutorialUIGroup;
+	[SerializeField] private UIWindowGroup uiWindowGroup;
 	
 	public override void Interact()
 	{
-		tutorialUIGroup?.Show();
+		uiWindowGroup?.Show();
 	}
 }

@@ -4,6 +4,7 @@ using UnityEngine;
 public class InventoryInputHandler : MonoBehaviour
 {
 	[SerializeField] private InventoryWindowManager windowManager;
+	[SerializeField] private ObjectInteractor objectInteractor;
 
 	private void Update() 
 	{
@@ -34,6 +35,15 @@ public class InventoryInputHandler : MonoBehaviour
 		{
 			if (windowManager.IsOpen)
 				windowManager.CloseInventory();
+		}
+
+		if (Input.GetKeyDown(KeyCode.E))
+		{
+			if (anySubPanelOpen)
+			{
+				windowManager.CloseInventory();
+				objectInteractor.BlockInteractionThisFrame = true;
+			}
 		}
 	}
 }

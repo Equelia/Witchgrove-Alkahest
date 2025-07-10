@@ -4,7 +4,7 @@ using DG.Tweening;
 using UnityEngine.UI;
 
 [RequireComponent(typeof(CanvasGroup))]
-public class TutorialUIGroup : MonoBehaviour
+public class UIWindowGroup : MonoBehaviour
 {
 	[Tooltip("Uniqe Id of the Tutorial UI Group")]
 	public string tutorialId;
@@ -17,6 +17,9 @@ public class TutorialUIGroup : MonoBehaviour
 	[SerializeField] private Button closeButton;
 	[SerializeField] private CanvasGroup holderGroup;
 	[SerializeField] private Transform holderTransform;
+
+	[Header("Setting")] 
+	[SerializeField] private bool showOnce = true;
 
 	private CanvasGroup canvasGroup;
 	private Sequence showSequence;
@@ -53,13 +56,17 @@ public class TutorialUIGroup : MonoBehaviour
 
 	public void Show()
 	{
-		if (TutorialManager.HasSeen(tutorialId)) return;
-
-		TutorialManager.MarkAsSeen(tutorialId);
+		if (showOnce)
+		{
+			if (TutorialManager.HasSeen(tutorialId)) 
+				return;
+			
+			TutorialManager.MarkAsSeen(tutorialId);
+		}
+		
 		gameObject.SetActive(true);
 
 		showSequence?.Kill();
-
 		showSequence = DOTween.Sequence();
 
 		showSequence

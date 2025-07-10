@@ -37,12 +37,12 @@ public abstract class InventoryProvider : InteractableItem, IExternalInventoryRe
 
 	public virtual List<Cell> GetAllSlots() => slots;
 
-	public virtual void ClearAllSlots()
+	public void ClearAllSlots()
 	{
-		foreach (var slot in slots)
+		foreach (var slot 
+		         in slots)
 		{
-			slot.ItemData = null;
-			slot.Count = 0;
+			slot.Clear();
 		}
 	}
 

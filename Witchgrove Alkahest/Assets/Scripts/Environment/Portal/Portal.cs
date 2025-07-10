@@ -8,17 +8,21 @@ using UnityEngine.SceneManagement;
 [RequireComponent(typeof(Collider))]
 public class Portal : MonoBehaviour
 {
-    [Tooltip("Имя сцены для загрузки")]
+    [Header("Level Requirements")]
+    [SerializeField] private int levelToLoad;
+    [SerializeField] private PlayerData playerData;
+    [SerializeField] private UIWindowGroup levelWarningUIWindowGroup;
+    
+    [Header("Scene Settings")]
+    [Tooltip("Target Scene name to load")]
     [SerializeField] private string targetSceneName;
-
-    [Tooltip("Уникальный ID этого портала в текущей сцене")]
+    [Tooltip("ID of this portal")]
     [SerializeField] private int portalID;
-
-    [Tooltip("ID портала в целевой сцене, в который нужно появиться")]
+    [Tooltip("ID of the portal, where player should appear in next scene")]
     [SerializeField] private int targetPortalID;
-
-    [Tooltip("Точка спавна игрока в целевой сцене")]
+    [Tooltip("Spawn point on scene")]
     [SerializeField] private Transform spawnPoint;
+    
 
     private void Reset()
     {
@@ -28,13 +32,22 @@ public class Portal : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Teleport(other);
+    }
+
+    private void Teleport(Collider other)
+    {
         if (!other.CompareTag("Player"))
             return;
 
-        PortalManager.NextPortalID = targetPortalID;
+        if (playerData.Level < levelToLoad)
+        {
+            levelWarningUIWindowGroup?.Show();
+            return;
+        }
 
+        PortalManager.NextPortalID = targetPortalID;
         SceneManager.sceneLoaded += PortalManager.OnSceneLoaded;
-        
         SaveManager.Instance.SaveGame();
         SceneManager.LoadScene(targetSceneName);
     }

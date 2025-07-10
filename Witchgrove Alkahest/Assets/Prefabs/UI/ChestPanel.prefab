@@ -2386,13 +2386,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 52298fb34c4a4dbda6c77d463a96f653, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tutorialId: 6
+  tutorialId: 2
   fadeDuration: 0.4
   scaleDuration: 0.4
   closeButton: {fileID: 9061871599321486883}
   holderGroup: {fileID: 173747409702875727}
   holderTransform: {fileID: 7671454752022649475}
-  onlyAnimateHolder: 1
 --- !u!1 &5000969358784868122
 GameObject:
   m_ObjectHideFlags: 0
@@ -2409,7 +2408,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4590748795239100156
 RectTransform:
   m_ObjectHideFlags: 0

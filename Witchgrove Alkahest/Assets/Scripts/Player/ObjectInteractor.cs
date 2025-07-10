@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -19,10 +20,13 @@ public class ObjectInteractor : MonoBehaviour
     [Tooltip("UI Text to display hovered object name")]
     [SerializeField] private GameObject objectNameTextHolder;
     [SerializeField] private TMP_Text objectNameText;
+    [Space, SerializeField] private InventoryWindowManager windowManager;
     
     [Header("Tutorial")]
-    [SerializeField] private TutorialUIGroup tutorialUIGroup;
-
+    [SerializeField] private UIWindowGroup uiWindowGroup;
+    
+    [NonSerialized] public bool BlockInteractionThisFrame = false;
+    
     private Camera mainCamera;
     private InteractableItem selectedItem;
 
@@ -34,18 +38,23 @@ public class ObjectInteractor : MonoBehaviour
 
     private void Start()
     {
-        tutorialUIGroup?.Show();
+        uiWindowGroup?.Show();
     }
 
     void Update()
     {
-        if (PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.IsOpen)
+        bool isUIOpen = windowManager.panels.Any(entry => entry.panel.activeSelf) ||  windowManager.IsOpen;
+        
+        if (isUIOpen)        
         {
             ClearHover();
             return;
         }
         
         HandleHover();
+        
+        if (BlockInteractionThisFrame)
+            return;
 
         //Interact with pickupable item
         if (selectedItem != null && Input.GetKeyDown(KeyCode.E))
@@ -66,6 +75,11 @@ public class ObjectInteractor : MonoBehaviour
                 PlayerInventorySystem.Instance.CurrentExternalReceiver = receiver;
             }
         }
+    }
+    
+    private void LateUpdate()
+    {
+        BlockInteractionThisFrame = false;
     }
     
     

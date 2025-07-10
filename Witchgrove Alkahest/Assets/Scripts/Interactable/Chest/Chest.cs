@@ -7,7 +7,7 @@ public class Chest : InventoryProvider
 	public string ChestId;
 	
 	[Header("Tutorial")]
-	[SerializeField] private TutorialUIGroup tutorialUIGroup;
+	[SerializeField] private UIWindowGroup uiWindowGroup;
 
 	[Header("Lid Settings")] 
 	public Transform lidObject;
@@ -39,7 +39,7 @@ public class Chest : InventoryProvider
 		PlayerInventorySystem.Instance.CurrentExternalReceiver = this;
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Chest");
 		ToggleLid();
-		tutorialUIGroup?.Show();
+		uiWindowGroup?.Show();
 	}
 
 	private void HandleInventoryClosed()

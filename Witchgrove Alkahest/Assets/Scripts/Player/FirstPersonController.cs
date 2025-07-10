@@ -78,10 +78,6 @@ public class FirstPersonController : MonoBehaviour
     {
         bool invOpen = inventoryPanel.activeSelf || tutorialManager.IsTutorialActive();
         
-
-        // Removed disabling virtual camera to prevent jitter on reopen
-        // cCam.enabled = !invOpen; // Modified: this line was removed
-        
         if (invOpen)
         {
             if (Cursor.lockState != CursorLockMode.None)

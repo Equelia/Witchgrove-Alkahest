@@ -10,7 +10,7 @@ public class Trader : InventoryProvider
 	[SerializeField] private TraderUI traderUI;
 		
 	[Header("Tutorial")]
-	[SerializeField] private TutorialUIGroup tutorialUIGroup;
+	[SerializeField] private UIWindowGroup uiWindowGroup;
 
 	public List<BaseItemData> GetItemsForSale() => itemsForSale;
 
@@ -19,7 +19,7 @@ public class Trader : InventoryProvider
 		base.Interact();
 		PlayerInventorySystem.Instance.CurrentExternalReceiver = this;
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Trader");
-		tutorialUIGroup?.Show();
+		uiWindowGroup?.Show();
 	}
 
 	public bool TryBuyItem(BaseItemData  item)

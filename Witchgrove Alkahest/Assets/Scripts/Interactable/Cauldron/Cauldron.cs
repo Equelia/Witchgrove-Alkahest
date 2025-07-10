@@ -14,7 +14,7 @@ public class Cauldron : InventoryProvider
     [SerializeField] private ParticleSystem[] bublesParticles;
     
     [Header("Tutorial")]
-    [SerializeField] private TutorialUIGroup tutorialUIGroup;
+    [SerializeField] private UIWindowGroup uiWindowGroup;
 
     private PotionData garbagePotion;
 
@@ -28,7 +28,7 @@ public class Cauldron : InventoryProvider
     {
         base.Interact();
         PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("Cauldron");
-        tutorialUIGroup?.Show();
+        uiWindowGroup?.Show();
     }
 
     public void TryCraft()

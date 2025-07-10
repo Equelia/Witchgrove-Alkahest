@@ -727,7 +727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &55233872
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -857,7 +857,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!1001 &75808135
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1331,7 +1331,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!1001 &121384723
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1443,7 +1443,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &121384727
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -1871,7 +1871,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!1 &185398576
 GameObject:
   m_ObjectHideFlags: 0
@@ -1922,7 +1922,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &185398579
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3370,7 +3370,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &419885374
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3536,7 +3536,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: e6b1b6fa3444ab1468b5cd7bd51fb2f0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &453460568
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3914,7 +3914,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &540733186
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4956,7 +4956,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!1 &609588074
 GameObject:
   m_ObjectHideFlags: 0
@@ -6714,6 +6714,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 154446f9b518e8243b0924f5ba8ecc3c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  levelToLoad: 0
+  playerData: {fileID: 0}
+  levelWarningUIWindowGroup: {fileID: 0}
   targetSceneName: MeadowLvl
   portalID: 2
   targetPortalID: 1
@@ -7934,7 +7937,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &959641410
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8520,7 +8523,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1054643896
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -8931,7 +8934,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1094976761
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10625,7 +10628,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1281822207
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -10790,7 +10793,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1294896728
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11056,7 +11059,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1321074626
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11128,7 +11131,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1332145400
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11298,7 +11301,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1340601273
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -11459,6 +11462,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cc82439277e46afafd3095898b05783, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tutorialPanels:
+  - {fileID: 1818402277}
+  - {fileID: 1818402276}
+  - {fileID: 1818402275}
+  - {fileID: 1818402274}
 --- !u!4 &1353733283
 Transform:
   m_ObjectHideFlags: 0
@@ -12284,7 +12292,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1414824766
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14109,7 +14117,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1625341594
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14242,7 +14250,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1629777184
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14526,7 +14534,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1701940434
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -14656,7 +14664,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!1001 &1706057055
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14809,7 +14817,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1706709970
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -15192,7 +15200,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 0ed9b304ea9a84040be5925c326650c9, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &1765846602
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -16209,6 +16217,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6243148476695078266, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: windowManager
+      value: 
+      objectReference: {fileID: 1475933704}
     - target: {fileID: 6273326867146754820, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_SizeDelta.x
       value: 20
@@ -16225,6 +16237,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6305231147561640232, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: tutorialManager
+      value: 
+      objectReference: {fileID: 1353733282}
     - target: {fileID: 6779377052296049702, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16240,6 +16256,10 @@ PrefabInstance:
     - target: {fileID: 6779377052296049702, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6812046535715852388, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_Color.a
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7003575433670876267, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
@@ -16369,6 +16389,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -35
       objectReference: {fileID: 0}
+    - target: {fileID: 9151722430092376135, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_text
+      value: "\u0412\u0435\u0440\u043D\u0443\u0442\u044C\u0441\u044F \u0434\u043E\u043C\u043E\u0439"
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151722430092376135, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_fontSize
+      value: 29.44
+      objectReference: {fileID: 0}
+    - target: {fileID: 9151722430092376135, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 29.44
+      objectReference: {fileID: 0}
     - target: {fileID: 9183620774861227362, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -16390,6 +16422,48 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+--- !u!114 &1818402272 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4791202245122187466, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 1818402271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1818402273 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 919234425608742370, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 1818402271}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1818402277}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 52298fb34c4a4dbda6c77d463a96f653, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!1 &1818402274 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8777014461497451292, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 1818402271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1818402275 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3808089243176528156, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 1818402271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1818402276 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5111120665984962153, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 1818402271}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1818402277 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6654485662780920453, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 1818402271}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1822693738
 GameObject:
   m_ObjectHideFlags: 0
@@ -17255,17 +17329,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1881167366}
   m_Mesh: {fileID: 10206, guid: 0000000000000000e000000000000000, type: 0}
---- !u!114 &1886553663 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 5154076418965139492, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
-  m_PrefabInstance: {fileID: 1818402271}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 52298fb34c4a4dbda6c77d463a96f653, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1001 &1896413184
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17693,7 +17756,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!4 &1916902043 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4518090244822660568, guid: c57c6d86541c2ce4d945cda785dff148, type: 3}
@@ -18516,7 +18579,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &2008420367
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -18665,6 +18728,7 @@ GameObject:
   - component: {fileID: 2015542542}
   - component: {fileID: 2015542541}
   - component: {fileID: 2015542543}
+  - component: {fileID: 2015542544}
   m_Layer: 0
   m_Name: Water
   m_TagString: Untagged
@@ -18761,6 +18825,20 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 1.4780384, z: 10}
   m_Center: {x: 0, y: -0.8943121, z: 0}
+--- !u!114 &2015542544
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2015542538}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1e5c193dd1b02184d9821bbc37a6a0b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  deathScreen: {fileID: 1818402273}
+  closeButton: {fileID: 1818402272}
 --- !u!1 &2016817548
 GameObject:
   m_ObjectHideFlags: 0
@@ -19105,7 +19183,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &2043479219
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19332,7 +19410,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!65 &2086141975
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -19813,7 +19891,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 1886553663}
+  uiWindowGroup: {fileID: 0}
 --- !u!1 &2141435224
 GameObject:
   m_ObjectHideFlags: 0
