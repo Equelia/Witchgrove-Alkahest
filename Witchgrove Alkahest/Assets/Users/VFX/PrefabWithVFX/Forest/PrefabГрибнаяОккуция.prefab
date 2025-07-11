@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6736505175975797842}
-  m_Layer: 0
+  - component: {fileID: -7292176878206420617}
+  - component: {fileID: -7215973561299517697}
+  m_Layer: 6
   m_Name: "Prefab\u0413\u0440\u0438\u0431\u043D\u0430\u044F\u041E\u043A\u043A\u0443\u0446\u0438\u044F"
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -26,13 +28,49 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.917, y: 0.478, z: -3.729}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.29, y: 1.29, z: 1.29}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1618552529669729698}
   - {fileID: 4776968348569876047}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &-7292176878206420617
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830978325671746611}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &-7215973561299517697
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6830978325671746611}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredientData: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
+  consumable: 1
+  uiWindowGroup: {fileID: 0}
 --- !u!1001 &1296185182062856777
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -89,6 +127,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: GribnayaOkkucia
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 083c13ac3ee6bc84eb7cdc659e0ee26b, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -110,6 +152,10 @@ PrefabInstance:
     - target: {fileID: 3201557510473907408, guid: b38b95b12ef15c44fbdc59e1f48dd437, type: 3}
       propertyPath: m_Name
       value: vfxOkkucya
+      objectReference: {fileID: 0}
+    - target: {fileID: 3201557510473907408, guid: b38b95b12ef15c44fbdc59e1f48dd437, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3887484915175718490, guid: b38b95b12ef15c44fbdc59e1f48dd437, type: 3}
       propertyPath: m_LocalPosition.x
@@ -150,6 +196,10 @@ PrefabInstance:
     - target: {fileID: 3887484915175718490, guid: b38b95b12ef15c44fbdc59e1f48dd437, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8265930054828547531, guid: b38b95b12ef15c44fbdc59e1f48dd437, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
