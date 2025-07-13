@@ -21,7 +21,7 @@ public class FirstPersonController : MonoBehaviour
     [Header("References")]
     [SerializeField] private Transform headTransform;
     [SerializeField] private CinemachineInputAxisController cCam;
-    [SerializeField] private GameObject inventoryPanel;
+    [SerializeField] private InventoryWindowManager windowManager;
 
     [Header("Head Bob Settings")]
     [SerializeField] private float walkBobFrequency = 1.5f;
@@ -60,9 +60,8 @@ public class FirstPersonController : MonoBehaviour
     private bool allowAirControlDuringLaunch = false;
     
     private Vector3 contactNormal = Vector3.up;
-
-    // Expose inventory state so FootStepController can check it
-    public bool InventoryOpen => inventoryPanel.activeSelf; // Modified: added public property
+    
+    public bool IsUIOpen => windowManager.IsMenuOpen || windowManager.IsInventoryOpen || tutorialManager.IsTutorialActive(); 
 
     void Start()
     {
@@ -76,9 +75,7 @@ public class FirstPersonController : MonoBehaviour
 
     void Update()
     {
-        bool invOpen = inventoryPanel.activeSelf || tutorialManager.IsTutorialActive();
-        
-        if (invOpen)
+        if (IsUIOpen)
         {
             if (Cursor.lockState != CursorLockMode.None)
             {

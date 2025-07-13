@@ -13,11 +13,13 @@ public class PanelEntry
 public class InventoryWindowManager : MonoBehaviour
 {
 	[SerializeField] private GameObject mainInventoryPanel;
+	[SerializeField] private GameObject mainMenuPanel;
 	public List<PanelEntry> panels;
 	
 	public event Action OnInventoryClosed;
 
-	public bool IsOpen => mainInventoryPanel.activeSelf;
+	public bool IsInventoryOpen => mainInventoryPanel.activeSelf;
+	public bool IsMenuOpen => mainMenuPanel.activeSelf;
 
 	private void Start()
 	{
@@ -27,6 +29,16 @@ public class InventoryWindowManager : MonoBehaviour
 	public void OpenInventory()
 	{
 		mainInventoryPanel.SetActive(true);
+	}
+
+	public void OpenMainMenu()
+	{
+		mainMenuPanel.SetActive(true);
+	}
+
+	public void CloseMainMenu()
+	{
+		mainMenuPanel.SetActive(false);
 	}
 
 	public void CloseInventory()

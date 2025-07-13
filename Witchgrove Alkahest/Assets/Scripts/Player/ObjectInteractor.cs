@@ -43,7 +43,7 @@ public class ObjectInteractor : MonoBehaviour
 
     void Update()
     {
-        bool isUIOpen = windowManager.panels.Any(entry => entry.panel.activeSelf) ||  windowManager.IsOpen;
+        bool isUIOpen = windowManager.panels.Any(entry => entry.panel.activeSelf) ||  windowManager.IsInventoryOpen;
         
         if (isUIOpen)        
         {

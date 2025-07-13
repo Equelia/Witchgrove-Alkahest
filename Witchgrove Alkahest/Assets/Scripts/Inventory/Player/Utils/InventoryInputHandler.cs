@@ -12,7 +12,7 @@ public class InventoryInputHandler : MonoBehaviour
 		
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
-			if (!windowManager.IsOpen)
+			if (!windowManager.IsInventoryOpen)
 				windowManager.OpenInventory();
 			else if (!anySubPanelOpen)
 				windowManager.CloseInventory();
@@ -20,7 +20,12 @@ public class InventoryInputHandler : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			if (!windowManager.IsOpen)
+			if (windowManager.IsInventoryOpen & anySubPanelOpen)
+			{
+				windowManager.CloseInventory();
+				windowManager.ClosePanelByName("RecipeBook");
+			}
+			else if (!windowManager.IsInventoryOpen)
 			{
 				windowManager.OpenInventory();
 				windowManager.OpenPanelByName("RecipeBook");
@@ -33,8 +38,12 @@ public class InventoryInputHandler : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (windowManager.IsOpen)
+			if (windowManager.IsInventoryOpen || anySubPanelOpen)
 				windowManager.CloseInventory();
+			else if (!windowManager.IsMenuOpen)
+				windowManager.OpenMainMenu();
+			else
+				windowManager.CloseMainMenu();
 		}
 
 		if (Input.GetKeyDown(KeyCode.E))

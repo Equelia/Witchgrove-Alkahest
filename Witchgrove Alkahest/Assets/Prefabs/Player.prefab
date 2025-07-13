@@ -214,7 +214,7 @@ CharacterController:
   m_Radius: 0.5
   m_SlopeLimit: 45
   m_StepOffset: 0.5
-  m_SkinWidth: 0.02
+  m_SkinWidth: 0.0001
   m_MinMoveDistance: 0.001
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4731223442925230267
@@ -238,7 +238,7 @@ MonoBehaviour:
   gravity: -15
   headTransform: {fileID: 5715120581807294260}
   cCam: {fileID: 0}
-  inventoryPanel: {fileID: 0}
+  windowManager: {fileID: 0}
   walkBobFrequency: 5
   walkBobHorizontalAmplitude: 0.08
   walkBobVerticalAmplitude: 0.08
@@ -284,7 +284,7 @@ MonoBehaviour:
   objectNameTextHolder: {fileID: 0}
   objectNameText: {fileID: 0}
   windowManager: {fileID: 0}
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!114 &591291957029007761
 MonoBehaviour:
   m_ObjectHideFlags: 0
