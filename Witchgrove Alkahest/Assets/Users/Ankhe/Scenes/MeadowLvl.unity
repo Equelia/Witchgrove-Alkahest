@@ -50765,6 +50765,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
   consumable: 0
   uiWindowGroup: {fileID: 1999116793}
@@ -50785,6 +50786,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f961e754a40a898ce82efb623c278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   uiWindowGroup: {fileID: 0}
 --- !u!1 &90164143 stripped
 GameObject:
@@ -50851,10 +50853,50 @@ PrefabInstance:
       propertyPath: basketController
       value: 
       objectReference: {fileID: 1672153918}
+    - target: {fileID: 1380400432754542822, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1628360057025983975, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1631746524833391494, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3389132744960759368, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: chestController
       value: 
       objectReference: {fileID: 1168443867}
+    - target: {fileID: 3419192292948495701, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3463310614005654343, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3887470171381122722, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: postProcessingVolume
+      value: 
+      objectReference: {fileID: 1603999460}
+    - target: {fileID: 4503266378427791204, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5277555674176340113, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5279761067592344556, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5741430095633363678, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6243148476695078266, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: windowManager
       value: 
@@ -50879,6 +50921,10 @@ PrefabInstance:
       propertyPath: cauldronController
       value: 
       objectReference: {fileID: 813177135}
+    - target: {fileID: 8726284171134436957, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -97274,6 +97320,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f1390f8a160fa0d41ac3538972dd83b2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -144091,7 +144138,7 @@ Light:
   serializedVersion: 11
   m_Type: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 2
+  m_Intensity: 1.2
   m_Range: 10
   m_SpotAngle: 30
   m_InnerSpotAngle: 21.80208
@@ -170149,6 +170196,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -170207,7 +170255,7 @@ PrefabInstance:
       objectReference: {fileID: 739850351}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: panels.Array.size
-      value: 5
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: mainInventoryPanel
@@ -170215,7 +170263,15 @@ PrefabInstance:
       objectReference: {fileID: 93099113}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: panels.Array.data[5].name
-      value: EndGamePanel
+      value: Settings
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
+      propertyPath: panels.Array.data[6].name
+      value: Graphics
+      objectReference: {fileID: 0}
+    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
+      propertyPath: panels.Array.data[7].name
+      value: Sounds
       objectReference: {fileID: 0}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: panels.Array.data[0].panel
@@ -170240,7 +170296,15 @@ PrefabInstance:
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: panels.Array.data[5].panel
       value: 
-      objectReference: {fileID: 811092645}
+      objectReference: {fileID: 601902496}
+    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
+      propertyPath: panels.Array.data[6].panel
+      value: 
+      objectReference: {fileID: 711521484}
+    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
+      propertyPath: panels.Array.data[7].panel
+      value: 
+      objectReference: {fileID: 1254438068}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: panels.Array.data[0].hotkey
       value: 101
@@ -180579,6 +180643,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -180798,6 +180863,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -181085,6 +181151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f1390f8a160fa0d41ac3538972dd83b2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -181431,6 +181498,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 350587e3e85ccdf43a5b8f5e07b1f3c9, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -181573,6 +181641,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -187059,6 +187128,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: a3ad1bb60c86c45429f3a9acdc1fa02d, type: 3}
   m_PrefabInstance: {fileID: 1811551087}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &601902496 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9072461564457831937, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 93099101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &603549815
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -187176,6 +187250,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -197237,6 +197312,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -212470,6 +212546,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4243724423293762, guid: c07f24e35f07ce74ba43afa35d48adf7, type: 3}
   m_PrefabInstance: {fileID: 708709187}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &711521484 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7107396681186223638, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 93099101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &712155557
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -222820,6 +222901,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -223159,6 +223241,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -228261,6 +228344,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 97bac5a7693d4d742a6f0b92c36c2116, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -228877,6 +228961,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -234813,6 +234898,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e7640f715224d229649ee41e77ebcae, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 50658053}
   slotCount: 8
   recipeDatabase: {fileID: 11400000, guid: de2626fb752a1b54da5e2a88827df517, type: 2}
   useSpecificOrder: 0
@@ -235303,6 +235389,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddbfba582706a5745a6873ec51de1a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   openAngle: -90
   duration: 1
 --- !u!1001 &843271406
@@ -245406,6 +245493,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f1390f8a160fa0d41ac3538972dd83b2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -282471,6 +282559,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f1390f8a160fa0d41ac3538972dd83b2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -298115,6 +298204,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -319036,6 +319126,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -319077,6 +319168,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ddbfba582706a5745a6873ec51de1a50, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   openAngle: 90
   duration: 0.5
 --- !u!65 &1079849363
@@ -330042,6 +330134,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -334957,6 +335050,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f1390f8a160fa0d41ac3538972dd83b2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -335323,6 +335417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f19c0a4fc6211441a5b91c9d8a303ad, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 50658053}
   slotCount: 8
   ChestId: 0
   uiWindowGroup: {fileID: 1370750039}
@@ -336189,6 +336284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: aa2bf43029676ea428b598068f069b2a, type: 2}
   consumable: 0
   uiWindowGroup: {fileID: 0}
@@ -336209,6 +336305,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f961e754a40a898ce82efb623c278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   uiWindowGroup: {fileID: 850526119}
 --- !u!1001 &1204210291
 PrefabInstance:
@@ -341451,6 +341548,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -346757,6 +346855,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -351822,6 +351921,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ebe11924f10991b49a816b3fb7f52b39, type: 3}
+--- !u!1 &1254438068 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 619733382206596809, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+  m_PrefabInstance: {fileID: 93099101}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1256199814
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352829,6 +352933,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -363147,6 +363252,42 @@ PrefabInstance:
     - target: {fileID: 1397453680948207798, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
       propertyPath: m_Name
       value: SoundManager
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[0].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[1].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[2].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[3].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[4].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[5].volume
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[6].volume
+      value: 0.4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: soundEntries.Array.data[7].volume
+      value: 0.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 3126257551769893453, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
+      propertyPath: m_Volume
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7753248654606752606, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
       propertyPath: m_LocalPosition.x
@@ -396201,6 +396342,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -406148,6 +406290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -421735,6 +421878,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -431856,6 +432000,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -436828,6 +436973,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca0ea4116b000724091f15d422212439, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   slotCount: 4
 --- !u!114 &1672153919
 MonoBehaviour:
@@ -436841,6 +436987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f39bbce425a4dc74eb3411af8c36d7d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 50658053}
   basket: {fileID: 1672153918}
   playerExperience: {fileID: 1268204305}
   playerData: {fileID: 93099103}
@@ -457855,6 +458002,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f5b8093c6e7d7ce49822c203e51a5218, type: 2}
   consumable: 0
   uiWindowGroup: {fileID: 0}
@@ -457875,6 +458023,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 490f961e754a40a898ce82efb623c278, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   uiWindowGroup: {fileID: 850526119}
 --- !u!1001 &1766023903
 PrefabInstance:
@@ -472786,6 +472935,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -473154,6 +473304,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: f1390f8a160fa0d41ac3538972dd83b2, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 0}
@@ -494358,6 +494509,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21c8d26abb5e46c7ba30744dc705505f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 50658053}
   slotCount: 4
   itemsForSale:
   - {fileID: 11400000, guid: ba8ec927c54934f48a45423a9e289bfe, type: 2}
@@ -506845,6 +506997,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
   consumable: 1
   uiWindowGroup: {fileID: 1999116786}
@@ -522447,6 +522600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19429c0905b24560981c96fa5dbe5d78, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   itemForPortal: {fileID: 11400000, guid: bd071c4543394ea43a1b79734b81e17e, type: 2}
   portalGameObject: {fileID: 510998573}
   animationDuration: 1

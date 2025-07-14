@@ -60,7 +60,24 @@ public class InventoryWindowManager : MonoBehaviour
 	public void ClosePanelByName(string panelName)
 	{
 		foreach (var entry in panels)
-			if (entry.panel.name == panelName)
+		{
+			if (entry.name == panelName && entry.panel.activeSelf)
+			{
 				entry.panel.SetActive(false);
+				break;
+			}
+		}
+	}
+
+	
+	public bool AnySubPanelOpen => panels.Any(p => p.panel.activeSelf);
+
+	public void CloseTopPanel()
+	{
+		var lastActive = panels.LastOrDefault(p => p.panel.activeSelf);
+		if (lastActive != null)
+		{
+			lastActive.panel.SetActive(false);
+		}
 	}
 }

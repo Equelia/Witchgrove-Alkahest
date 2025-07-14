@@ -32,10 +32,8 @@ public class PauseScreen : MonoBehaviour
 	}
 
 	private void Settings()
-	{
-		// TODO
-		// settingsPanel.SetActive(true);
-		// gameObject.SetActive(false);
+	{ 
+		settingsPanel.SetActive(true); 
 	}
 
 	private void MainMenu()

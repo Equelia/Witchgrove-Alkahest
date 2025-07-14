@@ -44,10 +44,12 @@ public class ObjectInteractor : MonoBehaviour
     void Update()
     {
         bool isUIOpen = windowManager.panels.Any(entry => entry.panel.activeSelf) ||  windowManager.IsInventoryOpen;
-        
-        if (isUIOpen)        
+
+        if (isUIOpen)
         {
-            ClearHover();
+            if (!BlockInteractionThisFrame)
+                ClearHover();
+
             return;
         }
         

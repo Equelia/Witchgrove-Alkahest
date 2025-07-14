@@ -32,7 +32,7 @@ public class SoundManager : MonoBehaviour
 
     [Header("Music Settings")]
     [Tooltip("AudioSource for background music")]    
-    [SerializeField] private AudioSource musicSource;
+    public AudioSource musicSource;
 
     [Header("SFX Pool Settings")]
     [Tooltip("Initial number of pooled SFX AudioSources")]
@@ -91,18 +91,24 @@ public class SoundManager : MonoBehaviour
     /// <summary>
     /// Play a named sound as one-shot SFX.
     /// </summary>
-    public AudioClip  PlaySound(string soundName)
+    public AudioClip PlaySound(string soundName)
     {
         if (!soundDict.TryGetValue(soundName, out var entry))
         {
             Debug.LogWarning($"Sound '{soundName}' not found in SoundManager library.");
             return null;
         }
+
         var src = sfxPool.Find(s => !s.isPlaying) ?? ExpandSfxPool(1)[0];
-        src.volume = entry.volume;
-        src.PlayOneShot(entry.clip);
+
+        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
+        float volumeScale = master * sfxVol * entry.volume;
+
+        src.PlayOneShot(entry.clip, volumeScale);
         return entry.clip;
     }
+
 
     /// <summary>
     /// Play background music clip.
@@ -147,4 +153,10 @@ public class SoundManager : MonoBehaviour
         }
         return newList;
     }
+    
+    public List<AudioSource> GetAllSfxSources()
+    {
+        return sfxPool;
+    }
+
 }

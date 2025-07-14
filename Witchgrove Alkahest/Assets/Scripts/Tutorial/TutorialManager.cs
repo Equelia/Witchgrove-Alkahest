@@ -10,6 +10,7 @@ public class TutorialManager : MonoBehaviour
 	public static void MarkAsSeen(string id)
 	{
 		PlayerPrefs.SetInt("tutorial_" + id, 1);
+		PlayerPrefs.Save();
 	}
 
 	public bool IsTutorialActive()

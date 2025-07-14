@@ -8,19 +8,18 @@ public class InventoryInputHandler : MonoBehaviour
 
 	private void Update() 
 	{
-		bool anySubPanelOpen = windowManager.panels.Any(entry => entry.panel.activeSelf);
 		
 		if (Input.GetKeyDown(KeyCode.Tab))
 		{
 			if (!windowManager.IsInventoryOpen)
 				windowManager.OpenInventory();
-			else if (!anySubPanelOpen)
+			else if (!windowManager.AnySubPanelOpen)
 				windowManager.CloseInventory();
 		}
 
 		if (Input.GetKeyDown(KeyCode.J))
 		{
-			if (windowManager.IsInventoryOpen & anySubPanelOpen)
+			if (windowManager.IsInventoryOpen & windowManager.AnySubPanelOpen)
 			{
 				windowManager.CloseInventory();
 				windowManager.ClosePanelByName("RecipeBook");
@@ -30,7 +29,7 @@ public class InventoryInputHandler : MonoBehaviour
 				windowManager.OpenInventory();
 				windowManager.OpenPanelByName("RecipeBook");
 			}
-			else if (!anySubPanelOpen)
+			else if (!windowManager.AnySubPanelOpen)
 			{
 				windowManager.CloseInventory();
 			}
@@ -38,17 +37,28 @@ public class InventoryInputHandler : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (windowManager.IsInventoryOpen || anySubPanelOpen)
+			if (windowManager.AnySubPanelOpen)
+			{
+				windowManager.CloseTopPanel();
+			}
+			else if (windowManager.IsInventoryOpen)
+			{
 				windowManager.CloseInventory();
+			}
 			else if (!windowManager.IsMenuOpen)
+			{
 				windowManager.OpenMainMenu();
+			}
 			else
+			{
 				windowManager.CloseMainMenu();
+			}
 		}
+
 
 		if (Input.GetKeyDown(KeyCode.E))
 		{
-			if (anySubPanelOpen)
+			if (windowManager.AnySubPanelOpen && !objectInteractor.BlockInteractionThisFrame)
 			{
 				windowManager.CloseInventory();
 				objectInteractor.BlockInteractionThisFrame = true;
