@@ -233,7 +233,7 @@ MonoBehaviour:
   sprintSpeed: 5
   minAirSpeed: 2
   airControlAcceleration: 2
-  slideSpeed: 5
+  mouseSensitivity: 1
   jumpHeight: 1.5
   gravity: -15
   headTransform: {fileID: 5715120581807294260}
@@ -308,6 +308,11 @@ MonoBehaviour:
   - surfaceTag: Sand
     soundNames:
     - SandStep
+  - surfaceTag: Wood
+    soundNames:
+    - WoodStep
+    - WoodStep2
+    - WoodStep3
   walkStepInterval: 0.8
   sprintStepInterval: 0.5
   raycastDistance: 1.5

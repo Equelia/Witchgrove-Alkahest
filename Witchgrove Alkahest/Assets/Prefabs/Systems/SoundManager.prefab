@@ -73,6 +73,30 @@ MonoBehaviour:
   - name: CellPop
     clip: {fileID: 8300000, guid: e43cf79f92f48954ebf4f23dd85dc33e, type: 3}
     volume: 0.05
+  - name: JumpSound
+    clip: {fileID: 8300000, guid: c1ffd27926833fb45904728359fcf411, type: 3}
+    volume: 0.1
+  - name: LandSound
+    clip: {fileID: 8300000, guid: 2438821802d40844bb478123a4787568, type: 3}
+    volume: 0.3
+  - name: WaterDeathSound
+    clip: {fileID: 8300000, guid: 88347b50430d7e4439fdf64025d57142, type: 3}
+    volume: 0.3
+  - name: WoodStep
+    clip: {fileID: 8300000, guid: cf42123bad794424593885b3ddd11281, type: 3}
+    volume: 0.3
+  - name: WoodStep2
+    clip: {fileID: 8300000, guid: 5ee3d7a9848bea643afb2e0a299dc2ca, type: 3}
+    volume: 0.3
+  - name: WoodStep3
+    clip: {fileID: 8300000, guid: f55a1324da4f6534fabbfe3c32445528, type: 3}
+    volume: 0.3
+  - name: MushroomJumpPad
+    clip: {fileID: 8300000, guid: a2ed8ae688041e4428aec6fb7cea31ac, type: 3}
+    volume: 0.3
+  - name: MushroomJumpPad2
+    clip: {fileID: 8300000, guid: 2eca8bc2d8208dc4ea03ced374c8d8d8, type: 3}
+    volume: 0.3
   bgMusicEntries:
   - name: MeadowLvl
     clip: {fileID: 8300000, guid: c26ed8876e334ba4a90b2d2a721a0981, type: 3}

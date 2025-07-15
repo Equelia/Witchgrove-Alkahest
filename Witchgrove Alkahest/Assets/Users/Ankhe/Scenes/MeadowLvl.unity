@@ -50946,21 +50946,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e62a73601ed88d24d83eda85b8ee8d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!1 &93099104 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 9105726395380303816, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
-  m_PrefabInstance: {fileID: 93099101}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &93099105 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4868643272777348031, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
-  m_PrefabInstance: {fileID: 93099101}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &93099106 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2137397338475330486, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
-  m_PrefabInstance: {fileID: 93099101}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &93099107 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6164536259848995773, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
@@ -170237,42 +170222,14 @@ PrefabInstance:
       propertyPath: playerInventoryUI
       value: 
       objectReference: {fileID: 93099114}
-    - target: {fileID: 226601997793650404, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: 'inventoryRows.Array.data[0]'
-      value: 
-      objectReference: {fileID: 93099106}
-    - target: {fileID: 226601997793650404, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: 'inventoryRows.Array.data[1]'
-      value: 
-      objectReference: {fileID: 93099105}
-    - target: {fileID: 226601997793650404, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: 'inventoryRows.Array.data[2]'
-      value: 
-      objectReference: {fileID: 93099104}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: mainMenuPanel
       value: 
       objectReference: {fileID: 739850351}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.size
-      value: 8
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: mainInventoryPanel
       value: 
       objectReference: {fileID: 93099113}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[5].name
-      value: Settings
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[6].name
-      value: Graphics
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[7].name
-      value: Sounds
-      objectReference: {fileID: 0}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: panels.Array.data[0].panel
       value: 
@@ -170305,26 +170262,6 @@ PrefabInstance:
       propertyPath: panels.Array.data[7].panel
       value: 
       objectReference: {fileID: 1254438068}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[0].hotkey
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[1].hotkey
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[2].hotkey
-      value: 101
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[3].hotkey
-      value: 106
-      objectReference: {fileID: 0}
-    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
-      propertyPath: panels.Array.data[4].hotkey
-      value: 101
-      objectReference: {fileID: 0}
     - target: {fileID: 6118447368741277824, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: m_Name
       value: InventorySystem
@@ -277157,7 +277094,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3119664213ab82499ef5aaf1bee5c3c, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.02
+      value: 0.02
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: b3119664213ab82499ef5aaf1bee5c3c, type: 3}
       propertyPath: m_LocalPosition.z
@@ -277191,6 +277128,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -8578433623609224457, guid: b3119664213ab82499ef5aaf1bee5c3c, type: 3}
+      propertyPath: m_TagString
+      value: Wood
+      objectReference: {fileID: 0}
     - target: {fileID: -8432316785492117190, guid: b3119664213ab82499ef5aaf1bee5c3c, type: 3}
       propertyPath: m_DynamicOccludee
       value: 1
@@ -277206,6 +277147,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: b3119664213ab82499ef5aaf1bee5c3c, type: 3}
       propertyPath: m_Name
       value: House
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: b3119664213ab82499ef5aaf1bee5c3c, type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -363252,42 +363197,6 @@ PrefabInstance:
     - target: {fileID: 1397453680948207798, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
       propertyPath: m_Name
       value: SoundManager
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[0].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[1].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[2].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[3].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[4].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[5].volume
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[6].volume
-      value: 0.4
-      objectReference: {fileID: 0}
-    - target: {fileID: 2073960154946241466, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: soundEntries.Array.data[7].volume
-      value: 0.16
-      objectReference: {fileID: 0}
-    - target: {fileID: 3126257551769893453, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
-      propertyPath: m_Volume
-      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 7753248654606752606, guid: 281f496aa12872249b17adcebe9caa25, type: 3}
       propertyPath: m_LocalPosition.x

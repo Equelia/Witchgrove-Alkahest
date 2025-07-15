@@ -15,10 +15,7 @@ public class FirstPersonController : MonoBehaviour
 
 	[Header("Mouse Settings")] [SerializeField]
 	private float mouseSensitivity = 1f;
-
-	[Header("Slide Settings")] [SerializeField]
-	private float slideSpeed = 5f; // speed when sliding down slopes steeper than slopeLimit
-
+	
 	[Header("Jump & Gravity Settings")] [SerializeField]
 	private float jumpHeight = 1.5f;
 
@@ -53,8 +50,8 @@ public class FirstPersonController : MonoBehaviour
 	private TutorialManager tutorialManager;
 
 	private CharacterController controller;
-	private Vector3 velocity; // vertical velocity
-	private Vector3 horizontalVelocity; // horizontal movement stored between frames
+	private Vector3 verticalVelocity; 
+	private Vector3 horizontalVelocity; 
 	private bool previousGrounded;
 	private bool jumpRequested;
 
@@ -102,14 +99,14 @@ public class FirstPersonController : MonoBehaviour
 			if (controller.isGrounded)
 			{
 				horizontalVelocity = Vector3.zero;
-				velocity.y = -2f;
+				verticalVelocity.y = -2f;
 			}
 			else
 			{
-				velocity.y += gravity * Time.deltaTime;
+				verticalVelocity.y += gravity * Time.deltaTime;
 			}
 
-			Vector3 finalMove = horizontalVelocity + Vector3.up * velocity.y;
+			Vector3 finalMove = horizontalVelocity + Vector3.up * verticalVelocity.y;
 			controller.Move(finalMove * Time.deltaTime);
 
 			return;
@@ -169,7 +166,6 @@ public class FirstPersonController : MonoBehaviour
 
 		if (isLaunched)
 		{
-			// Управление в воздухе, если включено
 			if (allowAirControlDuringLaunch)
 			{
 				Vector3 _rawInput = new Vector3(
@@ -192,7 +188,6 @@ public class FirstPersonController : MonoBehaviour
 				launchVelocity += moveDir * airControlAcceleration * Time.deltaTime;
 			}
 
-			// Применяем гравитацию и двигаем
 			launchVelocity += Physics.gravity * Time.deltaTime;
 			controller.Move(launchVelocity * Time.deltaTime);
 
@@ -206,8 +201,8 @@ public class FirstPersonController : MonoBehaviour
 		}
 
 
-		if (isGrounded && velocity.y < 0f)
-			velocity.y = -2f;
+		if (isGrounded && verticalVelocity.y < 0f)
+			verticalVelocity.y = -2f;
 
 		Vector3 rawInput = new Vector3(
 			Input.GetAxisRaw("Horizontal"),
@@ -250,14 +245,15 @@ public class FirstPersonController : MonoBehaviour
 
 		if (jumpRequested && isGrounded)
 		{
-			velocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
+			verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 			TriggerShake(jumpShakeDuration, jumpShakeAmplitude);
+			SoundManager.Instance.PlaySound("JumpSound");
 		}
 
 		jumpRequested = false;
 
-		velocity.y += gravity * Time.deltaTime;
-		Vector3 finalMove = horizontalVelocity + Vector3.up * velocity.y;
+		verticalVelocity.y += gravity * Time.deltaTime;
+		Vector3 finalMove = horizontalVelocity + Vector3.up * verticalVelocity.y;
 		controller.Move(finalMove * Time.deltaTime);
 
 		if (!previousGrounded && isGrounded)
@@ -266,6 +262,7 @@ public class FirstPersonController : MonoBehaviour
 			if (landAngle > controller.slopeLimit)
 				horizontalVelocity = Vector3.zero;
 			TriggerShake(landShakeDuration, landShakeAmplitude);
+			SoundManager.Instance.PlaySound("LandSound");
 		}
 
 		previousGrounded = isGrounded;

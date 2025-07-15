@@ -47,12 +47,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b89f0dc11ad7874eb20e7f165f6a0f3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   slotCount: 4
   playerInventoryUI: {fileID: 0}
-  inventoryRows:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   maxInventoryLevel: 3
   playerData: {fileID: 0}
   trashBinSlots: []
@@ -69,6 +66,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mainInventoryPanel: {fileID: 0}
+  mainMenuPanel: {fileID: 0}
   panels:
   - name: Cauldron
     panel: {fileID: 0}
@@ -79,6 +77,12 @@ MonoBehaviour:
   - name: RecipeBook
     panel: {fileID: 0}
   - name: Trader
+    panel: {fileID: 0}
+  - name: Settings
+    panel: {fileID: 0}
+  - name: Graphics
+    panel: {fileID: 0}
+  - name: Sounds
     panel: {fileID: 0}
 --- !u!114 &8433245895623045950
 MonoBehaviour:
@@ -93,6 +97,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   windowManager: {fileID: 4494123138496227675}
+  objectInteractor: {fileID: 0}
 --- !u!65 &6163937343913016648
 BoxCollider:
   m_ObjectHideFlags: 0

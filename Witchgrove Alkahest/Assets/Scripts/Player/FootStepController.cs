@@ -35,7 +35,7 @@ public class FootStepController : MonoBehaviour
 
     void Update()
     {
-        if (fps != null && fps.IsUIOpen) // Modified: skip and reset if inventory open
+        if (fps != null && fps.IsUIOpen)
         {
             stepTimer = 0f;
             return;

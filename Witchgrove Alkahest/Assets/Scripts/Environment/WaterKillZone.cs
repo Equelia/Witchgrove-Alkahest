@@ -31,6 +31,7 @@ public class WaterKillZone : MonoBehaviour
 		if (other.CompareTag("Player"))
 		{
 			playerDeathHandler = other.GetComponent<PlayerDeathHandler>();
+			SoundManager.Instance.PlaySound("WaterDeathSound");
 			deathScreen?.Show();
 		}
 	}

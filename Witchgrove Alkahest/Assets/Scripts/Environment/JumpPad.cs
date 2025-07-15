@@ -18,6 +18,11 @@ public class JumpPad : MonoBehaviour
 		FirstPersonController controller = FindFirstObjectByType<FirstPersonController>();
 		if (controller != null)
 		{
+			int random = Random.Range(0, 1);
+			if (random == 0)
+				SoundManager.Instance.PlaySound("MushroomJumpPad");
+			else
+				SoundManager.Instance.PlaySound("MushroomJumpPad2");
 			controller.AddExternalForce(launchForce, allowAirControl);
 		}
 	}
