@@ -50897,6 +50897,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5998839413919238434, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: playerData
+      value: 
+      objectReference: {fileID: 93099103}
+    - target: {fileID: 5998839413919238434, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: playerExperience
+      value: 
+      objectReference: {fileID: 1268204305}
     - target: {fileID: 6243148476695078266, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: windowManager
       value: 
