@@ -10,6 +10,7 @@ public class QuestData
 	public BaseItemData  requiredItem;
 	public int requiredCount = 1;
 	public float expAmount;
+	public int goldAmount;
 }
 
 [CreateAssetMenu(menuName = "Quest/QuestDatabase")]

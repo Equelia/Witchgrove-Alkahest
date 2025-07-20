@@ -53,5 +53,10 @@ public class PlayerData : MonoBehaviour
 			OnInventoryLevelChanged?.Invoke();
 		}
 	} 
+	
+	public void InvokeLevelChanged()
+	{
+		OnLevelChanged?.Invoke();
+	}
 
 }

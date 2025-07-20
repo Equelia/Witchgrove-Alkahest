@@ -5,7 +5,7 @@ public class RespawnManager : MonoBehaviour
 {
 	public static RespawnManager Instance { get; private set; }
 
-	[HideInInspector] public string respawnSceneName = "MeadowLvl";
+	[HideInInspector] public string respawnSceneName;
 	[HideInInspector] public bool shouldRespawn = false;
 
 	private void Awake()
@@ -22,6 +22,8 @@ public class RespawnManager : MonoBehaviour
 	public void TriggerRespawn()
 	{
 		shouldRespawn = true;
+		respawnSceneName = SceneManager.GetActiveScene().name;
 		SceneManager.LoadScene(respawnSceneName);
 	}
+
 }

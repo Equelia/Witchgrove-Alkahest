@@ -80,6 +80,7 @@ public class TaskBoard : InteractableItem
 
 		ConsumeItems();
 		playerExperience.AddExp(activeQuest.expAmount);
+		playerData.GoldAmount += activeQuest.goldAmount;
 		Debug.Log($"Задание \"{activeQuest.questId}\" выполнено! Начисленно \"{activeQuest.expAmount}\" опыта!");
 		activeQuest = null;
 	}

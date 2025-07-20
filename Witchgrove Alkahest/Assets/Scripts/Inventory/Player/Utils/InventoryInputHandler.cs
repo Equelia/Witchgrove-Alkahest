@@ -37,11 +37,7 @@ public class InventoryInputHandler : MonoBehaviour
 
 		if (Input.GetKeyDown(KeyCode.Escape))
 		{
-			if (windowManager.AnySubPanelOpen)
-			{
-				windowManager.CloseTopPanel();
-			}
-			else if (windowManager.IsInventoryOpen)
+			if (windowManager.AnySubPanelOpen || windowManager.IsInventoryOpen)
 			{
 				windowManager.CloseInventory();
 			}
@@ -49,11 +45,8 @@ public class InventoryInputHandler : MonoBehaviour
 			{
 				windowManager.OpenMainMenu();
 			}
-			else
-			{
-				windowManager.CloseMainMenu();
-			}
 		}
+
 
 
 		if (Input.GetKeyDown(KeyCode.E))
