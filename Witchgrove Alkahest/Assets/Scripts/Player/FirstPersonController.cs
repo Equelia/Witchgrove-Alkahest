@@ -15,7 +15,7 @@ public class FirstPersonController : MonoBehaviour
 
 	[Header("Mouse Settings")] [SerializeField]
 	private float mouseSensitivity = 1f;
-	
+
 	[Header("Jump & Gravity Settings")] [SerializeField]
 	private float jumpHeight = 1.5f;
 
@@ -50,8 +50,8 @@ public class FirstPersonController : MonoBehaviour
 	private TutorialManager tutorialManager;
 
 	private CharacterController controller;
-	private Vector3 verticalVelocity; 
-	private Vector3 horizontalVelocity; 
+	private Vector3 verticalVelocity;
+	private Vector3 horizontalVelocity;
 	private bool previousGrounded;
 	private bool jumpRequested;
 
@@ -66,6 +66,12 @@ public class FirstPersonController : MonoBehaviour
 	private bool allowAirControlDuringLaunch = false;
 
 	private Vector3 contactNormal = Vector3.up;
+
+	private float airborneDistance = 0f;
+	private float lastAirborneY = 0f;
+	private float minFallDistance = 0.15f;
+	private float landSoundCooldown = 0.3f;
+	private float landSoundTimer = 0f;
 
 	public bool IsUIOpen =>
 		windowManager.IsMenuOpen || windowManager.IsInventoryOpen || tutorialManager.IsTutorialActive();
@@ -112,6 +118,7 @@ public class FirstPersonController : MonoBehaviour
 			return;
 		}
 
+		landSoundTimer -= Time.deltaTime;
 
 		if (Cursor.lockState != CursorLockMode.Locked)
 		{
@@ -243,6 +250,7 @@ public class FirstPersonController : MonoBehaviour
 			}
 		}
 
+
 		if (jumpRequested && isGrounded)
 		{
 			verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
@@ -256,13 +264,32 @@ public class FirstPersonController : MonoBehaviour
 		Vector3 finalMove = horizontalVelocity + Vector3.up * verticalVelocity.y;
 		controller.Move(finalMove * Time.deltaTime);
 
-		if (!previousGrounded && isGrounded)
+		if (!isGrounded)
 		{
-			float landAngle = Vector3.Angle(contactNormal, Vector3.up);
-			if (landAngle > controller.slopeLimit)
-				horizontalVelocity = Vector3.zero;
-			TriggerShake(landShakeDuration, landShakeAmplitude);
-			SoundManager.Instance.PlaySound("LandSound");
+			float deltaY = Mathf.Abs(transform.position.y - lastAirborneY);
+			airborneDistance += deltaY;
+			lastAirborneY = transform.position.y;
+		}
+
+		if (!previousGrounded && isGrounded && landSoundTimer <= 0f)
+		{
+			if (airborneDistance > minFallDistance)
+			{
+				float landAngle = Vector3.Angle(contactNormal, Vector3.up);
+				if (landAngle > controller.slopeLimit)
+					horizontalVelocity = Vector3.zero;
+
+				TriggerShake(landShakeDuration, landShakeAmplitude);
+				SoundManager.Instance.PlaySound("LandSound");
+				landSoundTimer = landSoundCooldown;
+			}
+
+			airborneDistance = 0f;
+		}
+
+		if (previousGrounded && !isGrounded)
+		{
+			airborneDistance = 0f;
 		}
 
 		previousGrounded = isGrounded;

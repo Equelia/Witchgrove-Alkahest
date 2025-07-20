@@ -81,7 +81,6 @@ public class PlayerUI : MonoBehaviour
 
 	private void AnimateExpProgress()
 	{
-		float currentProgress = expProgressBar.fillAmount;
 		float targetProgress = playerExperience.GetProgressToNextLevel();
 
 		if (targetProgress < 1f)

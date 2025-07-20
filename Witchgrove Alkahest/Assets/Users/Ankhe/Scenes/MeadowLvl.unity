@@ -50873,6 +50873,10 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3431347447645228637, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: windowManager
+      value: 
+      objectReference: {fileID: 509728393}
     - target: {fileID: 3463310614005654343, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -50893,18 +50897,14 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5631514556352367280, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
+      propertyPath: windowManager
+      value: 
+      objectReference: {fileID: 509728393}
     - target: {fileID: 5741430095633363678, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5998839413919238434, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
-      propertyPath: playerData
-      value: 
-      objectReference: {fileID: 93099103}
-    - target: {fileID: 5998839413919238434, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
-      propertyPath: playerExperience
-      value: 
-      objectReference: {fileID: 1268204305}
     - target: {fileID: 6243148476695078266, guid: 3b2e37dbd58d52941be7fb103a88104d, type: 3}
       propertyPath: windowManager
       value: 
@@ -170234,6 +170234,10 @@ PrefabInstance:
       propertyPath: mainMenuPanel
       value: 
       objectReference: {fileID: 739850351}
+    - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
+      propertyPath: panels.Array.size
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 4494123138496227675, guid: b48454052bb58d84f81242b93d49250f, type: 3}
       propertyPath: mainInventoryPanel
       value: 
@@ -436921,6 +436925,7 @@ MonoBehaviour:
     requiredItem: {fileID: 0}
     requiredCount: 1
     expAmount: 0
+    goldAmount: 0
 --- !u!65 &1672153920
 BoxCollider:
   m_ObjectHideFlags: 0
