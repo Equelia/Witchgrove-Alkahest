@@ -19,10 +19,12 @@ MonoBehaviour:
     requiredItem: {fileID: 11400000, guid: 93340f65839b9874f92d25bbb30c9c0d, type: 2}
     requiredCount: 1
     expAmount: 20
+    goldAmount: 0
   - questId: "\u0417\u0435\u043B\u044C\u0435 \u0437\u0430\u0449\u0438\u0442\u044B"
     description: "\u043A\u0440\u0438\u0432\u043E\u0439 \u0440\u043E\u0433\n\u043A\u0430\u043C\u0435\u043D\u043D\u0430\u044F
       \u0433\u043E\u0440\u0442\u0435\u043D\u0437\u0438\u044F\n\u043A\u043E\u0440\u0435\u043D\u044C
       \u0441\u043C\u043E\u0440\u0447\u043A\u043E\u0432\u044B\u0439\n\u0412\u043E\u0434\u0430"
-    requiredItem: {fileID: 11400000, guid: 45ba43c3a14857b42bc235511b7a2c56, type: 2}
+    requiredItem: {fileID: 11400000, guid: 3abd2212e3ff0714a956741cabaae8ac, type: 2}
     requiredCount: 1
     expAmount: 20
+    goldAmount: 0
