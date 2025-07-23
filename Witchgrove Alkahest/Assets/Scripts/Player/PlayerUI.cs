@@ -1,3 +1,4 @@
+using System;
 using TMPro;
 using UnityEngine;
 using DG.Tweening;
@@ -16,8 +17,14 @@ public class PlayerUI : MonoBehaviour
 	
 	private int currentGoldDisplay = 0;
 
-	private void Start()
+	private void OnEnable()
 	{
+		if (playerData == null || playerExperience == null)
+		{
+			Debug.LogWarning("PlayerUI: missing references");
+			return;
+		}
+	
 		UpdateLevelUI();
 		UpdateGoldUI();
 		UpdateExpProgressBar();
@@ -36,6 +43,8 @@ public class PlayerUI : MonoBehaviour
 
 	private void AnimateLevelUp()
 	{
+		SoundManager.Instance.PlaySound("LevelUp");
+		
 		levelText.text = playerData.Level.ToString();
 
 		levelText.transform.DOKill();
@@ -59,6 +68,8 @@ public class PlayerUI : MonoBehaviour
 	{
 		goldText.transform.DOKill();
 		goldText.transform.localScale = Vector3.one;
+		
+		SoundManager.Instance.PlaySound("GoldChange");
 
 		goldText.transform
 			.DOScale(1.3f, 0.2f)

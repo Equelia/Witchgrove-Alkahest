@@ -97,9 +97,30 @@ MonoBehaviour:
   - name: MushroomJumpPad2
     clip: {fileID: 8300000, guid: 2eca8bc2d8208dc4ea03ced374c8d8d8, type: 3}
     volume: 0.3
+  - name: LevelUp
+    clip: {fileID: 8300000, guid: db3192f8ab9c85549a46c00dfeca5f1e, type: 3}
+    volume: 0.05
+  - name: GoldChange
+    clip: {fileID: 8300000, guid: 6a5b4807ac6eb624a9eea5c8a4130864, type: 3}
+    volume: 0.08
+  - name: Bunny&Wolf
+    clip: {fileID: 8300000, guid: 721f0a15cab35f749b99ae92504ae776, type: 3}
+    volume: 0.05
+  - name: Fish
+    clip: {fileID: 8300000, guid: b8b083b5f60b98d439c1c4f82d58d6c0, type: 3}
+    volume: 0.05
+  - name: Bananas
+    clip: {fileID: 8300000, guid: da997e7a2b242b646946a765aee8cf70, type: 3}
+    volume: 0.05
+  - name: Cat
+    clip: {fileID: 8300000, guid: dd8d2216f18955749877a9ccd30bcce0, type: 3}
+    volume: 0.05
+  - name: Bober
+    clip: {fileID: 8300000, guid: 90dcacfe053f27144828f45a1ff6c6f6, type: 3}
+    volume: 0.05
   bgMusicEntries:
   - name: MeadowLvl
-    clip: {fileID: 8300000, guid: c26ed8876e334ba4a90b2d2a721a0981, type: 3}
+    clip: {fileID: 8300000, guid: 262ddfc11b0abe64ab452fd4e2f20cb1, type: 3}
     volume: 0.02
   - name: CryingForestLvl
     clip: {fileID: 8300000, guid: 4bf0ff1a00fdc674cb6d935dae00f043, type: 3}
