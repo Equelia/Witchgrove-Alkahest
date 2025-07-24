@@ -220,7 +220,8 @@ public class Book : MonoBehaviour
 
     public void DragRightPageToPoint(Vector3 point)
     {
-        if (currentPage >= bookPages.Length) return;
+        if (currentPage >= bookPages.Length - 2)
+            return;        
         pageDragging = true;
         mode = FlipMode.RightToLeft;
         f = point;
@@ -248,12 +249,15 @@ public class Book : MonoBehaviour
 
     public void OnMouseDragRightPage()
     {
-        if (interactable) DragRightPageToPoint(transformPoint(Input.mousePosition));
+        if (!interactable || currentPage >= bookPages.Length - 2)
+            return;
+
+        DragRightPageToPoint(transformPoint(Input.mousePosition));
     }
 
     public void DragLeftPageToPoint(Vector3 point)
     {
-        if (currentPage <= 0) return;
+        if (currentPage <= 1) return;
         pageDragging = true;
         mode = FlipMode.LeftToRight;
         f = point;
@@ -271,17 +275,22 @@ public class Book : MonoBehaviour
         Left.rectTransform.pivot = new Vector2(1, 0);
         Left.transform.position = LeftNext.transform.position;
         Left.transform.eulerAngles = Vector3.zero;
-        Left.sprite = currentPage >= 2 ? bookPages[currentPage - 2] : background;
+        Left.sprite = bookPages[currentPage - 2];
 
-        LeftNext.sprite = currentPage >= 3 ? bookPages[currentPage - 3] : background;
+        LeftNext.sprite = currentPage - 3 >= 0 ? bookPages[currentPage - 3] : background;
         RightNext.transform.SetAsFirstSibling();
+
         if (enableShadowEffect) ShadowLTR.gameObject.SetActive(true);
         UpdateBookLTRToPoint(f);
     }
 
+
     public void OnMouseDragLeftPage()
     {
-        if (interactable) DragLeftPageToPoint(transformPoint(Input.mousePosition));
+        if (!interactable || currentPage <= 1)
+            return;
+
+        DragLeftPageToPoint(transformPoint(Input.mousePosition));
     }
 
     public void OnMouseRelease()
@@ -358,7 +367,14 @@ public class Book : MonoBehaviour
 
     private void Flip()
     {
+        if (mode == FlipMode.LeftToRight && currentPage <= 1)
+            return;
+        if (mode == FlipMode.RightToLeft && currentPage >= bookPages.Length - 2)
+            return;
+
         currentPage += (mode == FlipMode.RightToLeft) ? 2 : -2;
+        currentPage = Mathf.Clamp(currentPage, 0, bookPages.Length - 1);
+
         LeftNext.transform.SetParent(BookPanel.transform, true);
         Left.transform.SetParent(BookPanel.transform, true);
         Right.transform.SetParent(BookPanel.transform, true);
@@ -370,6 +386,8 @@ public class Book : MonoBehaviour
         ShadowLTR.gameObject.SetActive(false);
         OnFlip?.Invoke();
     }
+
+
 
     private void UpdateSprites()
     {
