@@ -44,7 +44,7 @@ public class SettingsController : MonoBehaviour
     {
         PlayerPrefs.SetFloat(MouseSensitivityKey, value);
         PlayerPrefs.Save();
-        firstPersonController.SetMouseSensitivity(value);
+        firstPersonController?.SetMouseSensitivity(value);
     }
 
     private void OnFpsDropdownChanged(int index)

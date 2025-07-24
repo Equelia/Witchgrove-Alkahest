@@ -6,6 +6,9 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
+    path: Assets/Scenes/MainMenu.unity
+    guid: f748165d85172834ea149a36de930331
+  - enabled: 1
     path: Assets/Users/Ankhe/Scenes/MeadowLvl.unity
     guid: 62ac573e699056e4c87bf24ee4ab5e14
   - enabled: 1

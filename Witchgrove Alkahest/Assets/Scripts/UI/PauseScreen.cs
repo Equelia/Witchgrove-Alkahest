@@ -38,6 +38,7 @@ public class PauseScreen : MonoBehaviour
 
 	private void MainMenu()
 	{
-		//TODO //SceneManager.LoadScene("MainMenu");
+		SaveManager.Instance.SaveGame();
+		SceneManager.LoadScene(0);
 	}
 }
