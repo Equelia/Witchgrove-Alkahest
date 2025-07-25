@@ -69,24 +69,22 @@ MonoBehaviour:
     result: {fileID: 11400000, guid: 93340f65839b9874f92d25bbb30c9c0d, type: 2}
     resultCount: 1
   - ingredients:
+    - type: {fileID: 11400000, guid: b77026d388bde2448aa320162eb5ddae, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: 8db54b512fb997f42b13d94a904fbf5a, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
+      count: 1
+    result: {fileID: 11400000, guid: 3abd2212e3ff0714a956741cabaae8ac, type: 2}
+    resultCount: 1
+  - ingredients:
     - type: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
       count: 1
     - type: {fileID: 11400000, guid: 5055a78e544321a45ae98c4331a42d09, type: 2}
       count: 1
-    - type: {fileID: 11400000, guid: 0ef1184d4b948d145bf20253aca9b339, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
-      count: 1
-    result: {fileID: 11400000, guid: 40c09cc54533dc844b6e0bdd1ec70040, type: 2}
-    resultCount: 1
-  - ingredients:
-    - type: {fileID: 11400000, guid: c80b93a0dd5b43f448a9fc4086e46b6b, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: 295df37576a223c4b94bff0d02d85b06, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: d8440007ad5fe0049a655ef172e9c49a, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
+    - type: {fileID: 11400000, guid: 8db54b512fb997f42b13d94a904fbf5a, type: 2}
       count: 1
     - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
       count: 1
