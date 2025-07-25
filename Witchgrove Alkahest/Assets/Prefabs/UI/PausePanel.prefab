@@ -169,7 +169,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &2538610134961418540
 RectTransform:
   m_ObjectHideFlags: 0
@@ -261,7 +261,6 @@ MonoBehaviour:
   settingsPanel: {fileID: 0}
   graphicsPanel: {fileID: 0}
   soundPanel: {fileID: 0}
-  windowManager: {fileID: 0}
 --- !u!1 &5377037443881235544
 GameObject:
   m_ObjectHideFlags: 0

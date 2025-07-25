@@ -36,7 +36,7 @@ public class ObjectInteractor : MonoBehaviour
         objectNameTextHolder.SetActive(false);
     }
 
-    private void Start()
+    private async  void Start()
     {
         uiWindowGroup?.Show();
     }

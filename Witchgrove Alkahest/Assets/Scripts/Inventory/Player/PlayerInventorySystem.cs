@@ -50,7 +50,6 @@ public class PlayerInventorySystem : InventoryProvider
 			TryAddOneItem(item);
 	}
 
-	//For future use
 	public bool TryConsumeItem(BaseItemData item, int amount)
 	{
 		foreach (var slot in slots)
@@ -94,6 +93,20 @@ public class PlayerInventorySystem : InventoryProvider
 
 		playerInventoryUI.RefreshUI();
 	}
+	
+	public int GetItemCount(BaseItemData item)
+	{
+		int total = 0;
+		foreach (var slot in slots)
+		{
+			if (slot.ItemData == item)
+			{
+				total += slot.Count;
+			}
+		}
+		return total;
+	}
+
 
 
 	

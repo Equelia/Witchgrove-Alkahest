@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
@@ -12,14 +13,19 @@ public class PauseScreen : MonoBehaviour
 	[Header("UI Elements")] 
 	[SerializeField] private GameObject settingsPanel;
 
-	private void Awake()
+	private void Start()
+	{
+		gameObject.SetActive(false);
+	}
+
+	private void OnEnable()
 	{
 		continueButton.onClick.AddListener(Continue);
 		settingsButton.onClick.AddListener(Settings);
 		mainMenuButton.onClick.AddListener(MainMenu);
 	}
 
-	private void OnDestroy()
+	private void OnDisable()
 	{
 		continueButton.onClick.RemoveListener(Continue);
 		settingsButton.onClick.RemoveListener(Settings);

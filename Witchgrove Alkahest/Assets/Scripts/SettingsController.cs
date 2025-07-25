@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
@@ -17,14 +18,15 @@ public class SettingsController : MonoBehaviour
     private void Start()
     {
         LoadSettings();
-
-        mouseSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChanged);
-        fpsDropdown.onValueChanged.AddListener(OnFpsDropdownChanged);
-        
-        gameObject.SetActive(false);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        mouseSensitivitySlider.onValueChanged.AddListener(OnMouseSensitivityChanged);
+        fpsDropdown.onValueChanged.AddListener(OnFpsDropdownChanged);
+    }
+
+    private void OnDisable()
     {
         mouseSensitivitySlider.onValueChanged.RemoveListener(OnMouseSensitivityChanged);
         fpsDropdown.onValueChanged.RemoveListener(OnFpsDropdownChanged);

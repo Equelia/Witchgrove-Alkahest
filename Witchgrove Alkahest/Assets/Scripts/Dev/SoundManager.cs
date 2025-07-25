@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cysharp.Threading.Tasks;
 using UnityEngine;
 
 /// <summary>
@@ -11,7 +12,7 @@ public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
 
-    [System.Serializable]
+    [Serializable]
     public class SoundEntry
     {
         [Tooltip("Unique identifier for this sound")]
@@ -43,6 +44,9 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, SoundEntry> soundDict;
     // Internal  bg music lookup dictionary
     private Dictionary<string, SoundEntry> bgMusicDict;
+    // Sounds that already have been played
+    private HashSet<string> playingOnce = new HashSet<string>();
+
 
     void Awake()
     {
@@ -86,6 +90,7 @@ public class SoundManager : MonoBehaviour
     private void Start()
     {
         PlayMusic("MeadowLvl", true);
+        ApplySavedVolumes(); 
     }
 
     /// <summary>
@@ -108,6 +113,44 @@ public class SoundManager : MonoBehaviour
         src.PlayOneShot(entry.clip, volumeScale);
         return entry.clip;
     }
+    
+
+    /// <summary>
+    /// Plays the sound only once at a time. Allows re-playing after the clip finishes.
+    /// </summary>
+    public AudioClip PlaySoundOnceUntilComplete(string soundName)
+    {
+        if (playingOnce.Contains(soundName))
+            return null;
+
+        if (!soundDict.TryGetValue(soundName, out var entry))
+        {
+            Debug.LogWarning($"Sound '{soundName}' not found in SoundManager library.");
+            return null;
+        }
+
+        // Find available audio source or expand pool
+        var src = sfxPool.Find(s => !s.isPlaying) ?? ExpandSfxPool(1)[0];
+
+        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
+        float volumeScale = master * sfxVol * entry.volume;
+
+        src.PlayOneShot(entry.clip, volumeScale);
+
+        // Track as "currently playing"
+        playingOnce.Add(soundName);
+        RemoveFromOnceAfterDelay(soundName, entry.clip.length).Forget();
+
+        return entry.clip;
+    }
+    
+    private async UniTaskVoid RemoveFromOnceAfterDelay(string soundName, float delay)
+    {
+        await UniTask.Delay(System.TimeSpan.FromSeconds(delay), cancellationToken: this.GetCancellationTokenOnDestroy());
+        playingOnce.Remove(soundName);
+    }
+
 
 
     /// <summary>
@@ -123,9 +166,24 @@ public class SoundManager : MonoBehaviour
             return;
         }
         musicSource.clip = entry.clip;
-        musicSource.volume = entry.volume;
         musicSource.loop = loop;
         musicSource.Play();
+    }
+    
+    public void ApplySavedVolumes()
+    {
+        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float music = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float sfx = PlayerPrefs.GetFloat("SfxVolume", 1f);
+
+        if (musicSource != null)
+            musicSource.volume = master * music;
+
+        foreach (var src in sfxPool)
+        {
+            if (src != null)
+                src.volume = master * sfx;
+        }
     }
 
     /// <summary>

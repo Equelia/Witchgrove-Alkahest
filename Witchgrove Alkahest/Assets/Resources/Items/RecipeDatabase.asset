@@ -14,13 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   recipes:
   - ingredients:
-    - type: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
+    - type: {fileID: 11400000, guid: b77026d388bde2448aa320162eb5ddae, type: 2}
       count: 1
-    - type: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
+    - type: {fileID: 11400000, guid: 8db54b512fb997f42b13d94a904fbf5a, type: 2}
       count: 1
-    - type: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
+    - type: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
       count: 1
-    result: {fileID: 11400000, guid: b3c16e97c8662f64589da3c7738c29ba, type: 2}
+    - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
+      count: 1
+    result: {fileID: 11400000, guid: 3abd2212e3ff0714a956741cabaae8ac, type: 2}
     resultCount: 1
   - ingredients:
     - type: {fileID: 11400000, guid: 9ebbf24643bd87d4dbb10d531781eba2, type: 2}
@@ -32,6 +34,19 @@ MonoBehaviour:
     - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
       count: 1
     result: {fileID: 11400000, guid: 7a9afabd46746c745934ccdc6eb8a0e6, type: 2}
+    resultCount: 1
+  - ingredients:
+    - type: {fileID: 11400000, guid: b77026d388bde2448aa320162eb5ddae, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: 8db54b512fb997f42b13d94a904fbf5a, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
+      count: 1
+    - type: {fileID: 11400000, guid: aa2bf43029676ea428b598068f069b2a, type: 2}
+      count: 1
+    result: {fileID: 11400000, guid: 93340f65839b9874f92d25bbb30c9c0d, type: 2}
     resultCount: 1
   - ingredients:
     - type: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}
@@ -56,28 +71,13 @@ MonoBehaviour:
     result: {fileID: 11400000, guid: 68262e4b56e950d489d2545ff2040c9f, type: 2}
     resultCount: 1
   - ingredients:
-    - type: {fileID: 11400000, guid: b77026d388bde2448aa320162eb5ddae, type: 2}
+    - type: {fileID: 11400000, guid: 52c7aead70c5f1b4b9c4d72ebfb49d25, type: 2}
       count: 1
-    - type: {fileID: 11400000, guid: 8db54b512fb997f42b13d94a904fbf5a, type: 2}
+    - type: {fileID: 11400000, guid: 46638568dce0df9428d453f1a858364b, type: 2}
       count: 1
-    - type: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
+    - type: {fileID: 11400000, guid: d8de563721bf244448ddf3d7bbca4f95, type: 2}
       count: 1
-    - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: aa2bf43029676ea428b598068f069b2a, type: 2}
-      count: 1
-    result: {fileID: 11400000, guid: 93340f65839b9874f92d25bbb30c9c0d, type: 2}
-    resultCount: 1
-  - ingredients:
-    - type: {fileID: 11400000, guid: b77026d388bde2448aa320162eb5ddae, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: 8db54b512fb997f42b13d94a904fbf5a, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
-      count: 1
-    - type: {fileID: 11400000, guid: 49da57a175786c64b85c1a41e763ebbd, type: 2}
-      count: 1
-    result: {fileID: 11400000, guid: 3abd2212e3ff0714a956741cabaae8ac, type: 2}
+    result: {fileID: 11400000, guid: b3c16e97c8662f64589da3c7738c29ba, type: 2}
     resultCount: 1
   - ingredients:
     - type: {fileID: 11400000, guid: 1ef1365206609854cbdaace21c511b04, type: 2}

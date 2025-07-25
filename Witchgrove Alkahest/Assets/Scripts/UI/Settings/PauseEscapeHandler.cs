@@ -31,14 +31,12 @@ public class PauseEscapeHandler : MonoBehaviour
 				return;
 			}
 
-			// Затем закрыть настройки
 			if (settingsPanel.activeSelf)
 			{
 				settingsPanel.SetActive(false);
 				return;
 			}
 
-			// Затем закрыть главное меню
 			if (windowManager.IsMenuOpen)
 			{
 				windowManager.CloseMainMenu();

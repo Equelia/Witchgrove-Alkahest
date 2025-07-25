@@ -38,16 +38,19 @@
             SetupResolutionDropdown();
             SetupQualityDropdown();
             LoadSettings();
-
-            resolutionDropdown.onValueChanged.AddListener(SetResolution);
-            qualityDropdown.onValueChanged.AddListener(SetQuality);
-            brightnessSlider.onValueChanged.AddListener(SetBrightness);
-            returnButton.onClick.AddListener(ReturnToSettings);
             
             gameObject.SetActive(false);
         }
 
-        private void OnDestroy()
+        private void OnEnable()
+        {
+            resolutionDropdown.onValueChanged.AddListener(SetResolution);
+            qualityDropdown.onValueChanged.AddListener(SetQuality);
+            brightnessSlider.onValueChanged.AddListener(SetBrightness);
+            returnButton.onClick.AddListener(ReturnToSettings);
+        }
+
+        private void OnDisable()
         {
             resolutionDropdown.onValueChanged.RemoveListener(SetResolution);
             qualityDropdown.onValueChanged.RemoveListener(SetQuality);
@@ -92,23 +95,20 @@
         {
             string[] qualityNames = QualitySettings.names;
             qualityDropdown.ClearOptions();
-
-            qualityDropdown.AddOptions(new System.Collections.Generic.List<string>(qualityNames));
-            qualityDropdown.value = PlayerPrefs.GetInt(QualityKey, QualitySettings.GetQualityLevel());
-            qualityDropdown.RefreshShownValue();
+            qualityDropdown.AddOptions(new List<string>(qualityNames));
         }
-
+        
         private void LoadSettings()
         {
             int resIndex = PlayerPrefs.GetInt(ResolutionKey, currentResolutionIndex);
-
             if (resIndex < 0 || resIndex >= filteredResolutions.Count)
                 resIndex = currentResolutionIndex;
 
             resolutionDropdown.value = resIndex;
             SetResolution(resIndex);
 
-            int qualityIndex = PlayerPrefs.GetInt(QualityKey, qualityDropdown.value);
+            int qualityIndex = PlayerPrefs.GetInt(QualityKey, 2); // Hight settings by deffault 
+            qualityDropdown.value = qualityIndex;
             SetQuality(qualityIndex);
 
             float brightness = PlayerPrefs.GetFloat(BrightnessKey, 0.3f); 

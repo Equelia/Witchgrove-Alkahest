@@ -14,11 +14,13 @@ public class InventoryWindowManager : MonoBehaviour
 {
 	[SerializeField] private GameObject mainInventoryPanel;
 	[SerializeField] private GameObject mainMenuPanel;
+	[SerializeField] private GameObject darkBackground;
+
 	public List<PanelEntry> panels;
-	
+
 	public event Action OnInventoryClosed;
 
-	public bool IsInventoryOpen => mainInventoryPanel.activeSelf;
+	public bool IsInventoryOpen => mainInventoryPanel.activeSelf || darkBackground.activeSelf;
 	public bool IsMenuOpen => mainMenuPanel.activeSelf;
 
 	private void Start()
@@ -26,9 +28,19 @@ public class InventoryWindowManager : MonoBehaviour
 		CloseInventory();
 	}
 
+	private void UpdateDarkBGState()
+	{
+		if (darkBackground == null) return;
+
+		bool anyVisible = mainInventoryPanel.activeSelf || panels.Any(p => p.panel.activeSelf);
+		darkBackground.SetActive(anyVisible);
+	}
+
+
 	public void OpenInventory()
 	{
 		mainInventoryPanel.SetActive(true);
+		UpdateDarkBGState();
 	}
 
 	public void OpenMainMenu()
@@ -49,12 +61,21 @@ public class InventoryWindowManager : MonoBehaviour
 		PlayerInventorySystem.Instance.CurrentExternalReceiver = null;
 		Tooltip.Instance.Hide();
 		OnInventoryClosed?.Invoke();
+		UpdateDarkBGState();
 	}
 
 	public void OpenPanelByName(string panelName)
 	{
 		foreach (var entry in panels)
-			entry.panel.SetActive(entry.name == panelName);
+		{
+			if (entry.name == panelName)
+			{
+				entry.panel.SetActive(true);
+				break;
+			}
+		}
+
+		UpdateDarkBGState();
 	}
 
 	public void ClosePanelByName(string panelName)
@@ -67,17 +88,16 @@ public class InventoryWindowManager : MonoBehaviour
 				break;
 			}
 		}
+
+		UpdateDarkBGState();
+	}
+	
+	
+	public bool IsPanelOpen(string panelName)
+	{
+		return panels.Any(p => p.name == panelName && p.panel.activeSelf);
 	}
 
 	
 	public bool AnySubPanelOpen => panels.Any(p => p.panel.activeSelf);
-
-	public void CloseTopPanel()
-	{
-		var lastActive = panels.LastOrDefault(p => p.panel.activeSelf);
-		if (lastActive != null)
-		{
-			lastActive.panel.SetActive(false);
-		}
-	}
 }

@@ -15,14 +15,19 @@ public class SettingsPanel : MonoBehaviour
 	
 	[Space, SerializeField] private SettingsController settingsController;
 
-	private void Awake()
+	private void Start()
+	{
+		gameObject.SetActive(false);
+	}
+
+	private void OnEnable()
 	{
 		graphicsButton.onClick.AddListener(OpenGraphicsPanel);
 		soundButton.onClick.AddListener(OpenSoundPanel);
 		returnButton.onClick.AddListener(ReturnToMainMenu);
 	}
 
-	private void OnDestroy()
+	private void OnDisable()
 	{
 		graphicsButton.onClick.RemoveListener(OpenGraphicsPanel);
 		soundButton.onClick.RemoveListener(OpenSoundPanel);

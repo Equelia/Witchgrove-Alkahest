@@ -9,7 +9,7 @@ public class Animal : InteractableItem
 	
 	public override void Interact()
 	{
-		SoundManager.Instance.PlaySound(soundName);
+		SoundManager.Instance.PlaySoundOnceUntilComplete(soundName);
 
 		if (PlayerInventorySystem.Instance.TryConsumeItem(requiredItem, 1))
 		{

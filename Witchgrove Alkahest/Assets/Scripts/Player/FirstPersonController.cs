@@ -255,7 +255,7 @@ public class FirstPersonController : MonoBehaviour
 		{
 			verticalVelocity.y = Mathf.Sqrt(jumpHeight * -2f * gravity);
 			TriggerShake(jumpShakeDuration, jumpShakeAmplitude);
-			SoundManager.Instance.PlaySound("JumpSound");
+			SoundManager.Instance.PlaySoundOnceUntilComplete("JumpSound");
 		}
 
 		jumpRequested = false;
@@ -280,7 +280,7 @@ public class FirstPersonController : MonoBehaviour
 					horizontalVelocity = Vector3.zero;
 
 				TriggerShake(landShakeDuration, landShakeAmplitude);
-				SoundManager.Instance.PlaySound("LandSound");
+				SoundManager.Instance.PlaySoundOnceUntilComplete("LandSound");
 				landSoundTimer = landSoundCooldown;
 			}
 

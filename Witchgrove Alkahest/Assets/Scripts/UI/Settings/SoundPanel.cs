@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -18,16 +19,19 @@ public class SoundPanel : MonoBehaviour
     private void Start()
     {
         LoadVolumes();
-
-        masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
-        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
-        sfxVolumeSlider.onValueChanged.AddListener(SetSfxVolume);
-        returnButton.onClick.AddListener(ReturnToSettings);
         
         gameObject.SetActive(false);
     }
 
-    private void OnDestroy()
+    private void OnEnable()
+    {
+        masterVolumeSlider.onValueChanged.AddListener(SetMasterVolume);
+        musicVolumeSlider.onValueChanged.AddListener(SetMusicVolume);
+        sfxVolumeSlider.onValueChanged.AddListener(SetSfxVolume);
+        returnButton.onClick.AddListener(ReturnToSettings);
+    }
+
+    private void OnDisable()
     {
         masterVolumeSlider.onValueChanged.RemoveListener(SetMasterVolume);
         musicVolumeSlider.onValueChanged.RemoveListener(SetMusicVolume);
@@ -37,8 +41,8 @@ public class SoundPanel : MonoBehaviour
 
     private void LoadVolumes()
     {
-        float master = PlayerPrefs.GetFloat(MasterVolumeKey, 1f);
-        float music = PlayerPrefs.GetFloat(MusicVolumeKey, 1f);
+        float master = PlayerPrefs.GetFloat(MasterVolumeKey, 0.7f);
+        float music = PlayerPrefs.GetFloat(MusicVolumeKey, 0.2f); 
         float sfx = PlayerPrefs.GetFloat(SfxVolumeKey, 1f);
 
         masterVolumeSlider.value = master;
@@ -75,7 +79,7 @@ public class SoundPanel : MonoBehaviour
             return;
 
         if (SoundManager.Instance.musicSource != null)
-            SoundManager.Instance.musicSource.volume = master * music / 10;
+            SoundManager.Instance.musicSource.volume = master * music;
 
         foreach (var src in SoundManager.Instance.GetAllSfxSources())
         {
@@ -83,6 +87,7 @@ public class SoundPanel : MonoBehaviour
                 src.volume = master * sfx;
         }
     }
+    
     
     private void ReturnToSettings()
     {
