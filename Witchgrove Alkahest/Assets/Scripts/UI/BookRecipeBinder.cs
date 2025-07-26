@@ -79,12 +79,12 @@ public class BookRecipeBinder : MonoBehaviour
 			// Pin and display
 			pinnedUI.SetPinnedRecipe(recipe);
 			currentPinnedRecipe = recipe;
+			GoalController.Instance.TriggerGoalProgress(GoalConditionType.PinRecipe);
 		}
 
 		UpdateButtonLabel();
 	}
 
-	// Call this manually if book page changes externally
 	public void UpdateButtonLabel()
 	{
 		int spreadIndex = book.currentPage / 2;
@@ -97,7 +97,6 @@ public class BookRecipeBinder : MonoBehaviour
 
 		string targetName = resultNamesBySpread[spreadIndex];
 
-		// Find matching recipe
 		var recipe = recipeDatabase.recipes.Find(r =>
 			r.result != null &&
 			r.result.displayName.Trim().Equals(targetName.Trim(), System.StringComparison.OrdinalIgnoreCase));

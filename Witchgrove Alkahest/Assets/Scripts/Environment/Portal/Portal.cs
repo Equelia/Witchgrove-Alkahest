@@ -45,7 +45,7 @@ public class Portal : MonoBehaviour
             levelWarningUIWindowGroup?.Show();
             return;
         }
-
+        
         PortalManager.NextPortalID = targetPortalID;
         SceneManager.sceneLoaded += PortalManager.OnSceneLoaded;
         SaveManager.Instance.SaveGame();

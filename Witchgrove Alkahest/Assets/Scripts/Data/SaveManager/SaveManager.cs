@@ -39,6 +39,7 @@ public class SaveManager : MonoBehaviour
         SaveQuestsModule(data);
         SaveCauldronModule(data);
         SaveBasketModule(data);
+        SaveGoalsModule(data);
         WriteToFile(data);
         Debug.Log($"[SaveManager] Game saved to {savePath}");
     }
@@ -53,6 +54,7 @@ public class SaveManager : MonoBehaviour
         LoadQuestsModule(data);
         LoadCauldronModule(data);
         LoadBasketModule(data);
+        LoadGoalsModule(data);  
         Debug.Log($"[SaveManager] Game loaded from {savePath}");
     }
     
@@ -225,6 +227,21 @@ public class SaveManager : MonoBehaviour
             cauldron.AddToFirstEmpty(item, sd.count);
         }
     }
+    
+    public void SaveGoalsModule(SaveData data)
+    {
+        if (GoalController.Instance == null) return;
+
+        data.goalStepIndex = GoalController.Instance.GetCurrentStepIndex();
+    }
+
+    public void LoadGoalsModule(SaveData data)
+    {
+        if (GoalController.Instance == null) return;
+
+        GoalController.Instance.SetCurrentStepIndex(data.goalStepIndex);
+    }
+
     
         
     // Overall utilities

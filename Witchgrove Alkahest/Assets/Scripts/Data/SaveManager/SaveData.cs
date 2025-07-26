@@ -28,4 +28,6 @@ public class SaveData
 	public List<SlotData> cauldronCraftSlots = new List<SlotData>();
 	
 	public List<SlotData> basketSlots = new List<SlotData>();
+	
+	public int goalStepIndex = 0;
 }

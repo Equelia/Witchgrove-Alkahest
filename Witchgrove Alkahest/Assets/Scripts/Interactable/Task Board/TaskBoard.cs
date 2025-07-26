@@ -34,6 +34,7 @@ public class TaskBoard : InteractableItem
 	{
 		base.Interact();
 		PlayerInventorySystem.Instance.playerInventoryUI.inventoryWindowManager.OpenPanelByName("TaskBoard");
+		GoalController.Instance.TriggerGoalProgress(GoalConditionType.OpenQuestBoard);
 		uiWindowGroup?.Show();
 	}
 
@@ -49,6 +50,15 @@ public class TaskBoard : InteractableItem
 			var levelQuests = db.quests
 				.Where(q => !completedQuest.Contains(q));
 			available.AddRange(levelQuests);
+			
+			foreach (var q in levelQuests)
+			{
+				if (!available.Contains(q))
+					available.Add(q);
+				
+				if (q.questId == "Возвращение Домой")
+					GoalController.Instance.TriggerGoalProgress(GoalConditionType.QuestAvailable);
+			}
 		}
 
 		return available;

@@ -17,11 +17,17 @@ public class Cauldron : InventoryProvider
 	[Header("Tutorial")] [SerializeField] private UIWindowGroup uiWindowGroup;
 
 	private PotionData garbagePotion;
+	private PotionData regenPotion;
+	private PotionData sleepPotion;
+	private PotionData fearPotion;
 
 	public override void Awake()
 	{
 		base.Awake();
 		garbagePotion = ItemDatabase.Instance.GetPotionById("смущенноезелье");
+		regenPotion = ItemDatabase.Instance.GetPotionById("зелье регенерации");
+		sleepPotion = ItemDatabase.Instance.GetPotionById("Зелье сновидений");
+		fearPotion = ItemDatabase.Instance.GetPotionById("Зелье страха");
 	}
 
 	public override void Interact()
@@ -65,9 +71,11 @@ public class Cauldron : InventoryProvider
 				PlayerInventorySystem.Instance.TryAddOneItem(resultType);
 
 			if (pinnedRecipeUI.GetCurrentResult()?.id == resultType.id)
-			{
 				pinnedRecipeUI.Hide();
-			}
+
+			if (resultType == regenPotion || resultType == sleepPotion || resultType == fearPotion)
+				GoalController.Instance.TriggerGoalProgress(GoalConditionType.CraftPotionFromPool);
+
 		}
 		else
 		{

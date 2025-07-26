@@ -14,14 +14,13 @@ public class PortalActivator : InteractableItem
 	{
 		if (portalGameObject != null)
 		{
-			// Сохраняем исходные масштабы всех потомков (включая самого портала)
 			foreach (Transform t in portalGameObject.GetComponentsInChildren<Transform>(true))
 			{
 				originalScales[t] = t.localScale;
 				t.localScale = Vector3.zero;
 			}
 
-			portalGameObject.SetActive(false); // скрываем изначально
+			portalGameObject.SetActive(false); 
 		}
 	}
 
@@ -33,8 +32,8 @@ public class PortalActivator : InteractableItem
 		if (PlayerInventorySystem.Instance.TryConsumeItem(itemForPortal, 1))
 		{
 			portalGameObject.SetActive(true);
-
-			// Применяем анимацию ко всем сохранённым трансформам
+			GoalController.Instance.TriggerGoalProgress(GoalConditionType.UseAltar);
+			
 			foreach (var kvp in originalScales)
 			{
 				kvp.Key.localScale = Vector3.zero;

@@ -9,5 +9,6 @@ public static class PortalManager
 	{
 		SoundManager.Instance.StopMusic();
 		SoundManager.Instance.PlayMusic(scene.name, true);
+		GoalController.Instance.TriggerGoalProgress(GoalConditionType.EnterBiome);
 	}
 }

@@ -25,4 +25,11 @@ public class FloatingPlatform : MonoBehaviour
 		Vector3 newPos = new Vector3(startPos.x, newY, startPos.z);
 		rb.MovePosition(newPos);
 	}
+	
+	public void ForceSetPosition(Vector3 newPosition)
+	{
+		rb.MovePosition(newPosition);
+		startPos = newPosition;
+	}
+
 }
