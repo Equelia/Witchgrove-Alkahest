@@ -6,15 +6,18 @@ using UnityEngine.UI;
 
 public class PlayerUI : MonoBehaviour
 {
-	[Header("Player Data")]
-	[SerializeField] private PlayerData playerData;
+	[Header("Player Data")] [SerializeField]
+	private PlayerData playerData;
+
 	[SerializeField] private PlayerExperience playerExperience;
-	
-	[Header("UI Elements")]
-	[SerializeField] private TMP_Text levelText;
+
+	[Header("UI Elements")] [SerializeField]
+	private TMP_Text levelText;
+
 	[SerializeField] private TMP_Text goldText;
-	[SerializeField] private Image expProgressBar; 
-	
+	[SerializeField] private Image expProgressBar;
+	[SerializeField] private RectTransform levelEffectTransform;
+
 	private int currentGoldDisplay = 0;
 
 	private void OnEnable()
@@ -24,7 +27,7 @@ public class PlayerUI : MonoBehaviour
 			Debug.LogWarning("PlayerUI: missing references");
 			return;
 		}
-	
+
 		UpdateLevelUI();
 		UpdateGoldUI();
 		UpdateExpProgressBar();
@@ -41,10 +44,18 @@ public class PlayerUI : MonoBehaviour
 		playerData.OnExpChanged -= AnimateExpProgress;
 	}
 
+	private void Update()
+	{
+		if (expProgressBar.fillAmount == 0)
+			levelEffectTransform.gameObject.SetActive(false);
+		else
+			levelEffectTransform.gameObject.SetActive(true);
+	}
+
 	private void AnimateLevelUp()
 	{
 		SoundManager.Instance.PlaySound("LevelUp");
-		
+
 		levelText.text = playerData.Level.ToString();
 
 		levelText.transform.DOKill();
@@ -56,19 +67,14 @@ public class PlayerUI : MonoBehaviour
 			.OnComplete(() =>
 				levelText.transform.DOScale(1f, 0.2f).SetEase(Ease.InBack)
 			);
-
-		levelText.DOColor(Color.yellow, 0.15f)
-			.OnComplete(() =>
-				levelText.DOColor(Color.white, 0.15f)
-			);
 	}
 
-	
+
 	private void AnimateGoldChange()
 	{
 		goldText.transform.DOKill();
 		goldText.transform.localScale = Vector3.one;
-		
+
 		SoundManager.Instance.PlaySound("GoldChange");
 
 		goldText.transform
@@ -96,29 +102,73 @@ public class PlayerUI : MonoBehaviour
 
 		if (targetProgress < 1f)
 		{
-			expProgressBar.DOFillAmount(targetProgress, 0.5f).SetEase(Ease.OutQuad);
+			float currentProgress = expProgressBar.fillAmount;
+
+			DOTween.To(() => currentProgress, x =>
+			{
+				expProgressBar.fillAmount = x;
+				UpdateLevelEffectVisual(x);
+			}, targetProgress, 0.5f).SetEase(Ease.OutQuad);
 		}
 		else
 		{
 			var sequence = DOTween.Sequence();
 
-			sequence.Append(expProgressBar.DOFillAmount(1f, 0.4f).SetEase(Ease.OutQuad));
+			// До 100%
+			sequence.Append(DOTween.To(() => expProgressBar.fillAmount, x =>
+			{
+				expProgressBar.fillAmount = x;
+				UpdateLevelEffectVisual(x);
+			}, 1f, 0.4f).SetEase(Ease.OutQuad));
+
 			sequence.AppendInterval(0.1f);
-			sequence.Append(expProgressBar.DOFillAmount(0f, 0.3f).SetEase(Ease.InQuad));
+
+			sequence.AppendCallback(() => { UpdateLevelEffectVisual(1f); });
+
+			sequence.Append(DOTween.To(() => 1f, x =>
+			{
+				expProgressBar.fillAmount = x;
+				UpdateLevelEffectVisual(x);
+			}, 0f, 0.3f).SetEase(Ease.InQuad));
+
 			sequence.AppendCallback(() =>
 			{
 				float newProgress = playerExperience.GetProgressToNextLevel();
-				expProgressBar.DOFillAmount(newProgress, 0.4f).SetEase(Ease.OutQuad);
+
+				DOTween.To(() => 0f, x =>
+				{
+					expProgressBar.fillAmount = x;
+					UpdateLevelEffectVisual(x);
+				}, newProgress, 0.4f).SetEase(Ease.OutQuad);
 			});
 		}
 	}
 
-	
+
+	private void UpdateLevelEffectVisual(float progress)
+	{
+		RectTransform effectRect = levelEffectTransform;
+		RectTransform parentRect = expProgressBar.rectTransform;
+
+		float totalHeight = parentRect.rect.height;
+
+		const float yOffset = -5f;
+		float targetY = progress * totalHeight + yOffset;
+
+		effectRect.anchoredPosition = new Vector2(
+			effectRect.anchoredPosition.x,
+			targetY
+		);
+	}
+
+
 	private void UpdateExpProgressBar()
 	{
 		float currentProgress = playerExperience.GetProgressToNextLevel();
 		expProgressBar.fillAmount = currentProgress;
+		UpdateLevelEffectVisual(currentProgress);
 	}
+
 
 	private void UpdateLevelUI()
 	{
@@ -130,5 +180,4 @@ public class PlayerUI : MonoBehaviour
 		currentGoldDisplay = playerData.GoldAmount;
 		goldText.text = currentGoldDisplay.ToString();
 	}
-
 }

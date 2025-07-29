@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class Animal : InteractableItem
+public class MemeObject : InteractableItem
 {
 	[Header("Required item to exchange for gold")]
 	[SerializeField] private BaseItemData requiredItem;

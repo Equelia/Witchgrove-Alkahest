@@ -73,6 +73,7 @@ public abstract class InventoryProvider : InteractableItem, IExternalInventoryRe
 		}
 		
 		Debug.Log("Inventory is full");
+		SoundManager.Instance.PlaySoundOnceUntilComplete("InventoryFull");
 		return false;
 	}
 

@@ -26,21 +26,21 @@ public class CellController : MonoBehaviour
 
 		lockImage.gameObject.SetActive(IsLocked);
 
+		// всегда обновляем визуал, даже если заблокировано
+		visuals.UpdateVisuals(data);
+
+		// подсказка всегда включена, но не будет срабатывать без предмета
+		tooltipHandler.SetCell(cell);
+
 		if (!IsLocked)
 		{
-			visuals.UpdateVisuals(data);
 			soundHandler.Initialize(cell, soundName);
-			tooltipHandler.SetCell(cell);
 
 			data.OnSlotChanged += HandleSlotChanged;
 			data.OnExternallyModified += HandleSlotChanged;
 		}
-		else
-		{
-			visuals.Clear();
-			tooltipHandler.enabled = false;
-		}
 	}
+
 
 
 	private void HandleSlotChanged(Cell changed)

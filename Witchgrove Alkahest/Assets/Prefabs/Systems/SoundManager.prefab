@@ -118,6 +118,15 @@ MonoBehaviour:
   - name: Bober
     clip: {fileID: 8300000, guid: 90dcacfe053f27144828f45a1ff6c6f6, type: 3}
     volume: 0.05
+  - name: GoalCat
+    clip: {fileID: 8300000, guid: b35c2e5833b3b064eb7124628db12a1a, type: 3}
+    volume: 1
+  - name: Business
+    clip: {fileID: 8300000, guid: 6c05c32f0e489494b95299a8bdf06571, type: 3}
+    volume: 0.1
+  - name: InventoryFull
+    clip: {fileID: 8300000, guid: f1650901b7a1f424f8a207c94ecf1373, type: 3}
+    volume: 1
   bgMusicEntries:
   - name: MeadowLvl
     clip: {fileID: 8300000, guid: 262ddfc11b0abe64ab452fd4e2f20cb1, type: 3}

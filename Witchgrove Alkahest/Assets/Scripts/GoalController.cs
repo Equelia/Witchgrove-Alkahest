@@ -11,6 +11,7 @@ public class GoalStep
 
 public enum GoalConditionType
 {
+	InitialGoal,
 	OpenQuestBoard,
 	PinRecipe,
 	CraftPotionFromPool,
@@ -38,9 +39,12 @@ public class GoalController : MonoBehaviour
 	{
 		if (Instance == null) Instance = this;
 		else Destroy(gameObject);
+	}
 
-		currentStepIndex = 0;
-		goalUI.SetGoalText(CurrentStep.data.description);
+	private void Start()
+	{
+		if (currentStepIndex == 0)
+			SpawnGoalCat();
 	}
 
 
@@ -51,6 +55,7 @@ public class GoalController : MonoBehaviour
 		if (step.conditionType == conditionType)
 		{
 			SpawnGoalCat();
+			goalUI.FinishAllGoals();
 		}
 	}
 
@@ -73,7 +78,7 @@ public class GoalController : MonoBehaviour
 			goalUI.FinishAllGoals();
 		}
 	}
-	
+
 	public int GetCurrentStepIndex() => currentStepIndex;
 
 	public void SetCurrentStepIndex(int index)
@@ -81,5 +86,4 @@ public class GoalController : MonoBehaviour
 		currentStepIndex = Mathf.Clamp(index, 0, goalSteps.Count - 1);
 		goalUI.SetGoalText(CurrentStep.data.description);
 	}
-
 }

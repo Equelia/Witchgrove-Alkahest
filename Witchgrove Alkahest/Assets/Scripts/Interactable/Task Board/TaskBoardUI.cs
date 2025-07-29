@@ -3,17 +3,19 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using System.Linq;
 
 public class TaskBoardUI : MonoBehaviour
 {
-	[Header("Task Board Components")] [Tooltip("Assign Task Board logic components")] [SerializeField]
-	private TaskBoard taskBoardController;
+	[Header("Task Board Components")] [Tooltip("Assign Task Board logic components")]
+	[SerializeField] private TaskBoard taskBoardController;
 
-	[Header("Task Board QuestButton Elements"), Space(10f)] [SerializeField]
-	private List<Button> questButtons;
+	[Header("Task Board QuestButton Elements"), Space(10f)] 
+	[SerializeField] private List<Button> questButtons;
 
-	[Header("UI Elements"), Space(10f)] [Tooltip("Assign UI Elements")] [SerializeField]
-	private TMP_Text infoText;
+	[Header("UI Elements"), Space(10f)] [Tooltip("Assign UI Elements")] 
+	[SerializeField] private TMP_Text infoText;
+	[SerializeField] private TMP_Text countText;
 
 	[SerializeField] private TMP_Text potionCountText;
 	[SerializeField] private Button completeButton;
@@ -33,6 +35,12 @@ public class TaskBoardUI : MonoBehaviour
 		UpdateQuestStatus();
 		RedrawQuestList();
 		completeButton.interactable = false;
+	}
+
+	private void ChangeCompleteButtonStatus(bool status)
+	{
+		completeButton.gameObject.SetActive(status);
+		countText.gameObject.SetActive(status);
 	}
 
 	private void RedrawQuestList()
@@ -64,6 +72,10 @@ public class TaskBoardUI : MonoBehaviour
 	{
 		taskBoardController.activeQuest = quest;
 		UpdateQuestStatus(quest);
+
+		var isLastQuest = (quest.questId == "Возвращение Домой");
+		ChangeCompleteButtonStatus(!isLastQuest);
+		 
 	}
 
 	private void UpdateQuestStatus(QuestData activeQuest = null)

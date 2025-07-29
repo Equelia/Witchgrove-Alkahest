@@ -20,7 +20,7 @@ public class TaskBoard : InteractableItem
 	[HideInInspector] public QuestData activeQuest;
 	private List<QuestData> completedQuest = new();
 	private List<QuestData> allQuests = new();
-
+	
 	private void Awake()
 	{
 		activeQuest = null;
@@ -55,7 +55,7 @@ public class TaskBoard : InteractableItem
 			{
 				if (!available.Contains(q))
 					available.Add(q);
-				
+
 				if (q.questId == "Возвращение Домой")
 					GoalController.Instance.TriggerGoalProgress(GoalConditionType.QuestAvailable);
 			}
