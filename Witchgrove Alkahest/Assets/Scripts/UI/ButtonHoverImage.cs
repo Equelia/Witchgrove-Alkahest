@@ -10,10 +10,12 @@ public class ButtonHoverImage : MonoBehaviour, IPointerEnterHandler, IPointerExi
 	public Sprite hoverSprite;
 
 	private Image buttonImage;
+	private Button button;
 
 	private void Awake()
 	{
 		buttonImage = GetComponent<Image>();
+		button = GetComponent<Button>();
 	}
 
 	private void OnEnable()
@@ -26,7 +28,7 @@ public class ButtonHoverImage : MonoBehaviour, IPointerEnterHandler, IPointerExi
 
 	public void OnPointerEnter(PointerEventData eventData)
 	{
-		if (buttonImage != null && hoverSprite != null)
+		if (buttonImage != null && hoverSprite != null && button.interactable)
 		{
 			buttonImage.sprite = hoverSprite;
 		}

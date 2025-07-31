@@ -5944,6 +5944,10 @@ PrefabInstance:
       propertyPath: m_sharedMaterial
       value: 
       objectReference: {fileID: -8047755773073401295, guid: 678766702d1ed2e47aae726b1ccf2977, type: 2}
+    - target: {fileID: 4445845129735495449, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: -20.4
+      objectReference: {fileID: 0}
     - target: {fileID: 4727345016485542193, guid: df54f8cc52f22c841894e8ff4f754ec1, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -6429,10 +6433,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: RecipeBook
       objectReference: {fileID: 0}
-    - target: {fileID: 3287030418450477863, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 4695000084644393052, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
       propertyPath: m_Pivot.x
       value: 0.5
@@ -6517,14 +6517,6 @@ PrefabInstance:
       propertyPath: canvas
       value: 
       objectReference: {fileID: 5282476125851157124}
-    - target: {fileID: 8368621683648171299, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
-      propertyPath: m_fontAsset
-      value: 
-      objectReference: {fileID: 11400000, guid: 678766702d1ed2e47aae726b1ccf2977, type: 2}
-    - target: {fileID: 8368621683648171299, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
-      propertyPath: m_sharedMaterial
-      value: 
-      objectReference: {fileID: -8047755773073401295, guid: 678766702d1ed2e47aae726b1ccf2977, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
