@@ -1,4 +1,5 @@
 using System;
+using Cysharp.Threading.Tasks;
 
 public class GoalCat : InteractableItem
 {
@@ -8,8 +9,9 @@ public class GoalCat : InteractableItem
 		gameObject.SetActive(false);
 	}
 
-	private void OnEnable()
+	private async void OnEnable()
 	{
-		SoundManager.Instance.PlaySound("GoalCat");
+		await UniTask.Delay(1000); 		
+		SoundManager.Instance.PlaySoundOnceAtPositionUntilComplete("GoalCat", gameObject.transform.position);
 	}
 }

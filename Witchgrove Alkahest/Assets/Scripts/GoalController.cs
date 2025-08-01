@@ -44,7 +44,7 @@ public class GoalController : MonoBehaviour
 	private void Start()
 	{
 		if (currentStepIndex == 0)
-			SpawnGoalCat();
+			SpawnGoalCat(true);
 	}
 
 
@@ -59,9 +59,13 @@ public class GoalController : MonoBehaviour
 		}
 	}
 
-	private void SpawnGoalCat()
+	private void SpawnGoalCat(bool spawnForward = false)
 	{
 		Vector3 spawnPos = playerTransform.position - playerTransform.forward * 2f;
+
+		if (spawnForward)
+			spawnPos = playerTransform.position + playerTransform.forward * 2f;
+
 		goalCat.transform.position = spawnPos;
 		goalCat.SetActive(true);
 	}

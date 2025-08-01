@@ -9,7 +9,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4159539725058607975}
-  m_Layer: 0
+  - component: {fileID: 5369981663332605138}
+  - component: {fileID: 2720147385248079849}
+  m_Layer: 6
   m_Name: PrefabYagoda
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -34,6 +36,43 @@ Transform:
   - {fileID: 6595587952232978560}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &5369981663332605138
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209557140328919940}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Size: {x: 1, y: 0.47783497, z: 1}
+  m_Center: {x: 0, y: -0.26108253, z: 0}
+--- !u!114 &2720147385248079849
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3209557140328919940}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
+  ingredientData: {fileID: 11400000, guid: 4b7f2d01f892625409f1bff1adb67c51, type: 2}
+  consumable: 1
+  uiWindowGroup: {fileID: 0}
 --- !u!1001 &1405810081741068778
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -106,6 +145,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: LohnayaYagoda
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: c531ee933f20d6e4da670f755261bba3, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -135,6 +178,14 @@ PrefabInstance:
     - target: {fileID: 3144397447429343060, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
       propertyPath: m_Name
       value: vfxYagoda(Meadow) (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144397447429343060, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3422084827547584386, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7173426107740844906, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
       propertyPath: m_LocalPosition.x
@@ -192,6 +243,10 @@ PrefabInstance:
       propertyPath: m_LocalPosition.z
       value: -0.016
       objectReference: {fileID: 0}
+    - target: {fileID: 8430189232448445308, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -213,6 +268,14 @@ PrefabInstance:
     - target: {fileID: 3144397447429343060, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
       propertyPath: m_Name
       value: vfxYagoda(Meadow)
+      objectReference: {fileID: 0}
+    - target: {fileID: 3144397447429343060, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3422084827547584386, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7402924621659737009, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
       propertyPath: m_LocalPosition.x
@@ -253,6 +316,10 @@ PrefabInstance:
     - target: {fileID: 7402924621659737009, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8430189232448445308, guid: 92c32565083bfb24db5dd3b8fd5f6b70, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

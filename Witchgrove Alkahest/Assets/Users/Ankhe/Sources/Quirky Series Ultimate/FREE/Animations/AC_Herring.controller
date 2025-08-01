@@ -20,7 +20,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 3026008405247099716}
-    m_Position: {x: 460, y: 70, z: 0}
+    m_Position: {x: 420, y: -130, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -4812666849199361229}
     m_Position: {x: 240, y: 120, z: 0}
@@ -56,7 +56,7 @@ AnimatorStateMachine:
     m_Position: {x: 240, y: 370, z: 0}
   - serializedVersion: 1
     m_State: {fileID: 83113974186324095}
-    m_Position: {x: 460, y: 370, z: 0}
+    m_Position: {x: 250, y: -140, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -2242542766928305082}
     m_Position: {x: 240, y: 420, z: 0}
@@ -69,7 +69,7 @@ AnimatorStateMachine:
   m_EntryPosition: {x: 50, y: 120, z: 0}
   m_ExitPosition: {x: 800, y: 120, z: 0}
   m_ParentStateMachinePosition: {x: 800, y: 20, z: 0}
-  m_DefaultState: {fileID: 3441052937135925910}
+  m_DefaultState: {fileID: 83113974186324095}
 --- !u!1102 &-8966093945038304913
 AnimatorState:
   serializedVersion: 6
@@ -791,7 +791,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Swim
+  m_Name: Idle
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []
@@ -921,7 +921,7 @@ AnimatorState:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Death
+  m_Name: Interact
   m_Speed: 1
   m_CycleOffset: 0
   m_Transitions: []

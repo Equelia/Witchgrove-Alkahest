@@ -127,6 +127,18 @@ MonoBehaviour:
   - name: InventoryFull
     clip: {fileID: 8300000, guid: f1650901b7a1f424f8a207c94ecf1373, type: 3}
     volume: 1
+  - name: RiverMan
+    clip: {fileID: 8300000, guid: f9dcd307966216b44bb059d023f10b6e, type: 3}
+    volume: 1
+  - name: Gun
+    clip: {fileID: 8300000, guid: 6383a53a1a480a240aafd4f0d7b1235c, type: 3}
+    volume: 1
+  - name: Parkour
+    clip: {fileID: 8300000, guid: a3dde3b5ac60c5241a4622ae41da379c, type: 3}
+    volume: 1
+  - name: Pivo
+    clip: {fileID: 8300000, guid: 0d50bc69697db904584204dad20b0110, type: 3}
+    volume: 1
   bgMusicEntries:
   - name: MeadowLvl
     clip: {fileID: 8300000, guid: 262ddfc11b0abe64ab452fd4e2f20cb1, type: 3}

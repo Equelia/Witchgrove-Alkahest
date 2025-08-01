@@ -8,6 +8,8 @@ using UnityEngine;
 /// Supports one background music AudioSource and pooled SFX AudioSources.
 /// Assign sound entries in inspector, then call PlaySound("name").
 /// </summary>
+
+[DefaultExecutionOrder(100)]
 public class SoundManager : MonoBehaviour
 {
     public static SoundManager Instance { get; private set; }
@@ -46,6 +48,8 @@ public class SoundManager : MonoBehaviour
     private Dictionary<string, SoundEntry> bgMusicDict;
     // Sounds that already have been played
     private HashSet<string> playingOnce = new HashSet<string>();
+    
+    private int audioSourceCounter = 0;
 
 
     void Awake()
@@ -78,13 +82,8 @@ public class SoundManager : MonoBehaviour
 
         // Initialize SFX pool
         sfxPool = new List<AudioSource>(initialSfxPoolSize);
-        for (int i = 0; i < initialSfxPoolSize; i++)
-        {
-            var src = gameObject.AddComponent<AudioSource>();
-            src.playOnAwake = false;
-            src.loop = false;
-            sfxPool.Add(src);
-        }
+        ExpandSfxPool(initialSfxPoolSize);
+
     }
 
     private void Start()
@@ -104,8 +103,9 @@ public class SoundManager : MonoBehaviour
             return null;
         }
 
-        var src = sfxPool.Find(s => !s.isPlaying) ?? ExpandSfxPool(1)[0];
-
+        var src = GetAvailableSfxSource();
+        src.spatialBlend = 0f;
+        
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
         float volumeScale = master * sfxVol * entry.volume;
@@ -130,7 +130,8 @@ public class SoundManager : MonoBehaviour
         }
 
         // Find available audio source or expand pool
-        var src = sfxPool.Find(s => !s.isPlaying) ?? ExpandSfxPool(1)[0];
+        var src = GetAvailableSfxSource();
+        src.spatialBlend = 0f;
 
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
@@ -144,6 +145,61 @@ public class SoundManager : MonoBehaviour
 
         return entry.clip;
     }
+    
+    /// <summary>
+    /// Plays a named sound at a specific world position using pooled AudioSource.
+    /// </summary>
+    public AudioClip PlaySoundAtPosition(string soundName, Vector3 position)
+    {
+        if (!soundDict.TryGetValue(soundName, out var entry))
+        {
+            Debug.LogWarning($"Sound '{soundName}' not found in SoundManager library.");
+            return null;
+        }
+
+        var src = GetAvailableSfxSource();
+        src.spatialBlend = 1f;
+        src.transform.position = position;
+
+        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
+        float volumeScale = master * sfxVol * entry.volume;
+
+        src.PlayOneShot(entry.clip, volumeScale);
+        return entry.clip;
+    }
+
+    /// <summary>
+    /// Plays a named sound once at a world position. Prevents replaying until finished. Uses pooled AudioSource.
+    /// </summary>
+    public AudioClip PlaySoundOnceAtPositionUntilComplete(string soundName, Vector3 position)
+    {
+        if (playingOnce.Contains(soundName))
+            return null;
+
+        if (!soundDict.TryGetValue(soundName, out var entry))
+        {
+            Debug.LogWarning($"Sound '{soundName}' not found in SoundManager library.");
+            return null;
+        }
+
+        var src = GetAvailableSfxSource();
+        src.spatialBlend = 1f;
+        src.transform.position = position;
+
+        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
+        float volumeScale = master * sfxVol * entry.volume;
+
+        src.PlayOneShot(entry.clip, volumeScale);
+
+        playingOnce.Add(soundName);
+        RemoveFromOnceAfterDelay(soundName, entry.clip.length).Forget();
+
+        return entry.clip;
+    }
+
+
     
     private async UniTaskVoid RemoveFromOnceAfterDelay(string soundName, float delay)
     {
@@ -203,14 +259,28 @@ public class SoundManager : MonoBehaviour
         var newList = new List<AudioSource>(count);
         for (int i = 0; i < count; i++)
         {
-            var src = gameObject.AddComponent<AudioSource>();
+            GameObject go = new GameObject($"SFX_AudioSource_{audioSourceCounter++}");
+            go.transform.parent = this.transform;
+
+            AudioSource src = go.AddComponent<AudioSource>();
             src.playOnAwake = false;
             src.loop = false;
+            src.minDistance = 1f;
+            src.maxDistance = 20f;
+            src.rolloffMode = AudioRolloffMode.Linear;
+
             sfxPool.Add(src);
             newList.Add(src);
         }
         return newList;
     }
+    
+    private AudioSource GetAvailableSfxSource()
+    {
+        return sfxPool.Find(s => !s.isPlaying) ?? ExpandSfxPool(1)[0];
+    }
+
+
     
     public List<AudioSource> GetAllSfxSources()
     {
