@@ -5745,9 +5745,17 @@ PrefabInstance:
       propertyPath: pinnedUI
       value: 
       objectReference: {fileID: 6481392581289966743}
+    - target: {fileID: 1563527922018978817, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 1760e6804c3509c4a8483da6617ce465, type: 3}
     - target: {fileID: 3287030418450477863, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
       propertyPath: m_Name
       value: RecipeBook
+      objectReference: {fileID: 0}
+    - target: {fileID: 3287030418450477863, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4695000084644393052, guid: 4474ecbf771bcc544b21dd585b5f4cb8, type: 3}
       propertyPath: m_Pivot.x

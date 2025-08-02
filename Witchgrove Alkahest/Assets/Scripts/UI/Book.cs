@@ -42,7 +42,9 @@ public class Book : MonoBehaviour
 	public int TotalPageCount => bookPages.Length;
 	public Vector3 EndBottomLeft => ebl;
 	public Vector3 EndBottomRight => ebr;
-	public float Height => BookPanel.rect.height;
+	
+	private const string PlayerPrefsPageKey = "Book_CurrentPage";
+
 
 	private float radius1, radius2;
 	private Vector3 sb, st, c, ebr, ebl, f;
@@ -56,6 +58,11 @@ public class Book : MonoBehaviour
 
 		Left.gameObject.SetActive(false);
 		Right.gameObject.SetActive(false);
+
+		// Загрузка текущей страницы
+		currentPage = PlayerPrefs.GetInt(PlayerPrefsPageKey, 1);
+		currentPage = Mathf.Clamp(currentPage, 0, bookPages.Length - 1);
+
 		UpdateSprites();
 		CalcCurlCriticalPoints();
 
@@ -71,9 +78,10 @@ public class Book : MonoBehaviour
 		Shadow.rectTransform.pivot = new Vector2(1, (pageWidth / 2) / shadowPageHeight);
 		ShadowLTR.rectTransform.sizeDelta = new Vector2(pageWidth, shadowPageHeight);
 		ShadowLTR.rectTransform.pivot = new Vector2(0, (pageWidth / 2) / shadowPageHeight);
-		
+
 		UpdateNavigationButtons();
 	}
+
 
 	private void CalcCurlCriticalPoints()
 	{
@@ -391,6 +399,10 @@ public class Book : MonoBehaviour
 		currentPage += (mode == FlipMode.RightToLeft) ? 2 : -2;
 		currentPage = Mathf.Clamp(currentPage, 0, bookPages.Length - 1);
 
+		// 💾 Сохраняем текущую страницу
+		PlayerPrefs.SetInt(PlayerPrefsPageKey, currentPage);
+		PlayerPrefs.Save();
+
 		LeftNext.transform.SetParent(BookPanel.transform, true);
 		Left.transform.SetParent(BookPanel.transform, true);
 		Right.transform.SetParent(BookPanel.transform, true);
@@ -403,6 +415,7 @@ public class Book : MonoBehaviour
 		OnFlip?.Invoke();
 		UpdateNavigationButtons();
 	}
+
 
 	private void UpdateSprites()
 	{

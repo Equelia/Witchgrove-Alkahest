@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -17,6 +18,27 @@ public class BookRecipeBinder : MonoBehaviour
 	[SerializeField] private List<string> resultNamesBySpread = new();
 	
 	private Recipe currentPinnedRecipe;
+	
+	private const string PinnedRecipeKey = "PinnedRecipeName";
+
+	private void Start()
+	{
+		string savedName = PlayerPrefs.GetString(PinnedRecipeKey, "");
+		if (!string.IsNullOrWhiteSpace(savedName))
+		{
+			var recipe = recipeDatabase.recipes.Find(r =>
+				r.result != null &&
+				r.result.displayName.Trim().Equals(savedName, System.StringComparison.OrdinalIgnoreCase));
+
+			if (recipe != null)
+			{
+				pinnedUI.SetPinnedRecipe(recipe);
+				currentPinnedRecipe = recipe;
+			}
+		}
+		
+		gameObject.SetActive(false);
+	}
 
 	private void OnEnable()
 	{
@@ -73,12 +95,16 @@ public class BookRecipeBinder : MonoBehaviour
 			// Unpin if already active
 			pinnedUI.Hide();
 			currentPinnedRecipe = null;
+			PlayerPrefs.DeleteKey(PinnedRecipeKey);
+
 		}
 		else
 		{
 			// Pin and display
 			pinnedUI.SetPinnedRecipe(recipe);
 			currentPinnedRecipe = recipe;
+			PlayerPrefs.SetString(PinnedRecipeKey, recipe.result.displayName.Trim());
+			PlayerPrefs.Save();
 			GoalController.Instance.TriggerGoalProgress(GoalConditionType.PinRecipe);
 		}
 
