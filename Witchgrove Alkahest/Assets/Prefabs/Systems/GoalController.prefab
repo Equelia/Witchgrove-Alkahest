@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4333545387203236287}
   - component: {fileID: 5028615850996689124}
+  - component: {fileID: 6471234963971160326}
   m_Layer: 0
   m_Name: GoalController
   m_TagString: Untagged
@@ -47,16 +48,34 @@ MonoBehaviour:
   goalCat: {fileID: 0}
   playerTransform: {fileID: 0}
   goalSteps:
-  - data: {fileID: 11400000, guid: 872db33cace360f41b70b33ea958c749, type: 2}
+  - data: {fileID: 11400000, guid: 76977131f05e69b46b140be740775b7c, type: 2}
     conditionType: 0
-  - data: {fileID: 11400000, guid: 89666ff9fefe7824981347b72a50e7d2, type: 2}
+  - data: {fileID: 11400000, guid: 872db33cace360f41b70b33ea958c749, type: 2}
     conditionType: 1
-  - data: {fileID: 11400000, guid: 523883caf6297ac4fa67b4111806634a, type: 2}
+  - data: {fileID: 11400000, guid: 89666ff9fefe7824981347b72a50e7d2, type: 2}
     conditionType: 2
-  - data: {fileID: 11400000, guid: b0b1f7d908ac69240ab87ecd838a5245, type: 2}
+  - data: {fileID: 11400000, guid: 523883caf6297ac4fa67b4111806634a, type: 2}
     conditionType: 3
-  - data: {fileID: 11400000, guid: da8451f3d230c714a81260f36e83e31e, type: 2}
+  - data: {fileID: 11400000, guid: b0b1f7d908ac69240ab87ecd838a5245, type: 2}
     conditionType: 4
-  - data: {fileID: 11400000, guid: c734504418c97724bb9b926988b99b70, type: 2}
+  - data: {fileID: 11400000, guid: da8451f3d230c714a81260f36e83e31e, type: 2}
     conditionType: 5
+  - data: {fileID: 11400000, guid: c734504418c97724bb9b926988b99b70, type: 2}
+    conditionType: 6
   goalUI: {fileID: 0}
+--- !u!114 &6471234963971160326
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1676334355317638971}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 082ec07bee244266bb26f9d8962e7ffe, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dialogPanel: {fileID: 0}
+  dialogText: {fileID: 0}
+  nextButton: {fileID: 0}
+  closeButton: {fileID: 0}

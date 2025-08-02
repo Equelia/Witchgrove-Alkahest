@@ -42,7 +42,7 @@ public class MainMenu : MonoBehaviour
 
     private void OpenAuthors()
     {
-        //authorsPanel.SetActive(true);
+        authorsPanel.SetActive(true);
     }
 
     private void Exit()

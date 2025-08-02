@@ -19,7 +19,8 @@ public class SoundPanel : MonoBehaviour
     private void Start()
     {
         LoadVolumes();
-        
+        SoundManager.Instance?.ApplySavedVolumes();
+
         gameObject.SetActive(false);
     }
 
@@ -43,7 +44,7 @@ public class SoundPanel : MonoBehaviour
     {
         float master = PlayerPrefs.GetFloat(MasterVolumeKey, 0.7f);
         float music = PlayerPrefs.GetFloat(MusicVolumeKey, 0.2f); 
-        float sfx = PlayerPrefs.GetFloat(SfxVolumeKey, 1f);
+        float sfx = PlayerPrefs.GetFloat(SfxVolumeKey, 0.5f);
 
         masterVolumeSlider.value = master;
         musicVolumeSlider.value = music;
@@ -75,17 +76,7 @@ public class SoundPanel : MonoBehaviour
 
     private void ApplyVolumes(float master, float music, float sfx)
     {
-        if (SoundManager.Instance == null)
-            return;
-
-        if (SoundManager.Instance.musicSource != null)
-            SoundManager.Instance.musicSource.volume = master * music;
-
-        foreach (var src in SoundManager.Instance.GetAllSfxSources())
-        {
-            if (src != null)
-                src.volume = master * sfx;
-        }
+        SoundManager.Instance?.ApplySavedVolumes();
     }
     
     

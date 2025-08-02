@@ -466,6 +466,7 @@ GameObject:
   - component: {fileID: 8094314959241340313}
   - component: {fileID: 191758224738178241}
   - component: {fileID: 6104645959598419707}
+  - component: {fileID: 4107047765842332137}
   m_Layer: 5
   m_Name: PinHolder
   m_TagString: Untagged
@@ -590,6 +591,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: 114873927440a4344a6d65bd98d79163, type: 3}
   hoverSprite: {fileID: 21300000, guid: 5358decdb5579174da06d274d0cd43f9, type: 3}
+--- !u!114 &4107047765842332137
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2676417665384707171}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070ec85f197d83f428744beb2b642db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2729148897802371742
 GameObject:
   m_ObjectHideFlags: 0
@@ -1178,6 +1191,7 @@ GameObject:
   - component: {fileID: 8508128378682993320}
   - component: {fileID: 2451949019500271290}
   - component: {fileID: 8599519396957114626}
+  - component: {fileID: 3263047616421709048}
   m_Layer: 5
   m_Name: PreviousPageButton
   m_TagString: Untagged
@@ -1313,6 +1327,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: a0e0e780b1ac164468545939eef32093, type: 3}
   hoverSprite: {fileID: 21300000, guid: d76f5d9981b48824b8c541008b6e55c4, type: 3}
+--- !u!114 &3263047616421709048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4666539187064110540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070ec85f197d83f428744beb2b642db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4820608635764828325
 GameObject:
   m_ObjectHideFlags: 0
@@ -1820,6 +1846,7 @@ GameObject:
   - component: {fileID: 7282945306018466018}
   - component: {fileID: 4113894007445199116}
   - component: {fileID: 6433040136740306809}
+  - component: {fileID: 1112293777297260041}
   m_Layer: 5
   m_Name: NextPageButton
   m_TagString: Untagged
@@ -1955,6 +1982,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: a0e0e780b1ac164468545939eef32093, type: 3}
   hoverSprite: {fileID: 21300000, guid: d76f5d9981b48824b8c541008b6e55c4, type: 3}
+--- !u!114 &1112293777297260041
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8988102045638228875}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070ec85f197d83f428744beb2b642db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9040507980841933993
 GameObject:
   m_ObjectHideFlags: 0

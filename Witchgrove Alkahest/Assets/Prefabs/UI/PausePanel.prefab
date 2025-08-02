@@ -274,6 +274,7 @@ GameObject:
   - component: {fileID: 8624382537245714554}
   - component: {fileID: 7821570183449145557}
   - component: {fileID: 4527870269824166663}
+  - component: {fileID: 2160445288232380486}
   m_Layer: 5
   m_Name: ContinueButton
   m_TagString: Untagged
@@ -397,6 +398,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: 114873927440a4344a6d65bd98d79163, type: 3}
   hoverSprite: {fileID: 21300000, guid: 5358decdb5579174da06d274d0cd43f9, type: 3}
+--- !u!114 &2160445288232380486
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5377037443881235544}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070ec85f197d83f428744beb2b642db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5527470383438399187
 GameObject:
   m_ObjectHideFlags: 0
@@ -410,6 +423,7 @@ GameObject:
   - component: {fileID: 931483426483648405}
   - component: {fileID: 29617653061161250}
   - component: {fileID: 8803207124168522561}
+  - component: {fileID: 7986184989342561963}
   m_Layer: 5
   m_Name: MainMenuButton
   m_TagString: Untagged
@@ -533,6 +547,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: 114873927440a4344a6d65bd98d79163, type: 3}
   hoverSprite: {fileID: 21300000, guid: 5358decdb5579174da06d274d0cd43f9, type: 3}
+--- !u!114 &7986184989342561963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5527470383438399187}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070ec85f197d83f428744beb2b642db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5734782526979417841
 GameObject:
   m_ObjectHideFlags: 0
@@ -546,6 +572,7 @@ GameObject:
   - component: {fileID: 5325464731960813848}
   - component: {fileID: 7617056695480444986}
   - component: {fileID: 3455531544528156451}
+  - component: {fileID: 6934520612579044161}
   m_Layer: 5
   m_Name: SettingsButton
   m_TagString: Untagged
@@ -669,6 +696,18 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   defaultSprite: {fileID: 21300000, guid: 114873927440a4344a6d65bd98d79163, type: 3}
   hoverSprite: {fileID: 21300000, guid: 5358decdb5579174da06d274d0cd43f9, type: 3}
+--- !u!114 &6934520612579044161
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5734782526979417841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 070ec85f197d83f428744beb2b642db6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &7702377420221386715
 GameObject:
   m_ObjectHideFlags: 0

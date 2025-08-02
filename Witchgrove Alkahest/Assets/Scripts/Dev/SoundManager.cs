@@ -24,6 +24,11 @@ public class SoundManager : MonoBehaviour
         [Tooltip("Volume (0-1)")]
         [Range(0f,1f)] public float volume = 1f;
     }
+    
+    [Header("Base Multipliers")]
+    [SerializeField, Range(0f, 1f)] private float defaultSfxVolumeMultiplier = 1f;
+    [SerializeField, Range(0f, 1f)] private float defaultMusicVolumeMultiplier = 1f;
+
 
     [Header("Sound Library")]
     [Tooltip("List of named sounds")]
@@ -108,7 +113,7 @@ public class SoundManager : MonoBehaviour
         
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
-        float volumeScale = master * sfxVol * entry.volume;
+        float volumeScale = master * sfxVol * defaultSfxVolumeMultiplier * entry.volume;
 
         src.PlayOneShot(entry.clip, volumeScale);
         return entry.clip;
@@ -135,7 +140,7 @@ public class SoundManager : MonoBehaviour
 
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
-        float volumeScale = master * sfxVol * entry.volume;
+        float volumeScale = master * sfxVol * defaultSfxVolumeMultiplier * entry.volume;
 
         src.PlayOneShot(entry.clip, volumeScale);
 
@@ -163,7 +168,7 @@ public class SoundManager : MonoBehaviour
 
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
-        float volumeScale = master * sfxVol * entry.volume;
+        float volumeScale = master * sfxVol * defaultSfxVolumeMultiplier * entry.volume;
 
         src.PlayOneShot(entry.clip, volumeScale);
         return entry.clip;
@@ -189,7 +194,7 @@ public class SoundManager : MonoBehaviour
 
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float sfxVol = PlayerPrefs.GetFloat("SfxVolume", 1f);
-        float volumeScale = master * sfxVol * entry.volume;
+        float volumeScale = master * sfxVol * defaultSfxVolumeMultiplier * entry.volume;
 
         src.PlayOneShot(entry.clip, volumeScale);
 
@@ -216,31 +221,42 @@ public class SoundManager : MonoBehaviour
     {
         if (musicSource == null)
             return;
+
         if (!bgMusicDict.TryGetValue(soundName, out var entry))
         {
             Debug.LogWarning($"Music '{soundName}' not found in SoundManager library.");
             return;
         }
+
+        float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
+        float musicVol = PlayerPrefs.GetFloat("MusicVolume", 1f);
+        float finalVolume = master * musicVol * defaultMusicVolumeMultiplier * entry.volume;
+
         musicSource.clip = entry.clip;
         musicSource.loop = loop;
+        musicSource.volume = finalVolume;
         musicSource.Play();
     }
+
     
     public void ApplySavedVolumes()
     {
         float master = PlayerPrefs.GetFloat("MasterVolume", 1f);
         float music = PlayerPrefs.GetFloat("MusicVolume", 1f);
-        float sfx = PlayerPrefs.GetFloat("SfxVolume", 1f);
 
-        if (musicSource != null)
-            musicSource.volume = master * music;
-
-        foreach (var src in sfxPool)
+        if (musicSource != null && musicSource.clip != null)
         {
-            if (src != null)
-                src.volume = master * sfx;
+            foreach (var entry in bgMusicEntries)
+            {
+                if (entry.clip == musicSource.clip)
+                {
+                    musicSource.volume = master * music * defaultMusicVolumeMultiplier * entry.volume;
+                    break;
+                }
+            }
         }
     }
+
 
     /// <summary>
     /// Stop background music immediately.

@@ -9836,8 +9836,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 1.0209094, y: 0.8435969, z: 1.0603517}
+  m_Center: {x: 0.002920157, y: 0.42939436, z: 0.0027046262}
 --- !u!114 &-3453680122414153858
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -9850,9 +9850,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c84456b4babb4dd49b2b2fa3a2fcea18, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  objectInteractor: {fileID: 0}
   ingredientData: {fileID: 11400000, guid: 3a4b81c287229ec4fba7fcb9d05bb8b0, type: 2}
   consumable: 1
-  tutorialUIGroup: {fileID: 0}
+  uiWindowGroup: {fileID: 0}
 --- !u!1001 &4563707071272049569
 PrefabInstance:
   m_ObjectHideFlags: 0

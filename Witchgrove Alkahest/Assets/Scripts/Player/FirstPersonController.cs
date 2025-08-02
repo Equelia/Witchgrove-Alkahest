@@ -48,6 +48,8 @@ public class FirstPersonController : MonoBehaviour
 
 	[Header("Tutorial Settings")] [SerializeField]
 	private TutorialManager tutorialManager;
+	
+	[SerializeField] private GameObject dialogWindow;
 
 	private CharacterController controller;
 	private Vector3 verticalVelocity;
@@ -74,7 +76,7 @@ public class FirstPersonController : MonoBehaviour
 	private float landSoundTimer = 0f;
 
 	public bool IsUIOpen =>
-		windowManager.IsMenuOpen || windowManager.IsInventoryOpen || tutorialManager.IsTutorialActive();
+		windowManager.IsMenuOpen || windowManager.IsInventoryOpen || tutorialManager.IsTutorialActive() || dialogWindow.activeSelf;
 
 	void Start()
 	{

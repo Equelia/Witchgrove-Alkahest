@@ -1,4 +1,5 @@
 #if UNITY_EDITOR
+using System.Collections.Generic;
 using UnityEngine;
 using Sirenix.OdinInspector;
 using Sirenix.OdinInspector.Editor;
@@ -6,8 +7,7 @@ using UnityEditor;
 using System.IO;
 
 /// <summary>
-/// Окно управления SaveData игрока — редактирование, сохранение, загрузка, удаление.
-/// Работает и в Edit Mode, и в Play Mode.
+/// SaveData manager
 /// </summary>
 public class SaveDataEditor : OdinEditorWindow
 {
@@ -140,12 +140,59 @@ public class SaveDataEditor : OdinEditorWindow
 		}
 	}
 
-	[Button(ButtonSizes.Medium), GUIColor(1f, 0.6f, 0.6f), LabelText("Удалить PlayerPrefs")]
-	private void DeletePlayerPrefs()
+	[Button(ButtonSizes.Medium), GUIColor(1f, 0.5f, 0.5f), LabelText("Удалить PlayerPrefs НАСТРОЕК")]
+	private void DeleteSettingsPlayerPrefs()
 	{
-		PlayerPrefs.DeleteAll();
+		PlayerPrefs.DeleteKey("MouseSensitivity");
+		PlayerPrefs.DeleteKey("FpsLimit");
+		PlayerPrefs.DeleteKey("ScreenResolution");
+		PlayerPrefs.DeleteKey("QualityLevel");
+		PlayerPrefs.DeleteKey("BrightnessLevel");
+		PlayerPrefs.DeleteKey("MasterVolume");
+		PlayerPrefs.DeleteKey("MusicVolume");
+		PlayerPrefs.DeleteKey("SfxVolume");
 		PlayerPrefs.Save();
-		Debug.Log("[SaveDataEditor] PlayerPrefs удалены.");
+
+		Debug.Log("[SaveDataEditor] PlayerPrefs, связанные с настройками, удалены.");
 	}
+
+	[Button(ButtonSizes.Medium), GUIColor(1f, 0.4f, 0.4f), LabelText("Удалить ВСЕ игровые PlayerPrefs (кроме настроек)")]
+	private void DeleteOnlyGamePlayerPrefs()
+	{
+		var savedSettings = new Dictionary<string, object>
+		{
+			{ "MouseSensitivity", PlayerPrefs.GetFloat("MouseSensitivity", 0.5f) },
+			{ "FpsLimit", PlayerPrefs.GetInt("FpsLimit", 0) },
+			{ "ScreenResolution", PlayerPrefs.GetInt("ScreenResolution", 0) },
+			{ "QualityLevel", PlayerPrefs.GetInt("QualityLevel", 2) },
+			{ "BrightnessLevel", PlayerPrefs.GetFloat("BrightnessLevel", 0.3f) },
+			{ "MasterVolume", PlayerPrefs.GetFloat("MasterVolume", 0.7f) },
+			{ "MusicVolume", PlayerPrefs.GetFloat("MusicVolume", 0.2f) },
+			{ "SfxVolume", PlayerPrefs.GetFloat("SfxVolume", 0.5f) }
+		};
+
+		PlayerPrefs.DeleteAll();
+		
+		foreach (var pair in savedSettings)
+		{
+			switch (pair.Value)
+			{
+				case int i:
+					PlayerPrefs.SetInt(pair.Key, i);
+					break;
+				case float f:
+					PlayerPrefs.SetFloat(pair.Key, f);
+					break;
+				case string s:
+					PlayerPrefs.SetString(pair.Key, s);
+					break;
+			}
+		}
+
+		PlayerPrefs.Save();
+		Debug.Log("[SaveDataEditor] Все игровые PlayerPrefs удалены, настройки сохранены.");
+	}
+
+	
 }
 #endif
