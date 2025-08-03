@@ -15,11 +15,6 @@ public class SettingsPanel : MonoBehaviour
 	
 	[Space, SerializeField] private SettingsController settingsController;
 
-	private void Start()
-	{
-		gameObject.SetActive(false);
-	}
-
 	private void OnEnable()
 	{
 		graphicsButton.onClick.AddListener(OpenGraphicsPanel);

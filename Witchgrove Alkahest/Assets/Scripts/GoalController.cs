@@ -44,7 +44,14 @@ public class GoalController : MonoBehaviour
 	private void Start()
 	{
 		if (currentStepIndex == 0)
+		{
 			SpawnGoalCat(true);
+			goalUI.HideInstantly();
+		}
+		else
+		{
+			goalUI.SetGoalText(CurrentStep.data.description);
+		}
 	}
 
 
@@ -55,7 +62,7 @@ public class GoalController : MonoBehaviour
 		if (step.conditionType == conditionType)
 		{
 			SpawnGoalCat();
-			goalUI.FinishAllGoals();
+			goalUI.HideGoals();
 		}
 	}
 
@@ -79,7 +86,7 @@ public class GoalController : MonoBehaviour
 		}
 		else
 		{
-			goalUI.FinishAllGoals();
+			goalUI.HideGoals();
 		}
 	}
 

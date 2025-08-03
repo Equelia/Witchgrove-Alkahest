@@ -21,7 +21,7 @@ public class BookRecipeBinder : MonoBehaviour
 	
 	private const string PinnedRecipeKey = "PinnedRecipeName";
 
-	private void Start()
+	private void Awake()
 	{
 		string savedName = PlayerPrefs.GetString(PinnedRecipeKey, "");
 		if (!string.IsNullOrWhiteSpace(savedName))
@@ -36,8 +36,6 @@ public class BookRecipeBinder : MonoBehaviour
 				currentPinnedRecipe = recipe;
 			}
 		}
-		
-		gameObject.SetActive(false);
 	}
 
 	private void OnEnable()

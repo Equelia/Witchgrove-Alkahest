@@ -12,6 +12,9 @@ public class EndGamePortal : MonoBehaviour
 		{
 			endGamePanel.SetActive(true);
 			playerController.SetActive(false);
+			PlayerInventorySystem.Instance.gameObject.SetActive(false);
+			Cursor.lockState = CursorLockMode.None;
+			Cursor.visible = true;
 		}
 	}
 }
