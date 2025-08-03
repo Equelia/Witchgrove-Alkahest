@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 6d2204d9b3a30bc4ea553622baf4bdee
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307488
+  packageName: Mountain - Stylized Fantasy Environment
+  packageVersion: 1.1
+  assetPath: Assets/Holotna/Mountain/Models/Tree01.fbx
+  uploadId: 738207
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -51,7 +56,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -110,10 +115,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 307488
-  packageName: Mountain - Stylized Fantasy Environment
-  packageVersion: 1.1
-  assetPath: Assets/Holotna/Mountain/Models/Tree01.fbx
-  uploadId: 738207

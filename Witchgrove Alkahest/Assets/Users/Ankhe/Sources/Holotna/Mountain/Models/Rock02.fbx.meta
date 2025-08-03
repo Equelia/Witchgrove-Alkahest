@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: 7eea887dd135f38438297beecb26b6da
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307488
+  packageName: Mountain - Stylized Fantasy Environment
+  packageVersion: 1.1
+  assetPath: Assets/Holotna/Mountain/Models/Rock02.fbx
+  uploadId: 738207
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -36,6 +41,7 @@ ModelImporter:
   meshes:
     lODScreenPercentages:
     - 0.25
+    - 0.125
     - 0.01
     globalScale: 1
     meshCompression: 0
@@ -109,10 +115,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 307488
-  packageName: Mountain - Stylized Fantasy Environment
-  packageVersion: 1.1
-  assetPath: Assets/Holotna/Mountain/Models/Rock02.fbx
-  uploadId: 738207

@@ -1,7 +1,14 @@
 fileFormatVersion: 2
 guid: cd05cddec3f3cc34598bb5e2bf9fc218
+AssetOrigin:
+  serializedVersion: 1
+  productId: 260042
+  packageName: Idyllic Fantasy Nature
+  packageVersion: 1.0
+  assetPath: Assets/Idyllic Fantasy Nature/Models/Butterfly/Butterfly.fbx
+  uploadId: 617545
 ModelImporter:
-  serializedVersion: 21300
+  serializedVersion: 22200
   internalIDToNameTable: []
   externalObjects: {}
   materials:
@@ -16,8 +23,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -89,8 +94,7 @@ ModelImporter:
       - time: 0.9958678
         functionName: AnimationEnded
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 7b2d1c42e3127af4085a6e78ce29e663,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 7b2d1c42e3127af4085a6e78ce29e663, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -126,8 +130,7 @@ ModelImporter:
       - time: 0.9917355
         functionName: AnimationEnded
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 7b2d1c42e3127af4085a6e78ce29e663,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 7b2d1c42e3127af4085a6e78ce29e663, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -163,8 +166,7 @@ ModelImporter:
       - time: 0.9917355
         functionName: AnimationEnded
         data: 
-        objectReferenceParameter: {fileID: 11500000, guid: 7b2d1c42e3127af4085a6e78ce29e663,
-          type: 3}
+        objectReferenceParameter: {fileID: 11500000, guid: 7b2d1c42e3127af4085a6e78ce29e663, type: 3}
         floatParameter: 0
         intParameter: 0
         messageOptions: 0
@@ -180,6 +182,7 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
+    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -187,7 +190,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -207,6 +210,7 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
+    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -239,15 +243,9 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
+  importBlendShapeDeformPercent: 0
   remapMaterialsIfMaterialImportModeIsNone: 0
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 260042
-  packageName: Idyllic Fantasy Nature
-  packageVersion: 1.0
-  assetPath: Assets/Idyllic Fantasy Nature/Models/Butterfly/Butterfly.fbx
-  uploadId: 617545

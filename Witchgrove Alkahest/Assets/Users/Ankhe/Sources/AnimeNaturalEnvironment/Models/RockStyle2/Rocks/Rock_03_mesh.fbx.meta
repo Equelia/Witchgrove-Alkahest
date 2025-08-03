@@ -1,5 +1,12 @@
 fileFormatVersion: 2
 guid: f30e95d5e7931d747aa04517ce9faeea
+AssetOrigin:
+  serializedVersion: 1
+  productId: 236927
+  packageName: Anime Natural Environment
+  packageVersion: 1.02
+  assetPath: Assets/AnimeNaturalEnvironment/Models/RockStyle2/Rocks/Rock_03_mesh.fbx
+  uploadId: 645705
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -21,8 +28,6 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
-    rigImportErrors: 
-    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -53,7 +58,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 0
+    generateSecondaryUV: 1
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -112,10 +117,3 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
-AssetOrigin:
-  serializedVersion: 1
-  productId: 236927
-  packageName: Anime Natural Environment
-  packageVersion: 1.02
-  assetPath: Assets/AnimeNaturalEnvironment/Models/RockStyle2/Rocks/Rock_03_mesh.fbx
-  uploadId: 645705
