@@ -1,12 +1,5 @@
 fileFormatVersion: 2
 guid: e90cb0244ed309549bb2734776c5ea03
-AssetOrigin:
-  serializedVersion: 1
-  productId: 307488
-  packageName: Mountain - Stylized Fantasy Environment
-  packageVersion: 1.1
-  assetPath: Assets/Holotna/Mountain/Models/Bridge01.fbx
-  uploadId: 738207
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -23,6 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -115,3 +110,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 307488
+  packageName: Mountain - Stylized Fantasy Environment
+  packageVersion: 1.1
+  assetPath: Assets/Holotna/Mountain/Models/Bridge01.fbx
+  uploadId: 738207

@@ -1,14 +1,7 @@
 fileFormatVersion: 2
 guid: c7b2d7f4487ce764685b74ac15a605c5
-AssetOrigin:
-  serializedVersion: 1
-  productId: 229812
-  packageName: 'Low Poly Bird: Nests'
-  packageVersion: 1.0
-  assetPath: Assets/Low Poly Bird Nests/Meshes/Nest_10.fbx
-  uploadId: 521948
 ModelImporter:
-  serializedVersion: 22200
+  serializedVersion: 21202
   internalIDToNameTable:
   - first:
       74: -8643362626442215653
@@ -140,6 +133,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 1
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -165,7 +160,6 @@ ModelImporter:
     addColliders: 0
     useSRGBMaterialColor: 1
     sortHierarchyByName: 1
-    importPhysicalCameras: 1
     importVisibility: 1
     importBlendShapes: 1
     importCameras: 1
@@ -173,7 +167,7 @@ ModelImporter:
     nodeNameCollisionStrategy: 1
     fileIdsGeneration: 2
     swapUVChannels: 0
-    generateSecondaryUV: 1
+    generateSecondaryUV: 0
     useFileUnits: 1
     keepQuads: 0
     weldVertices: 1
@@ -193,7 +187,6 @@ ModelImporter:
     secondaryUVMinObjectScale: 1
     secondaryUVPackMargin: 4
     useFileScale: 1
-    strictVertexDataChecks: 0
   tangentSpace:
     normalSmoothAngle: 60
     normalImportMode: 0
@@ -226,9 +219,14 @@ ModelImporter:
   humanoidOversampling: 1
   avatarSetup: 0
   addHumanoidExtraRootOnlyWhenUsingAvatar: 1
-  importBlendShapeDeformPercent: 0
-  remapMaterialsIfMaterialImportModeIsNone: 1
   additionalBone: 0
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 229812
+  packageName: 'Low Poly Bird: Nests'
+  packageVersion: 1.0
+  assetPath: Assets/Low Poly Bird Nests/Meshes/Nest_10.fbx
+  uploadId: 521948

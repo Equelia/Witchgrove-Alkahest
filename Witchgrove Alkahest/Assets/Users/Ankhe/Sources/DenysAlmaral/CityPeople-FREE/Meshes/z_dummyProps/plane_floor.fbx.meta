@@ -1,12 +1,5 @@
 fileFormatVersion: 2
 guid: 02feb4b17ca061f4492c38fd726a4fcd
-AssetOrigin:
-  serializedVersion: 1
-  productId: 260446
-  packageName: City People FREE Samples
-  packageVersion: 1.1.1
-  assetPath: Assets/DenysAlmaral/CityPeople-FREE/Meshes/z_dummyProps/plane_floor.fbx
-  uploadId: 748246
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
@@ -23,6 +16,8 @@ ModelImporter:
     optimizeGameObjects: 0
     removeConstantScaleCurves: 0
     motionNodeName: 
+    rigImportErrors: 
+    rigImportWarnings: 
     animationImportErrors: 
     animationImportWarnings: 
     animationRetargetingWarnings: 
@@ -112,3 +107,10 @@ ModelImporter:
   userData: 
   assetBundleName: 
   assetBundleVariant: 
+AssetOrigin:
+  serializedVersion: 1
+  productId: 260446
+  packageName: City People FREE Samples
+  packageVersion: 1.1.1
+  assetPath: Assets/DenysAlmaral/CityPeople-FREE/Meshes/z_dummyProps/plane_floor.fbx
+  uploadId: 748246
