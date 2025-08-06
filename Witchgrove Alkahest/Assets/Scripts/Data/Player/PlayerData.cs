@@ -49,7 +49,7 @@ public class PlayerData : MonoBehaviour
 		get => inventoryLevel;
 		set
 		{
-			inventoryLevel = Mathf.Clamp(value, 1, 3);
+			inventoryLevel = Mathf.Clamp(value, 1, 4);
 			OnInventoryLevelChanged?.Invoke();
 		}
 	} 

@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class TaskBoard : InteractableItem
 {
-	[Header("Basket & PlayerExperience Components")]
-	[SerializeField] private Basket basket;
+	[Header("PlayerExperience Components")]
 	[SerializeField] private PlayerExperience playerExperience;
 	[SerializeField] private PlayerData playerData;
 	
@@ -95,11 +94,11 @@ public class TaskBoard : InteractableItem
 		activeQuest = null;
 	}
 
-	public int GetBasketAvailableItems(QuestData quest)
+	public int GetAvailableItems(QuestData quest)
 	{
 		if (quest == null) return 0;
 
-		return basket.GetAllSlots()
+		return PlayerInventorySystem.Instance.GetAllSlots()
 			.Where(slot => slot.ItemData == quest.requiredItem)
 			.Sum(slot => slot.Count);
 	}
@@ -108,7 +107,7 @@ public class TaskBoard : InteractableItem
 	{
 		int remaining = activeQuest.requiredCount;
 		
-		foreach (var slot in basket.GetAllSlots())
+		foreach (var slot in PlayerInventorySystem.Instance.GetAllSlots())
 		{
 			if (slot.ItemData != activeQuest.requiredItem) continue;
 

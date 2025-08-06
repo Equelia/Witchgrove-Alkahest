@@ -96,7 +96,7 @@ public class TaskBoardUI : MonoBehaviour
 	public void UpdateAvailableItemsCount()
 	{
 		var activeQuest = taskBoardController.activeQuest;
-		int count = taskBoardController.GetBasketAvailableItems(activeQuest);
+		int count = taskBoardController.GetAvailableItems(activeQuest);
 
 		if (activeQuest != null)
 		{
